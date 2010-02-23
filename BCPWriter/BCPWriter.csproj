@@ -45,8 +45,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BCPChar.cs" />
+    <Compile Include="IBCPSerialization.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="examples\char%2810%29.bcp" />
+    <None Include="examples\char%281000%29.bcp" />
+    <None Include="examples\char%282%29.bcp" />
+    <None Include="examples\char%2820%29.bcp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
