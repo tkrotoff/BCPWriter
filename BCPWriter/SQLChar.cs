@@ -6,14 +6,14 @@ using System.IO;
 
 namespace BCPWriter
 {
-    class BCPChar
+    class SQLChar
     {
         private static readonly string SPACE = " ";
 
         private string _text;
         private short _length;
 
-        public BCPChar(string text, short length)
+        public SQLChar(string text, short length)
         {
             System.Diagnostics.Trace.Assert(text.Length <= length);
 

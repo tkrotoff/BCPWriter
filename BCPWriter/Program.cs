@@ -13,7 +13,7 @@ namespace BCPWriter
             FileStream stream = new FileStream(@"D:\krotoff\BCPWriter\BCPCharTest", FileMode.Create);
             BinaryWriter writer = new BinaryWriter(stream);
 
-            BCPChar bcpChar = new BCPChar("KIKOO", 10);
+            SQLChar bcpChar = new SQLChar("KIKOO", 10);
             bcpChar.ToBCPFormat(writer);
 
             writer.Close();
