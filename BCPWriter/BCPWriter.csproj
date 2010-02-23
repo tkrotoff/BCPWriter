@@ -49,6 +49,7 @@
     <Compile Include="IBCPSerialization.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SQLInt.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="examples\char%2810%29.bcp" />
