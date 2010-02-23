@@ -6,7 +6,7 @@ using System.IO;
 
 namespace BCPWriter
 {
-    class SQLChar
+    class SQLChar : IBCPSerialization
     {
         private static readonly string SPACE = " ";
 
@@ -21,7 +21,7 @@ namespace BCPWriter
             _length = length;
         }
 
-        public void ToBCPFormat(BinaryWriter writer)
+        public void ToBCP(BinaryWriter writer)
         {
             //Short is 2 bytes long
             writer.Write(_length);

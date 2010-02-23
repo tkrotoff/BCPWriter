@@ -8,6 +8,6 @@ namespace BCPWriter
 {
     interface IBCPSerialization
     {
-        void ToBCPFormat(BinaryWriter writer);
+        void ToBCP(BinaryWriter writer);
     }
 }

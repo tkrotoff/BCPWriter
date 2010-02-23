@@ -14,7 +14,7 @@ namespace BCPWriter
             BinaryWriter writer = new BinaryWriter(stream);
 
             SQLChar bcpChar = new SQLChar("KIKOO", 10);
-            bcpChar.ToBCPFormat(writer);
+            bcpChar.ToBCP(writer);
 
             writer.Close();
         }
