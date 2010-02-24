@@ -6,17 +6,13 @@ using System.IO;
 
 namespace BCPWriter
 {
-    class SQLChar : IBCPSerialization
+    class SQLNChar : IBCPSerialization
     {
-        public static readonly string SPACE = " ";
-
         private string _text;
         private short _length;
 
-        public SQLChar(string text, short length)
+        public SQLNChar(string text, short length)
         {
-            System.Diagnostics.Trace.Assert(text.Length <= length);
-
             _text = text;
             _length = length;
         }
@@ -24,19 +20,20 @@ namespace BCPWriter
         public void ToBCP(BinaryWriter writer)
         {
             //Short is 2 bytes long
-            writer.Write(_length);
+            //* 2 because we are in unicode, thus 1 char is 2 bytes long
+            short length = (short) (_length * 2);
+            writer.Write(length);
 
             //Append spaces if needed
             StringBuilder tmp = new StringBuilder(_text);
             while (tmp.Length < _length)
             {
-                tmp.Append(SPACE);
+                tmp.Append(SQLChar.SPACE);
             }
             ////
 
-            //Text should be in ascii
-            byte[] asciiText = Encoding.Convert(Encoding.Unicode, Encoding.ASCII, Encoding.Unicode.GetBytes(tmp.ToString()));
-            writer.Write(asciiText);
+            //Text should be in unicode
+            writer.Write(Encoding.Unicode.GetBytes(tmp.ToString()));
         }
     }
 }
