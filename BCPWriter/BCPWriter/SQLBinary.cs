@@ -7,15 +7,15 @@ using System.IO;
 namespace BCPWriter
 {
     /// <summary>
-    /// binary and varbinary
+    /// SQL binary and varbinary.
     /// </summary>
     /// 
-    /// <a href="http://msdn.microsoft.com/en-us/library/ms188362.aspx">binary and varbinary (Transact-SQL)</see>a>
-    /// <a href="http://msdn.microsoft.com/en-us/library/ms187752.aspx">Data Types (Transact-SQL)</a>
-    /// <a href="http://databases.about.com/od/sqlserver/a/mssql_datatypes.htm">Microsoft SQL Server Data Types</a>
-    /// 
     /// <remarks>
-    /// From SQL Server 2008 Books Online<br/>
+    /// <a href="http://msdn.microsoft.com/en-us/library/ms187752.aspx">Data Types (Transact-SQL)</a><br/>
+    /// <a href="http://databases.about.com/od/sqlserver/a/mssql_datatypes.htm">Microsoft SQL Server Data Types</a><br/>
+    /// <a href="http://msdn.microsoft.com/en-us/library/ms188362.aspx">binary and varbinary (Transact-SQL)</a><br/>
+    /// <br/>
+    /// From SQL Server 2008 Books Online:<br/>
     /// <br/>
     /// When n is not specified in a data definition or variable declaration statement,
     /// the default length is 1.<br/>
@@ -30,24 +30,32 @@ namespace BCPWriter
         byte[] _data;
         ushort _length;
 
-        public static int MAX = 2 ^ 31 - 1;
-        //public static int MAX_UNICODE = 2 ^ 30 - 1;
+        public static readonly int MAX = SQLChar.MAX;
+        //public static readonly int MAX_UNICODE = 2 ^ 30 - 1;
+
+        public static readonly int MIN_LENGTH = SQLChar.MIN_LENGTH;
+        public static readonly int MAX_LENGTH = SQLChar.MAX_LENGTH;
 
         /// <summary>
-        /// 
+        /// Constructs a SQL binary or varbinary.
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="data">binary data</param>
         /// <param name="length">
         /// length of n bytes, where n is a value from 1 through 8,000.
         /// The storage size is n bytes.
+        /// length can also be MAX.
         /// </param>
         public SQLBinary(byte[] data, ushort length)
         {
             System.Diagnostics.Trace.Assert(data.Length <= length);
 
-            //Can be a value from 1 through 8,000
-            System.Diagnostics.Trace.Assert(length >= 1);
-            System.Diagnostics.Trace.Assert(length <= 8000);
+            System.Diagnostics.Trace.Assert(length <= MAX);
+            if (length < MAX)
+            {
+                //Can be a value from 1 through 8,000
+                System.Diagnostics.Trace.Assert(length >= MIN_LENGTH);
+                System.Diagnostics.Trace.Assert(length <= MAX_LENGTH);
+            }
 
             _data = data;
             _length = length;

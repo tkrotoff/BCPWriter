@@ -48,5 +48,17 @@ namespace BCPWriter.Tests
         {
             TestInt(1000);
         }
+
+        [Test]
+        public void TestIntMinimum()
+        {
+            TestInt(SQLInt.MIN_VALUE);
+        }
+
+        [Test]
+        public void TestIntMaximum()
+        {
+            TestInt(SQLInt.MAX_VALUE);
+        }
     }
 }
