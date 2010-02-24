@@ -49,7 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="BCPTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -57,6 +57,13 @@
       <Project>{566431EB-5EC3-4E1E-B0CD-BD58ED45B4A5}</Project>
       <Name>BCPWriter</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bcp_tests\char%2810%29.bcp" />
+    <None Include="bcp_tests\char%281000%29.bcp" />
+    <None Include="bcp_tests\char%282%29.bcp" />
+    <None Include="bcp_tests\char%2820%29.bcp" />
+    <None Include="bcp_tests\nchar%2810%29.bcp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
