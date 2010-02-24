@@ -17,9 +17,9 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[Table_1](
-	[column] varchar(max) NULL
+	[column] varbinary(max) NULL
 ) ON [PRIMARY]
 
 GO
 
-INSERT INTO [dbo].[Table_1]([column]) VALUES('')
+INSERT INTO [dbo].[Table_1]([column]) VALUES(CAST('KIKOO' AS VARBINARY(MAX)))
