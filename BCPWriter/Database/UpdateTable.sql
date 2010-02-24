@@ -17,9 +17,9 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[Table_1](
-	[column] int NULL
+	[column] nchar(2) NULL
 ) ON [PRIMARY]
 
 GO
 
-INSERT INTO [dbo].[Table_1]([column]) VALUES(1000)
+INSERT INTO [dbo].[Table_1]([column]) VALUES('KI')

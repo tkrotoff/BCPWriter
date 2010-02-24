@@ -52,6 +52,7 @@
     <Compile Include="BCPTests.cs" />
     <Compile Include="SQLIntTests.cs" />
     <Compile Include="SQLCharTests.cs" />
+    <Compile Include="SQLNCharTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BCPWriter\BCPWriter.csproj">
@@ -67,6 +68,8 @@
     <None Include="bcp_tests\int%281000%29.bcp" />
     <None Include="bcp_tests\int%282%29.bcp" />
     <None Include="bcp_tests\nchar%2810%29.bcp" />
+    <None Include="bcp_tests\nchar%281000%29.bcp" />
+    <None Include="bcp_tests\nchar%282%29.bcp" />
     <None Include="runbcp.bat" />
   </ItemGroup>
   <ItemGroup>
