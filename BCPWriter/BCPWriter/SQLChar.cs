@@ -27,15 +27,15 @@ namespace BCPWriter
     /// </remarks>
     public class SQLChar : IBCPSerialization
     {
-        public static readonly string SPACE = " ";
+        public static readonly char SPACE = ' ';
 
         private string _text;
         private ushort _length;
 
-        public static readonly int MAX = (int) Math.Pow(2, 31) - 1;
+        public static readonly int MAX = SQLInt.MAX_VALUE;
 
-        public static readonly int MIN_LENGTH = 1;
-        public static readonly int MAX_LENGTH = 8000;
+        public static readonly ushort MIN_LENGTH = 1;
+        public static readonly ushort MAX_LENGTH = 8000;
 
         /// <summary>
         /// Constructs a SQL char and varchar.

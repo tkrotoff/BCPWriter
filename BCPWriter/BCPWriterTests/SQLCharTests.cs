@@ -48,5 +48,17 @@ namespace BCPWriter.Tests
         {
             TestChar("KIKOO", 1000);
         }
+
+        [Test]
+        public void TestCharMinimum()
+        {
+            TestChar("", SQLChar.MIN_LENGTH);
+        }
+
+        [Test]
+        public void TestCharMaximum()
+        {
+            TestChar("KIKOO", SQLChar.MAX_LENGTH);
+        }
     }
 }
