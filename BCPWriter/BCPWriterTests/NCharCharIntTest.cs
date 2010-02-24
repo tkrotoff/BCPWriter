@@ -13,16 +13,6 @@ namespace BCPWriter.Tests
     [TestFixture]
     class NCharCharIntTest
     {
-        public void CheckFile(string myFileName)
-        {
-            string bcpFileName = "../../bcp_tests/" + myFileName;
-
-            byte[] myFile = BCPTests.ReadBinaryFile(myFileName);
-            byte[] bcpFile = BCPTests.ReadBinaryFile(bcpFileName);
-
-            Assert.AreEqual(bcpFile, myFile);
-        }
-
         [Test]
         public void Test()
         {
@@ -42,7 +32,7 @@ namespace BCPWriter.Tests
 
             writer.Close();
 
-            CheckFile(myFileName);
+            BCPTests.CheckFile(myFileName);
         }
     }
 }

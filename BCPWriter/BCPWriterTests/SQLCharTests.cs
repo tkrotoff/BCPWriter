@@ -13,52 +13,64 @@ namespace BCPWriter.Tests
     [TestFixture]
     class SQLCharTests
     {
-        public void TestChar(string text, ushort length)
+        private void WriteChar(string text, ushort length, string myFileName)
         {
-            string bcpFileName = string.Format("../../bcp_tests/char({0}).bcp", length);
-            string myFileName = string.Format("char({0}).bcp", length);
-
             BinaryWriter writer = BCPTests.CreateBinaryFile(myFileName);
 
             SQLChar sqlChar = new SQLChar(text, length);
             sqlChar.ToBCP(writer);
 
             writer.Close();
-
-            byte[] myFile = BCPTests.ReadBinaryFile(myFileName);
-            byte[] bcpFile = BCPTests.ReadBinaryFile(bcpFileName);
-
-            Assert.AreEqual(bcpFile, myFile);
         }
 
         [Test]
         public void TestChar2()
         {
-            TestChar("KI", 2);
+            ushort length = 2;
+
+            string myFileName = string.Format("char({0}).bcp", length);
+            WriteChar("KI", length, myFileName);
+            BCPTests.CheckFile(myFileName);
         }
 
         [Test]
         public void TestChar10()
         {
-            TestChar("KIKOO", 10);
+            ushort length = 10;
+
+            string myFileName = string.Format("char({0}).bcp", length);
+            WriteChar("KIKOO", length, myFileName);
+            BCPTests.CheckFile(myFileName);
         }
 
         [Test]
         public void TestChar1000()
         {
-            TestChar("KIKOO", 1000);
+            ushort length = 1000;
+
+            string myFileName = string.Format("char({0}).bcp", length);
+            WriteChar("KIKOO", length, myFileName);
+            BCPTests.CheckFile(myFileName);
         }
 
         [Test]
         public void TestCharMinimum()
         {
-            TestChar("", SQLChar.MIN_LENGTH);
+            ushort length = SQLChar.MIN_LENGTH;
+
+            string myFileName = string.Format("char({0}).bcp", length);
+            WriteChar("", length, myFileName);
+            BCPTests.CheckFile(myFileName);
         }
 
         [Test]
         public void TestCharMaximum()
         {
-            TestChar("", SQLChar.MAX_LENGTH);
+            ushort length = SQLChar.MAX_LENGTH;
+
+            string myFileName = string.Format("char({0}).bcp", length);
+            WriteChar("", length, myFileName);
+            BCPTests.CheckFile(myFileName);
         }
     }
 }

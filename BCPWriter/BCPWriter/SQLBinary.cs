@@ -30,7 +30,7 @@ namespace BCPWriter
         byte[] _data;
         ushort _length;
 
-        public static readonly int MAX = SQLChar.MAX;
+        public static readonly int MAX = SQLInt.MAX_VALUE;
         //public static readonly int MAX_UNICODE = 2 ^ 30 - 1;
 
         public static readonly int MIN_LENGTH = SQLChar.MIN_LENGTH;

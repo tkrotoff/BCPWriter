@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.IO;
 
+using NUnit.Framework;
+
 namespace BCPWriter.Tests
 {
     class BCPTests
@@ -32,6 +34,16 @@ namespace BCPWriter.Tests
                     ms.Write(buffer, 0, read);
                 }
             }
+        }
+
+        public static void CheckFile(string myFileName)
+        {
+            string bcpFileName = "../../bcp_tests/" + myFileName;
+
+            byte[] myFile = BCPTests.ReadBinaryFile(myFileName);
+            byte[] bcpFile = BCPTests.ReadBinaryFile(bcpFileName);
+
+            Assert.AreEqual(bcpFile, myFile);
         }
     }
 }

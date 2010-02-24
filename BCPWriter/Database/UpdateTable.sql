@@ -17,7 +17,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[Table_1](
-	[column] char(1) NULL
+	[column] varchar(max) NULL
 ) ON [PRIMARY]
 
 GO

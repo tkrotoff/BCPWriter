@@ -13,40 +13,44 @@ namespace BCPWriter.Tests
     [TestFixture]
     class SQLNCharTests
     {
-        public void TestNChar(string text, ushort length)
+        private void WriteNChar(string text, ushort length, string myFileName)
         {
-            string bcpFileName = string.Format("../../bcp_tests/nchar({0}).bcp", length);
-            string myFileName = string.Format("nchar({0}).bcp", length);
-
             BinaryWriter writer = BCPTests.CreateBinaryFile(myFileName);
 
             SQLNChar sqlNChar = new SQLNChar(text, length);
             sqlNChar.ToBCP(writer);
 
             writer.Close();
-
-            byte[] myFile = BCPTests.ReadBinaryFile(myFileName);
-            byte[] bcpFile = BCPTests.ReadBinaryFile(bcpFileName);
-
-            Assert.AreEqual(bcpFile, myFile);
         }
 
         [Test]
         public void TestNChar2()
         {
-            TestNChar("KI", 2);
+            ushort length = 2;
+
+            string myFileName = string.Format("nchar({0}).bcp", length);
+            WriteNChar("KI", length, myFileName);
+            BCPTests.CheckFile(myFileName);
         }
 
         [Test]
         public void TestNChar10()
         {
-            TestNChar("KIKOO", 10);
+            ushort length = 10;
+
+            string myFileName = string.Format("nchar({0}).bcp", length);
+            WriteNChar("KIKOO", length, myFileName);
+            BCPTests.CheckFile(myFileName);
         }
 
         [Test]
         public void TestNChar1000()
         {
-            TestNChar("KIKOO", 1000);
+            ushort length = 1000;
+
+            string myFileName = string.Format("nchar({0}).bcp", length);
+            WriteNChar("KIKOO", length, myFileName);
+            BCPTests.CheckFile(myFileName);
         }
     }
 }

@@ -13,52 +13,64 @@ namespace BCPWriter.Tests
     [TestFixture]
     class SQLIntTests
     {
-        public void TestInt(int value)
+        private void WriteInt(int value, string myFileName)
         {
-            string bcpFileName = string.Format("../../bcp_tests/int({0}).bcp", value);
-            string myFileName = string.Format("int({0}).bcp", value);
-
             BinaryWriter writer = BCPTests.CreateBinaryFile(myFileName);
 
             SQLInt sqlInt = new SQLInt(value);
             sqlInt.ToBCP(writer);
 
             writer.Close();
-
-            byte[] myFile = BCPTests.ReadBinaryFile(myFileName);
-            byte[] bcpFile = BCPTests.ReadBinaryFile(bcpFileName);
-
-            Assert.AreEqual(bcpFile, myFile);
         }
 
         [Test]
         public void TestInt2()
         {
-            TestInt(2);
+            int value = 2;
+
+            string myFileName = string.Format("int({0}).bcp", value);
+            WriteInt(value, myFileName);
+            BCPTests.CheckFile(myFileName);
         }
 
         [Test]
         public void TestInt10()
         {
-            TestInt(10);
+            int value = 10;
+
+            string myFileName = string.Format("int({0}).bcp", value);
+            WriteInt(value, myFileName);
+            BCPTests.CheckFile(myFileName);
         }
 
         [Test]
         public void TestInt1000()
         {
-            TestInt(1000);
+            int value = 1000;
+
+            string myFileName = string.Format("int({0}).bcp", value);
+            WriteInt(value, myFileName);
+            BCPTests.CheckFile(myFileName);
         }
 
         [Test]
         public void TestIntMinimum()
         {
-            TestInt(SQLInt.MIN_VALUE);
+            int value = SQLInt.MIN_VALUE;
+
+            string myFileName = string.Format("int({0}).bcp", value);
+            WriteInt(SQLInt.MIN_VALUE, myFileName);
+            BCPTests.CheckFile(myFileName);
         }
 
         [Test]
         public void TestIntMaximum()
         {
-            TestInt(SQLInt.MAX_VALUE);
+            int value = SQLInt.MAX_VALUE;
+
+            string myFileName = string.Format("int({0}).bcp", value);
+            WriteInt(value, myFileName);
+            BCPTests.CheckFile(myFileName);
         }
     }
 }

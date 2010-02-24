@@ -13,22 +13,14 @@ namespace BCPWriter.Tests
     [TestFixture]
     class SQLBinaryTests
     {
-        public void TestBinary(byte[] data, ushort length)
+        private void WriteBinary(byte[] data, ushort length, string myFileName)
         {
-            string bcpFileName = string.Format("../../bcp_tests/binary({0}).bcp", length);
-            string myFileName = string.Format("binary({0}).bcp", length);
-
             BinaryWriter writer = BCPTests.CreateBinaryFile(myFileName);
 
             SQLBinary sqlBinary = new SQLBinary(data, length);
             sqlBinary.ToBCP(writer);
 
             writer.Close();
-
-            byte[] myFile = BCPTests.ReadBinaryFile(myFileName);
-            byte[] bcpFile = BCPTests.ReadBinaryFile(bcpFileName);
-
-            Assert.AreEqual(bcpFile, myFile);
         }
 
         [Test]
@@ -43,7 +35,11 @@ namespace BCPWriter.Tests
                 i++;
             }
 
-            TestBinary(data, 2);
+            ushort length = 2;
+
+            string myFileName = string.Format("binary({0}).bcp", length);
+            WriteBinary(data, length, myFileName);
+            BCPTests.CheckFile(myFileName);
         }
 
         [Test]
@@ -58,7 +54,11 @@ namespace BCPWriter.Tests
                 i++;
             }
 
-            TestBinary(data, 50);
+            ushort length = 50;
+
+            string myFileName = string.Format("binary({0}).bcp", length);
+            WriteBinary(data, length, myFileName);
+            BCPTests.CheckFile(myFileName);
         }
 
         [Test]
@@ -73,7 +73,11 @@ namespace BCPWriter.Tests
                 i++;
             }
 
-            TestBinary(data, 1000);
+            ushort length = 1000;
+
+            string myFileName = string.Format("binary({0}).bcp", length);
+            WriteBinary(data, length, myFileName);
+            BCPTests.CheckFile(myFileName);
         }
     }
 }

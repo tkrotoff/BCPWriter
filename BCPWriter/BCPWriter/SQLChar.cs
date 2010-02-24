@@ -32,8 +32,6 @@ namespace BCPWriter
         private string _text;
         private ushort _length;
 
-        public static readonly int MAX = SQLInt.MAX_VALUE;
-
         public static readonly ushort MIN_LENGTH = 1;
         public static readonly ushort MAX_LENGTH = 8000;
 
@@ -50,13 +48,9 @@ namespace BCPWriter
         {
             System.Diagnostics.Trace.Assert(text.Length <= length);
 
-            System.Diagnostics.Trace.Assert(length <= MAX);
-            if (length < MAX)
-            {
-                //Can be a value from 1 through 8,000
-                System.Diagnostics.Trace.Assert(length >= MIN_LENGTH);
-                System.Diagnostics.Trace.Assert(length <= MAX_LENGTH);
-            }
+            //Can be a value from 1 through 8,000
+            System.Diagnostics.Trace.Assert(length >= MIN_LENGTH);
+            System.Diagnostics.Trace.Assert(length <= MAX_LENGTH);
 
             _text = text;
             _length = length;

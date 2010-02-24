@@ -55,6 +55,7 @@
     <Compile Include="SQLIntTests.cs" />
     <Compile Include="SQLCharTests.cs" />
     <Compile Include="SQLNCharTests.cs" />
+    <Compile Include="SQLVarCharMaxTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BCPWriter\BCPWriter.csproj">
