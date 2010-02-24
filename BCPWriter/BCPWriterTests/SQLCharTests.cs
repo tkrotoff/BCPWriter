@@ -52,7 +52,7 @@ namespace BCPWriter.Tests
         [Test]
         public void TestCharMinimum()
         {
-            //TestChar("", SQLChar.MIN_LENGTH);
+            TestChar("", SQLChar.MIN_LENGTH);
         }
 
         [Test]
