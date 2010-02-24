@@ -22,4 +22,4 @@ CREATE TABLE [dbo].[Table_1](
 
 GO
 
-INSERT INTO [dbo].[Table_1]([werg])VALUES(10)
+INSERT INTO [dbo].[Table_1]([werg]) VALUES(10)
