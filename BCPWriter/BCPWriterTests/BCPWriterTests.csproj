@@ -50,6 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BCPTests.cs" />
+    <Compile Include="NCharCharIntTest.cs" />
+    <Compile Include="SQLBinaryTests.cs" />
     <Compile Include="SQLIntTests.cs" />
     <Compile Include="SQLCharTests.cs" />
     <Compile Include="SQLNCharTests.cs" />

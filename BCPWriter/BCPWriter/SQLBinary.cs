@@ -59,8 +59,9 @@ namespace BCPWriter
             writer.Write(_length);
 
             string hex = ToHexString(_data);
-            byte[] hexBytes = StringToByteArray(hex.ToString());
+            byte[] hexBytes = StringToByteArray(hex);
 
+            //Append 0s if needed
             List<byte> bytes = new List<byte>(hexBytes);
             while (bytes.Count < _length)
             {
