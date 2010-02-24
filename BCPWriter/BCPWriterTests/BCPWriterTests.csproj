@@ -50,7 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BCPTests.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SQLIntTests.cs" />
+    <Compile Include="SQLCharTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BCPWriter\BCPWriter.csproj">
@@ -62,8 +63,14 @@
     <None Include="bcp_tests\char%2810%29.bcp" />
     <None Include="bcp_tests\char%281000%29.bcp" />
     <None Include="bcp_tests\char%282%29.bcp" />
-    <None Include="bcp_tests\char%2820%29.bcp" />
+    <None Include="bcp_tests\int%2810%29.bcp" />
+    <None Include="bcp_tests\int%281000%29.bcp" />
+    <None Include="bcp_tests\int%282%29.bcp" />
     <None Include="bcp_tests\nchar%2810%29.bcp" />
+    <None Include="runbcp.bat" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

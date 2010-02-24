@@ -9,11 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BCPWriterApp", "BCPWriterAp
 EndProject
 Project("{4F174C21-8C12-11D0-8340-0000F80270F8}") = "Database", "Database\Database.dbp", "{96FBF0DD-5AAB-468C-9698-BA8136EFFA74}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5D65BB5E-A53B-41FD-B312-1DDBFD075C7F}"
-	ProjectSection(SolutionItems) = preProject
-		runbcp.bat = runbcp.bat
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

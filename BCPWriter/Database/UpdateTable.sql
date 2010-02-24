@@ -17,9 +17,9 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[Table_1](
-	[werg] int NULL
+	[column] int NULL
 ) ON [PRIMARY]
 
 GO
 
-INSERT INTO [dbo].[Table_1]([werg]) VALUES(10)
+INSERT INTO [dbo].[Table_1]([column]) VALUES(1000)
