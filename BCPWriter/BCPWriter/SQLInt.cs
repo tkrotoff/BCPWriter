@@ -6,7 +6,7 @@ using System.IO;
 
 namespace BCPWriter
 {
-    class SQLInt : IBCPSerialization
+    public class SQLInt : IBCPSerialization
     {
         int _value;
 

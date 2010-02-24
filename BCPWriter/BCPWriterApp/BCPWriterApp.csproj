@@ -5,15 +5,13 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{566431EB-5EC3-4E1E-B0CD-BD58ED45B4A5}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{2A7AA6D5-1569-4851-AC04-666619796483}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BCPWriter</RootNamespace>
-    <AssemblyName>BCPWriter</AssemblyName>
+    <RootNamespace>BCPWriterApp</RootNamespace>
+    <AssemblyName>BCPWriterApp</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <StartupObject>
-    </StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -47,21 +45,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SQLChar.cs" />
-    <Compile Include="IBCPSerialization.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SQLInt.cs" />
-    <Compile Include="SQLNChar.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="examples\char%2810%29.bcp" />
-    <None Include="examples\char%281000%29.bcp" />
-    <None Include="examples\char%282%29.bcp" />
-    <None Include="examples\char%2820%29.bcp" />
-    <None Include="examples\nchar%2810%29.bcp" />
+    <ProjectReference Include="..\BCPWriter\BCPWriter.csproj">
+      <Project>{566431EB-5EC3-4E1E-B0CD-BD58ED45B4A5}</Project>
+      <Name>BCPWriter</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>

@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.IO;
 
-namespace BCPWriter
+using BCPWriter;
+
+namespace BCPWriterWriterApp
 {
     class Program
     {

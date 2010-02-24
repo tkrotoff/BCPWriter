@@ -6,7 +6,7 @@ using System.IO;
 
 namespace BCPWriter
 {
-    class SQLNChar : IBCPSerialization
+    public class SQLNChar : IBCPSerialization
     {
         private string _text;
         private short _length;

@@ -1,0 +1,1 @@
+bcp [BCPTest].[dbo].[Table_1] out test.bcp -S FRDEVPC01 -U sa -P Password01 -n

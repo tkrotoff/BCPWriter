@@ -6,7 +6,7 @@ using System.IO;
 
 namespace BCPWriter
 {
-    class SQLChar : IBCPSerialization
+    public class SQLChar : IBCPSerialization
     {
         public static readonly string SPACE = " ";
 

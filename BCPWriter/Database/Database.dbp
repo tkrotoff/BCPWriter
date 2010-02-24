@@ -1,0 +1,12 @@
+# Microsoft Developer Studio Project File - Database Project
+Begin DataProject = "Database Project"
+   MSDTVersion = "80"
+   Begin Folder = "Change Scripts"
+   End
+   Begin Folder = "Create Scripts"
+   End
+   Begin Folder = "Queries"
+   End
+   Begin DBRefFolder = "Database References"
+   End
+End

@@ -3,6 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BCPWriter", "BCPWriter\BCPWriter.csproj", "{566431EB-5EC3-4E1E-B0CD-BD58ED45B4A5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BCPWriterTests", "BCPWriterTests\BCPWriterTests.csproj", "{5A7647A7-574F-4514-BC93-C10E04CCD5D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BCPWriterApp", "BCPWriterApp\BCPWriterApp.csproj", "{2A7AA6D5-1569-4851-AC04-666619796483}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +17,14 @@ Global
 		{566431EB-5EC3-4E1E-B0CD-BD58ED45B4A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{566431EB-5EC3-4E1E-B0CD-BD58ED45B4A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{566431EB-5EC3-4E1E-B0CD-BD58ED45B4A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A7647A7-574F-4514-BC93-C10E04CCD5D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A7647A7-574F-4514-BC93-C10E04CCD5D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A7647A7-574F-4514-BC93-C10E04CCD5D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A7647A7-574F-4514-BC93-C10E04CCD5D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A7AA6D5-1569-4851-AC04-666619796483}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A7AA6D5-1569-4851-AC04-666619796483}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A7AA6D5-1569-4851-AC04-666619796483}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A7AA6D5-1569-4851-AC04-666619796483}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
