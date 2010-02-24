@@ -11,9 +11,9 @@ namespace BCPWriter
         public static readonly string SPACE = " ";
 
         private string _text;
-        private short _length;
+        private ushort _length;
 
-        public SQLChar(string text, short length)
+        public SQLChar(string text, ushort length)
         {
             System.Diagnostics.Trace.Assert(text.Length <= length);
 
@@ -23,7 +23,7 @@ namespace BCPWriter
 
         public void ToBCP(BinaryWriter writer)
         {
-            //Short is 2 bytes long
+            //ushort is 2 bytes long
             writer.Write(_length);
 
             //Append spaces if needed

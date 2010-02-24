@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SQLBinary.cs" />
     <Compile Include="SQLChar.cs" />
     <Compile Include="IBCPSerialization.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

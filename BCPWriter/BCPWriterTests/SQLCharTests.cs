@@ -13,7 +13,7 @@ namespace BCPWriter.Tests
     [TestFixture]
     class SQLCharTests
     {
-        public void TestChar(string text, short length)
+        public void TestChar(string text, ushort length)
         {
             string bcpFileName = string.Format("../../bcp_tests/char({0}).bcp", length);
             string myFileName = string.Format("char({0}).bcp", length);

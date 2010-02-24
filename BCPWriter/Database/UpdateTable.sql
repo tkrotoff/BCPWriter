@@ -17,9 +17,9 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[Table_1](
-	[column] nchar(2) NULL
+	[column] binary(50) NULL
 ) ON [PRIMARY]
 
 GO
 
-INSERT INTO [dbo].[Table_1]([column]) VALUES('KI')
+INSERT INTO [dbo].[Table_1]([column]) VALUES(CAST('KIKOO' AS binary))

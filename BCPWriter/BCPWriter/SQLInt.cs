@@ -17,11 +17,11 @@ namespace BCPWriter
 
         public void ToBCP(BinaryWriter writer)
         {
-            //Byte is 1 byte long :)
+            //byte is 1 byte long :)
             byte size = 4;
             writer.Write(size);
 
-            //Int is 4 bytes long
+            //int is 4 bytes long
             writer.Write(_value);
         }
     }
