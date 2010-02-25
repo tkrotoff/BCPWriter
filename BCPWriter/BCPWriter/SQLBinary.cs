@@ -7,7 +7,7 @@ using System.IO;
 namespace BCPWriter
 {
     /// <summary>
-    /// SQL binary and varbinary.
+    /// SQL binary.
     /// </summary>
     /// 
     /// <remarks>
@@ -16,6 +16,9 @@ namespace BCPWriter
     /// <a href="http://msdn.microsoft.com/en-us/library/ms188362.aspx">binary and varbinary (Transact-SQL)</a><br/>
     /// <br/>
     /// From SQL Server 2008 Books Online:<br/>
+    /// <br/>
+    /// Fixed-length binary data with a length of n bytes, where n is a value from 1 through 8,000.<br/>
+    /// The storage size is n bytes.<br/>
     /// <br/>
     /// When n is not specified in a data definition or variable declaration statement,
     /// the default length is 1.<br/>
@@ -27,14 +30,11 @@ namespace BCPWriter
     /// </remarks>
     public class SQLBinary : IBCPSerialization
     {
-        byte[] _data;
-        ushort _length;
+        private byte[] _data;
+        private ushort _length;
 
-        public static readonly int MAX = SQLInt.MAX_VALUE;
-        //public static readonly int MAX_UNICODE = 2 ^ 30 - 1;
-
-        public static readonly int MIN_LENGTH = SQLChar.MIN_LENGTH;
-        public static readonly int MAX_LENGTH = SQLChar.MAX_LENGTH;
+        public static readonly ushort MIN_LENGTH = SQLChar.MIN_LENGTH;
+        public static readonly ushort MAX_LENGTH = SQLChar.MAX_LENGTH;
 
         /// <summary>
         /// Constructs a SQL binary or varbinary.
@@ -43,19 +43,14 @@ namespace BCPWriter
         /// <param name="length">
         /// length of n bytes, where n is a value from 1 through 8,000.
         /// The storage size is n bytes.
-        /// length can also be MAX.
         /// </param>
         public SQLBinary(byte[] data, ushort length)
         {
             System.Diagnostics.Trace.Assert(data.Length <= length);
 
-            System.Diagnostics.Trace.Assert(length <= MAX);
-            if (length < MAX)
-            {
-                //Can be a value from 1 through 8,000
-                System.Diagnostics.Trace.Assert(length >= MIN_LENGTH);
-                System.Diagnostics.Trace.Assert(length <= MAX_LENGTH);
-            }
+            //Can be a value from 1 through 8,000
+            System.Diagnostics.Trace.Assert(length >= MIN_LENGTH);
+            System.Diagnostics.Trace.Assert(length <= MAX_LENGTH);
 
             _data = data;
             _length = length;
@@ -67,7 +62,7 @@ namespace BCPWriter
             writer.Write(_length);
 
             string hex = ToHexString(_data);
-            byte[] hexBytes = StringToByteArray(hex);
+            byte[] hexBytes = HexToByteArray(hex);
 
             //Append 0s if needed
             List<byte> bytes = new List<byte>(hexBytes);
@@ -89,12 +84,24 @@ namespace BCPWriter
             return hex.ToString();
         }
 
+        public static byte[] StringToByteArray(string text)
+        {
+            byte[] bytes = new byte[text.Length];
+            int i = 0;
+            foreach (char c in text.ToCharArray())
+            {
+                bytes[i] = (byte)c;
+                i++;
+            }
+            return bytes;
+        }
+
         /// <summary>
         /// See <a href="http://stackoverflow.com/questions/311165/how-do-you-convert-byte-array-to-hexadecimal-string-and-vice-versa-in-c">How do you convert Byte Array to Hexadecimal String, and vice versa, in C#?</a>
         /// </summary>
         /// <param name="hex"></param>
         /// <returns></returns>
-        public static byte[] StringToByteArray(string hex)
+        public static byte[] HexToByteArray(string hex)
         {
             int nbChars = hex.Length;
             byte[] bytes = new byte[nbChars / 2];

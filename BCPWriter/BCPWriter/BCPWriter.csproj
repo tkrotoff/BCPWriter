@@ -53,8 +53,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQLInt.cs" />
     <Compile Include="SQLNChar.cs" />
-    <Compile Include="SQLVarBinaryMax.cs" />
-    <Compile Include="SQLVarCharMax.cs" />
+    <Compile Include="SQLVarBinary.cs" />
+    <Compile Include="SQLVarChar.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

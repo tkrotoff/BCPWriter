@@ -6,6 +6,26 @@ using System.IO;
 
 namespace BCPWriter
 {
+    /// <summary>
+    /// SQL nchar and nvarchar.
+    /// </summary>
+    /// 
+    /// <remarks>
+    /// <see>SQLChar</see>
+    /// <a href="http://msdn.microsoft.com/en-us/library/ms187752.aspx">Data Types (Transact-SQL)</a><br/>
+    /// <a href="http://databases.about.com/od/sqlserver/a/mssql_datatypes.htm">Microsoft SQL Server Data Types</a><br/>
+    /// <a href="http://msdn.microsoft.com/en-us/library/ms186939.aspx">nchar and nvarchar (Transact-SQL)</a><br/>
+    /// <br/>
+    /// From SQL Server 2008 Books Online:<br/>
+    /// <br/>
+    /// Character data types that are either fixed-length, nchar, or variable-length, nvarchar,<br/>
+    /// Unicode data and use the UNICODE UCS-2 character set.<br/>
+    /// <br/>
+    /// When n is not specified in a data definition or variable declaration statement, the default length is 1.<br/>
+    /// When n is not specified with the CAST function, the default length is 30.<br/>
+    /// Use nchar when the sizes of the column data entries are probably going to be similar.<br/>
+    /// Use nvarchar when the sizes of the column data entries are probably going to vary considerably.<br/>
+    /// </remarks>
     public class SQLNChar : IBCPSerialization
     {
         private string _text;

@@ -7,7 +7,7 @@ using System.IO;
 namespace BCPWriter
 {
     /// <summary>
-    /// SQL char and varchar.
+    /// SQL char.
     /// </summary>
     /// 
     /// <remarks>
@@ -27,10 +27,10 @@ namespace BCPWriter
     /// </remarks>
     public class SQLChar : IBCPSerialization
     {
-        public static readonly char SPACE = ' ';
-
         private string _text;
         private ushort _length;
+
+        public static readonly char SPACE = ' ';
 
         public static readonly ushort MIN_LENGTH = 1;
         public static readonly ushort MAX_LENGTH = 8000;
@@ -42,7 +42,6 @@ namespace BCPWriter
         /// <param name="length">
         /// length of n bytes, where n is a value from 1 through 8,000.
         /// The storage size is n bytes.
-        /// length can also be MAX.
         /// </param>
         public SQLChar(string text, ushort length)
         {
@@ -69,7 +68,7 @@ namespace BCPWriter
             }
             ////
 
-            //Text should be in ascii
+            //FIXME Text should be in Windows code page something, I don't know yet
             byte[] asciiText = Encoding.Convert(Encoding.Unicode, Encoding.ASCII, Encoding.Unicode.GetBytes(tmp.ToString()));
             writer.Write(asciiText);
         }
