@@ -26,14 +26,21 @@ namespace BCPWriter
     /// |--------------------|
     /// </code>
     /// <br/>
-    /// Example for a char SQL data type with length 10 and text KIKOO:<br/>
+    /// Example for a char SQL data type with length 10 (char(10)) and text KIKOO:<br/>
     /// <code>
     /// 0A 00 4B 49 4B 4F 4F 20
     /// 
-    /// |--------------------------------------|
-    /// | Data Length = 10 | Data = KIKOO      |
-    /// | 0A 00            | 4B 49 4B 4F 4F 20 |
-    /// |--------------------------------------|
+    /// |-----------------------------------------------|
+    /// | Data Length = 10 | Data = KIKOO               |
+    /// | 0A 00            | 4B 49 4B 4F 4F 20 20 20 20 |
+    /// |-----------------------------------------------|
+    /// 
+    /// 4B = K
+    /// 49 = I
+    /// 4B = K
+    /// 4F = O
+    /// 4F = O
+    /// 20 * 4 = 4 * Space, KIKOO is of length 4 so bcp append spaces until to reach length = 10
     /// </code>
     /// </remarks>
     interface IBCPSerialization

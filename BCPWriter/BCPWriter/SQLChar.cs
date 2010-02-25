@@ -68,9 +68,18 @@ namespace BCPWriter
             }
             ////
 
-            //FIXME Text should be in Windows code page something, I don't know yet
-            byte[] asciiText = Encoding.Convert(Encoding.Unicode, Encoding.ASCII, Encoding.Unicode.GetBytes(tmp.ToString()));
-            writer.Write(asciiText);
+            writer.Write(EncodeToOEMCodePage(tmp.ToString()));
+        }
+
+        /// <summary>
+        /// Encode text using OEM code page, see http://en.wikipedia.org/wiki/Windows_code_page
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        public static byte[] EncodeToOEMCodePage(string text)
+        {
+            Encoding enc = Encoding.GetEncoding(System.Globalization.CultureInfo.CurrentCulture.TextInfo.OEMCodePage);
+            return enc.GetBytes(text);
         }
     }
 }

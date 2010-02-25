@@ -44,6 +44,16 @@ namespace BCPWriter.Tests
         }
 
         [Test]
+        public void TestChar10OEMCodePage()
+        {
+            ushort length = 10;
+
+            string myFileName = string.Format("char({0})_oemcodepage.bcp", length);
+            WriteChar("KIKOO éùà", length, myFileName);
+            BCPTests.CheckFile(myFileName);
+        }
+
+        [Test]
         public void TestChar1000()
         {
             ushort length = 1000;

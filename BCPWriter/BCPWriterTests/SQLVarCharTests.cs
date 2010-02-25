@@ -24,10 +24,22 @@ namespace BCPWriter.Tests
         }
 
         [Test]
+        public void TestVarChar10OEMCodePage()
+        {
+            ushort length = 10;
+
+            string myFileName = string.Format("varchar({0})_oemcodepage.bcp", length);
+            WriteVarChar("KIKOO éùà", length, myFileName);
+            BCPTests.CheckFile(myFileName);
+        }
+
+        [Test]
         public void TestVarChar50()
         {
-            string myFileName = "varchar(50).bcp";
-            WriteVarChar("KIKOO", 50, myFileName);
+            ushort length = 50;
+
+            string myFileName = string.Format("varchar({0}).bcp", length);
+            WriteVarChar("KIKOO", length, myFileName);
             BCPTests.CheckFile(myFileName);
         }
 

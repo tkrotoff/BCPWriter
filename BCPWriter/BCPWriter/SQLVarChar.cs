@@ -61,9 +61,7 @@ namespace BCPWriter
                 writer.Write(length);
             }
 
-            //FIXME Text should be in Windows code page something, I don't know yet
-            byte[] asciiText = Encoding.Convert(Encoding.Unicode, Encoding.ASCII, Encoding.Unicode.GetBytes(_text.ToString()));
-            writer.Write(asciiText);
+            writer.Write(SQLChar.EncodeToOEMCodePage(_text));
         }
     }
 }

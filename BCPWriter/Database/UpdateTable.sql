@@ -17,9 +17,9 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[Table_1](
-	[column] xml NULL
+	[column] varchar(10) NULL
 ) ON [PRIMARY]
 
 GO
 
-INSERT INTO [dbo].[Table_1]([column]) VALUES('')
+INSERT INTO [dbo].[Table_1]([column]) VALUES('KIKOO éùà')
