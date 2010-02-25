@@ -36,7 +36,7 @@ namespace BCPWriter
         public static readonly ushort MAX_LENGTH = 8000;
 
         /// <summary>
-        /// Constructs a SQL char and varchar.
+        /// Constructs a SQL char.
         /// </summary>
         /// <param name="text">text</param>
         /// <param name="length">

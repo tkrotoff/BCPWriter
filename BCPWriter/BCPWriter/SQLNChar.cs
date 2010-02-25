@@ -7,7 +7,7 @@ using System.IO;
 namespace BCPWriter
 {
     /// <summary>
-    /// SQL nchar and nvarchar.
+    /// SQL nchar.
     /// </summary>
     /// 
     /// <remarks>
@@ -31,8 +31,25 @@ namespace BCPWriter
         private string _text;
         private ushort _length;
 
+        public static readonly ushort MIN_LENGTH = 1;
+        public static readonly ushort MAX_LENGTH = 4000;
+
+        /// <summary>
+        /// Constructs a SQL nchar.
+        /// </summary>
+        /// <param name="text">text</param>
+        /// <param name="length">
+        /// length of n bytes, where n is a value from 1 through 4,000.
+        /// The storage size is two times n bytes.
+        /// </param>
         public SQLNChar(string text, ushort length)
         {
+            System.Diagnostics.Trace.Assert(text.Length <= length);
+
+            //Can be a value from 1 through 4,000
+            System.Diagnostics.Trace.Assert(length >= MIN_LENGTH);
+            System.Diagnostics.Trace.Assert(length <= MAX_LENGTH);
+
             _text = text;
             _length = length;
         }

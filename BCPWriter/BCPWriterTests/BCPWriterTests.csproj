@@ -55,6 +55,7 @@
     <Compile Include="SQLIntTests.cs" />
     <Compile Include="SQLCharTests.cs" />
     <Compile Include="SQLNCharTests.cs" />
+    <Compile Include="SQLNVarCharTests.cs" />
     <Compile Include="SQLVarBinaryTests.cs" />
     <Compile Include="SQLVarCharTests.cs" />
   </ItemGroup>

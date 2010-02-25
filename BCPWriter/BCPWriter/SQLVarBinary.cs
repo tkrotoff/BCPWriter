@@ -35,7 +35,7 @@ namespace BCPWriter
         /// </param>
         public SQLVarBinary(byte[] data, uint length)
         {
-            System.Diagnostics.Trace.Assert(data.Length <= MAX);
+            System.Diagnostics.Trace.Assert(data.Length <= length);
 
             if (length != MAX)
             {
