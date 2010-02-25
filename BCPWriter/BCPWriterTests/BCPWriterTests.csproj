@@ -58,6 +58,7 @@
     <Compile Include="SQLNVarCharTests.cs" />
     <Compile Include="SQLVarBinaryTests.cs" />
     <Compile Include="SQLVarCharTests.cs" />
+    <Compile Include="SQLXMLTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BCPWriter\BCPWriter.csproj">
