@@ -29,7 +29,10 @@ namespace BCPWriter
 
         public void WriteRows(IEnumerable<object> rows)
         {
-            System.Diagnostics.Trace.Assert(_columns.Count() != 0);
+            if (_columns.Count() == 0)
+            {
+                throw new ArgumentException("No columns");
+            }
 
             for (int i = 0; i < rows.Count(); i++)
             {

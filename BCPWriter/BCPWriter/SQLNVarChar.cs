@@ -35,9 +35,10 @@ namespace BCPWriter
         {
             if (length != MAX)
             {
-                //Can be a value from 1 through 4,000
-                System.Diagnostics.Trace.Assert(length >= SQLNChar.MIN_LENGTH);
-                System.Diagnostics.Trace.Assert(length <= SQLNChar.MAX_LENGTH);
+                if (length < SQLNChar.MIN_LENGTH || length > SQLNChar.MAX_LENGTH)
+                {
+                    throw new ArgumentException("length should be between 1 and 4,000");
+                }
             }
 
             _length = length;
@@ -45,7 +46,10 @@ namespace BCPWriter
 
         public byte[] ToBCP(string text)
         {
-            System.Diagnostics.Trace.Assert(text.Length <= _length);
+            if (text.Length > _length)
+            {
+                throw new ArgumentException("text is longer than the length declared inside the constructor");
+            }
 
             byte[] sizeBytes = null;
             if (_length == MAX)

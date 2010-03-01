@@ -44,15 +44,20 @@ namespace BCPWriter
         public SQLNChar(ushort length)
         {
             //Can be a value from 1 through 4,000
-            System.Diagnostics.Trace.Assert(length >= MIN_LENGTH);
-            System.Diagnostics.Trace.Assert(length <= MAX_LENGTH);
+            if (length < MIN_LENGTH || length > MAX_LENGTH)
+            {
+                throw new ArgumentException("length should be between 1 and 4,000");
+            }
 
             _length = length;
         }
 
         public byte[] ToBCP(string text)
         {
-            System.Diagnostics.Trace.Assert(text.Length <= _length);
+            if (text.Length > _length)
+            {
+                throw new ArgumentException("text is longer than the length declared inside the constructor");
+            }
 
             //ushort is 2 bytes long
             //* 2 because we are in unicode, thus 1 char is 2 bytes long

@@ -34,10 +34,12 @@ namespace BCPWriter
         public byte[] ToBCP(int value)
         {
             //Can be a value from -2^31 through -2^31-1
-            //FIXME useless asserts since int cannot be less/more than MIN_VALUE/MAX_VALUE
-            //asserts here for the beauty of it...
-            System.Diagnostics.Trace.Assert(value >= MIN_VALUE);
-            System.Diagnostics.Trace.Assert(value <= MAX_VALUE);
+            //FIXME useless exceptions since int cannot be less/more than MIN_VALUE/MAX_VALUE
+            //here for the beauty of it...
+            if (value < MIN_VALUE || value > MAX_VALUE)
+            {
+                throw new ArgumentException("value should be between -2^31 and -2^31-1");
+            }
 
             //byte is 1 byte long :)
             byte size = 4;

@@ -14,6 +14,8 @@
     <FileAlignment>512</FileAlignment>
     <StartupObject>
     </StartupObject>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>BCPWriter.BCPWriter.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -58,6 +60,9 @@
     <Compile Include="SQLVarBinary.cs" />
     <Compile Include="SQLVarChar.cs" />
     <Compile Include="SQLXML.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BCPWriter.BCPWriter.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
