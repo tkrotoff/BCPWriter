@@ -5,8 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BCPWriter", "BCPWriter\BCPW
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BCPWriterTests", "BCPWriterTests\BCPWriterTests.csproj", "{5A7647A7-574F-4514-BC93-C10E04CCD5D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BCPWriterApp", "BCPWriterApp\BCPWriterApp.csproj", "{2A7AA6D5-1569-4851-AC04-666619796483}"
-EndProject
 Project("{4F174C21-8C12-11D0-8340-0000F80270F8}") = "Database", "Database\Database.dbp", "{96FBF0DD-5AAB-468C-9698-BA8136EFFA74}"
 EndProject
 Global
@@ -23,10 +21,6 @@ Global
 		{5A7647A7-574F-4514-BC93-C10E04CCD5D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A7647A7-574F-4514-BC93-C10E04CCD5D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A7647A7-574F-4514-BC93-C10E04CCD5D0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2A7AA6D5-1569-4851-AC04-666619796483}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2A7AA6D5-1569-4851-AC04-666619796483}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2A7AA6D5-1569-4851-AC04-666619796483}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2A7AA6D5-1569-4851-AC04-666619796483}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

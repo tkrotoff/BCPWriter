@@ -2,7 +2,8 @@
 
 [Reflection.Assembly]::LoadFrom("BCPWriter.dll");
 
-$bcp = new-object BCPWriter.BCPWriter("data.bcp");
+$bcpFileName = "data.bcp";
+$bcp = new-object BCPWriter.BCPWriter($bcpFileName);
 
 $firstName = new-object BCPWriter.SQLNVarChar([BCPWriter.SQLNVarChar]::MAX);
 $bcp.AddColumn($firstName);
@@ -20,8 +21,16 @@ $gender = new-object BCPWriter.SQLInt;
 $bcp.AddColumn($gender);
 
 $rows =
-    "Frédéric François", "Chopin", 1810, 1849, 0,
+    "Frédéric François", "Chopin", 1810, 1849, 1,
     "Franz", "Liszt", 1811, 1886, 1,
-    "George", "Sand", 1804, 1876, 1;
+    "George", "Sand", 1804, 1876, 0;
 
 $bcp.WriteRows($rows);
+
+$table = "[BCPTest].[dbo].[Table_1]";
+$servername = "FRDEVPC01";
+$username = "sa";
+$password = "Password01";
+
+# Call bcp and load the data inside the table
+bcp $table in $bcpFileName -n -S $servername -U $username -P $password
