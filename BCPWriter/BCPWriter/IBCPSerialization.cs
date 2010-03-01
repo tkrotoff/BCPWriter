@@ -43,8 +43,8 @@ namespace BCPWriter
     /// 20 * 4 = 4 * Space, KIKOO is of length 4 so bcp append spaces until to reach length = 10
     /// </code>
     /// </remarks>
-    interface IBCPSerialization
+    public interface IBCPSerialization
     {
-        //byte[] ToBCP(object value);
+        //byte[] ToBCP<T>(T value);
     }
 }

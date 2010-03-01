@@ -6,37 +6,74 @@ using System.IO;
 
 namespace BCPWriter
 {
-    class BCPWriter
+    public class BCPWriter
     {
-        public BCPWriter()
+        private List<IBCPSerialization> _columns = new List<IBCPSerialization>();
+
+        private BinaryWriter _writer = null;
+
+        public BCPWriter(BinaryWriter writer)
         {
-            string myFileName = "test.bcp";
-
-            FileStream stream = new FileStream(myFileName, FileMode.Create);
-            BinaryWriter writer = new BinaryWriter(stream);
-
-            SQLChar firstName = new SQLChar(10);
-            SQLChar lastName = new SQLChar(10);
-            SQLInt age = new SQLInt();
-            SQLInt gender = new SQLInt();
-
-            writer.Write(firstName.ToBCP("Tanguy"));
-            writer.Write(lastName.ToBCP("Krotoff"));
-            writer.Write(age.ToBCP(10));
-            writer.Write(gender.ToBCP(1));
-
-            writer.Write(firstName.ToBCP("Renaud"));
-            writer.Write(lastName.ToBCP("Larzilliere"));
-            writer.Write(age.ToBCP(15));
-            writer.Write(gender.ToBCP(1));
-
-            writer.Write(firstName.ToBCP("Nicolas"));
-            writer.Write(lastName.ToBCP("Thal"));
-            writer.Write(age.ToBCP(7));
-            writer.Write(gender.ToBCP(1));
-
-            writer.Close();
+            _writer = writer;
         }
 
+        public void AddColumn(IBCPSerialization column)
+        {
+            _columns.Add(column);
+        }
+
+        public void AddColumns(IEnumerable<IBCPSerialization> columns)
+        {
+            _columns.AddRange(columns);
+        }
+
+        public void WriteRows(IEnumerable<object> rows)
+        {
+            System.Diagnostics.Trace.Assert(_columns.Count() != 0);
+
+            for (int i = 0; i < rows.Count(); i++)
+            {
+                IBCPSerialization column = _columns[i % _columns.Count()];
+                object row = rows.ElementAt(i);
+
+                if (column is SQLBinary)
+                {
+                    _writer.Write(((SQLBinary)column).ToBCP((byte[])row));
+                }
+                else if (column is SQLChar)
+                {
+                    _writer.Write(((SQLChar)column).ToBCP((string)row));
+                }
+                else if (column is SQLInt)
+                {
+                    _writer.Write(((SQLInt)column).ToBCP((int)row));
+                }
+                else if (column is SQLNChar)
+                {
+                    _writer.Write(((SQLNChar)column).ToBCP((string)row));
+                }
+                else if (column is SQLNVarChar)
+                {
+                    _writer.Write(((SQLNVarChar)column).ToBCP((string)row));
+                }
+                else if (column is SQLVarBinary)
+                {
+                    _writer.Write(((SQLVarBinary)column).ToBCP((byte[])row));
+                }
+                else if (column is SQLVarChar)
+                {
+                    _writer.Write(((SQLVarChar)column).ToBCP((string)row));
+                }
+                else if (column is SQLXML)
+                {
+                    _writer.Write(((SQLXML)column).ToBCP((string)row));
+                }
+                else
+                {
+                    System.Diagnostics.Trace.Assert(false);
+                }
+            }
+            _writer.Close();
+        }
     }
 }
