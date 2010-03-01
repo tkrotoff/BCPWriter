@@ -37,7 +37,6 @@ namespace BCPWriter
         /// <summary>
         /// Constructs a SQL char.
         /// </summary>
-        /// <param name="writer">BinaryWriter</param>
         /// <param name="length">
         /// length of n bytes, where n is a value from 1 through 8,000.
         /// The storage size is n bytes.

@@ -147,8 +147,8 @@ namespace BCPWriter.Tests
             //Death
             writer.AddColumn(new SQLInt());
 
-            //           10,000,000
-            int nbRows = 10000000;
+            //           100,000
+            int nbRows = 100000;
 
             List<object> rows = new List<object>();
             for (int i = 0; i < nbRows; i++)

@@ -36,7 +36,6 @@ namespace BCPWriter
         /// <summary>
         /// Constructs a SQL nchar.
         /// </summary>
-        /// <param name="text">text</param>
         /// <param name="length">
         /// length of n bytes, where n is a value from 1 through 4,000.
         /// The storage size is two times n bytes.
@@ -52,6 +51,11 @@ namespace BCPWriter
             _length = length;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="text">text</param>
+        /// <returns></returns>
         public byte[] ToBCP(string text)
         {
             if (text.Length > _length)

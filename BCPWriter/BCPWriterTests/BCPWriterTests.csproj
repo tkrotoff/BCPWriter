@@ -56,7 +56,9 @@
     <Compile Include="SQLIntTests.cs" />
     <Compile Include="SQLCharTests.cs" />
     <Compile Include="SQLNCharTests.cs" />
+    <Compile Include="SQLNTextTests.cs" />
     <Compile Include="SQLNVarCharTests.cs" />
+    <Compile Include="SQLTextTests.cs" />
     <Compile Include="SQLVarBinaryTests.cs" />
     <Compile Include="SQLVarCharTests.cs" />
     <Compile Include="SQLXMLTests.cs" />
