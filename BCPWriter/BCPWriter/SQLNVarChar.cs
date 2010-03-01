@@ -18,10 +18,9 @@ namespace BCPWriter
     /// </remarks>
     public class SQLNVarChar : IBCPSerialization
     {
-        private string _text;
         private uint _length;
 
-        public static readonly uint MAX = (uint)SQLInt.MAX_VALUE;
+        public const uint MAX = (uint)SQLInt.MAX_VALUE;
 
         /// <summary>
         /// Constructs a SQL nvarchar.
@@ -32,10 +31,8 @@ namespace BCPWriter
         /// The storage size is two times n bytes.
         /// length can also be MAX.
         /// </param>
-        public SQLNVarChar(string text, uint length)
+        public SQLNVarChar(uint length)
         {
-            System.Diagnostics.Trace.Assert(text.Length <= length);
-
             if (length != MAX)
             {
                 //Can be a value from 1 through 4,000
@@ -43,29 +40,29 @@ namespace BCPWriter
                 System.Diagnostics.Trace.Assert(length <= SQLNChar.MAX_LENGTH);
             }
 
-            _text = text;
             _length = length;
         }
 
-        public void ToBCP(BinaryWriter writer)
+        public byte[] ToBCP(string text)
         {
+            System.Diagnostics.Trace.Assert(text.Length <= _length);
+
+            byte[] sizeBytes = null;
             if (_length == MAX)
             {
                 //ulong is 8 bytes long
                 //* 2 because we are in unicode, thus 1 char is 2 bytes long
-                ulong length = (ulong)(_text.Length * 2);
-                writer.Write(length);
+                sizeBytes = BitConverter.GetBytes((ulong)(text.Length * 2));
             }
             else
             {
                 //ushort is 2 bytes long
                 //* 2 because we are in unicode, thus 1 char is 2 bytes long
-                ushort length = (ushort)(_text.Length * 2);
-                writer.Write(length);
+                sizeBytes = BitConverter.GetBytes((ushort)(text.Length * 2));
             }
 
             //Text should be in unicode
-            writer.Write(Encoding.Unicode.GetBytes(_text.ToString()));
+            return SQLInt.ConcatByteArrays(sizeBytes, Encoding.Unicode.GetBytes(text));
         }
     }
 }

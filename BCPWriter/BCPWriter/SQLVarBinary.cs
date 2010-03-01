@@ -18,11 +18,10 @@ namespace BCPWriter
     /// </remarks>
     public class SQLVarBinary : IBCPSerialization
     {
-        private byte[] _data;
         private uint _length;
 
-        public static readonly uint MAX = (uint) SQLInt.MAX_VALUE;
-        //public static readonly int MAX_UNICODE = 2 ^ 30 - 1;
+        public const uint MAX = (uint)SQLInt.MAX_VALUE;
+        //public const int MAX_UNICODE = 2 ^ 30 - 1;
 
         /// <summary>
         /// Constructs a SQL varbinary.
@@ -33,10 +32,8 @@ namespace BCPWriter
         /// The storage size is n bytes.
         /// length can also be MAX.
         /// </param>
-        public SQLVarBinary(byte[] data, uint length)
+        public SQLVarBinary(uint length)
         {
-            System.Diagnostics.Trace.Assert(data.Length <= length);
-
             if (length != MAX)
             {
                 //Can be a value from 1 through 8,000
@@ -44,29 +41,29 @@ namespace BCPWriter
                 System.Diagnostics.Trace.Assert(length <= SQLChar.MAX_LENGTH);
             }
 
-            _data = data;
             _length = length;
         }
 
-        public void ToBCP(BinaryWriter writer)
+        public byte[] ToBCP(byte[] data)
         {
+            System.Diagnostics.Trace.Assert(data.Length <= _length);
+
+            byte[] sizeBytes = null;
             if (_length == MAX)
             {
                 //ulong is 8 bytes long
-                ulong length = (ulong)_data.Length;
-                writer.Write(length);
+                sizeBytes = BitConverter.GetBytes((ulong)data.Length);
             }
             else
             {
                 //ushort is 2 bytes long
-                ushort length = (ushort)_data.Length;
-                writer.Write(length);
+                sizeBytes = BitConverter.GetBytes((ushort)data.Length);
             }
 
-            string hex = SQLBinary.ToHexString(_data);
+            string hex = SQLBinary.ToHexString(data);
             byte[] hexBytes = SQLBinary.HexToByteArray(hex);
 
-            writer.Write(hexBytes.ToArray());
+            return SQLInt.ConcatByteArrays(sizeBytes, hexBytes);
         }
     }
 }

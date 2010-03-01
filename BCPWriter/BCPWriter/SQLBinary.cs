@@ -30,11 +30,10 @@ namespace BCPWriter
     /// </remarks>
     public class SQLBinary : IBCPSerialization
     {
-        private byte[] _data;
         private ushort _length;
 
-        public static readonly ushort MIN_LENGTH = SQLChar.MIN_LENGTH;
-        public static readonly ushort MAX_LENGTH = SQLChar.MAX_LENGTH;
+        public const ushort MIN_LENGTH = SQLChar.MIN_LENGTH;
+        public const ushort MAX_LENGTH = SQLChar.MAX_LENGTH;
 
         /// <summary>
         /// Constructs a SQL binary or varbinary.
@@ -44,24 +43,23 @@ namespace BCPWriter
         /// length of n bytes, where n is a value from 1 through 8,000.
         /// The storage size is n bytes.
         /// </param>
-        public SQLBinary(byte[] data, ushort length)
+        public SQLBinary(ushort length)
         {
-            System.Diagnostics.Trace.Assert(data.Length <= length);
-
             //Can be a value from 1 through 8,000
             System.Diagnostics.Trace.Assert(length >= MIN_LENGTH);
             System.Diagnostics.Trace.Assert(length <= MAX_LENGTH);
 
-            _data = data;
             _length = length;
         }
 
-        public void ToBCP(BinaryWriter writer)
+        public byte[] ToBCP(byte[] data)
         {
-            //ushort is 2 bytes long
-            writer.Write(_length);
+            System.Diagnostics.Trace.Assert(data.Length <= _length);
 
-            string hex = ToHexString(_data);
+            //ushort is 2 bytes long
+            byte[] sizeBytes = BitConverter.GetBytes(_length);
+
+            string hex = ToHexString(data);
             byte[] hexBytes = HexToByteArray(hex);
 
             //Append 0s if needed
@@ -71,7 +69,7 @@ namespace BCPWriter
                 bytes.Add(0);
             }
 
-            writer.Write(bytes.ToArray());
+            return SQLInt.ConcatByteArrays(sizeBytes, bytes.ToArray());
         }
 
         public static string ToHexString(byte[] data)

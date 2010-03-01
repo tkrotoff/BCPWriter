@@ -21,14 +21,14 @@ namespace BCPWriter.Tests
             FileStream stream = new FileStream(myFileName, FileMode.Create);
             BinaryWriter writer = new BinaryWriter(stream);
 
-            SQLNChar sqlNChar = new SQLNChar("KIKOO", 10);
-            sqlNChar.ToBCP(writer);
+            SQLNChar sqlNChar = new SQLNChar(10);
+            writer.Write(sqlNChar.ToBCP("KIKOO"));
 
-            SQLChar sqlChar = new SQLChar("KIKOO", 10);
-            sqlChar.ToBCP(writer);
+            SQLChar sqlChar = new SQLChar(10);
+            writer.Write(sqlChar.ToBCP("KIKOO"));
 
-            SQLInt sqlInt = new SQLInt(10);
-            sqlInt.ToBCP(writer);
+            SQLInt sqlInt = new SQLInt();
+            writer.Write(sqlInt.ToBCP(10));
 
             writer.Close();
 

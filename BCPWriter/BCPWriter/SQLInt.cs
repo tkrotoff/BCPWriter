@@ -25,12 +25,13 @@ namespace BCPWriter
     /// </remarks>
     public class SQLInt : IBCPSerialization
     {
-        int _value;
+        //Math.Pow(-2, 31)
+        public const int MIN_VALUE = -2147483648;
 
-        public static readonly int MIN_VALUE = (int) Math.Pow(-2, 31);
-        public static readonly int MAX_VALUE = (int) Math.Pow(2, 31) - 1;
+        //Math.Pow(2, 31) - 1
+        public const int MAX_VALUE = 2147483647;
 
-        public SQLInt(int value)
+        public byte[] ToBCP(int value)
         {
             //Can be a value from -2^31 through -2^31-1
             //FIXME useless asserts since int cannot be less/more than MIN_VALUE/MAX_VALUE
@@ -38,17 +39,22 @@ namespace BCPWriter
             System.Diagnostics.Trace.Assert(value >= MIN_VALUE);
             System.Diagnostics.Trace.Assert(value <= MAX_VALUE);
 
-            _value = value;
-        }
-
-        public void ToBCP(BinaryWriter writer)
-        {
             //byte is 1 byte long :)
             byte size = 4;
-            writer.Write(size);
+            byte[] sizeBytes = { size };
 
             //int is 4 bytes long
-            writer.Write(_value);
+            byte[] valueBytes = BitConverter.GetBytes(value);
+
+            return ConcatByteArrays(sizeBytes, valueBytes);
+        }
+
+        public static byte[] ConcatByteArrays(byte[] array1, byte[] array2)
+        {
+            byte[] bytes = new byte[array1.Length + array2.Length];
+            Buffer.BlockCopy(array1, 0, bytes, 0, array1.Length);
+            Buffer.BlockCopy(array2, 0, bytes, array1.Length, array2.Length);
+            return bytes;
         }
     }
 }

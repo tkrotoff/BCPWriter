@@ -17,8 +17,8 @@ namespace BCPWriter.Tests
         {
             BinaryWriter writer = BCPTests.CreateBinaryFile(myFileName);
 
-            SQLXML sqlXML = new SQLXML(xml);
-            sqlXML.ToBCP(writer);
+            SQLXML sqlXML = new SQLXML();
+            writer.Write(sqlXML.ToBCP(xml));
 
             writer.Close();
         }

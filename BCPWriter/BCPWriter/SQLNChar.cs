@@ -28,11 +28,10 @@ namespace BCPWriter
     /// </remarks>
     public class SQLNChar : IBCPSerialization
     {
-        private string _text;
         private ushort _length;
 
-        public static readonly ushort MIN_LENGTH = 1;
-        public static readonly ushort MAX_LENGTH = 4000;
+        public const ushort MIN_LENGTH = 1;
+        public const ushort MAX_LENGTH = 4000;
 
         /// <summary>
         /// Constructs a SQL nchar.
@@ -42,27 +41,26 @@ namespace BCPWriter
         /// length of n bytes, where n is a value from 1 through 4,000.
         /// The storage size is two times n bytes.
         /// </param>
-        public SQLNChar(string text, ushort length)
+        public SQLNChar(ushort length)
         {
-            System.Diagnostics.Trace.Assert(text.Length <= length);
-
             //Can be a value from 1 through 4,000
             System.Diagnostics.Trace.Assert(length >= MIN_LENGTH);
             System.Diagnostics.Trace.Assert(length <= MAX_LENGTH);
 
-            _text = text;
             _length = length;
         }
 
-        public void ToBCP(BinaryWriter writer)
+        public byte[] ToBCP(string text)
         {
+            System.Diagnostics.Trace.Assert(text.Length <= _length);
+
             //ushort is 2 bytes long
             //* 2 because we are in unicode, thus 1 char is 2 bytes long
             short length = (short) (_length * 2);
-            writer.Write(length);
+            byte[] sizeBytes = BitConverter.GetBytes(length);
 
             //Append spaces if needed
-            StringBuilder tmp = new StringBuilder(_text);
+            StringBuilder tmp = new StringBuilder(text);
             while (tmp.Length < _length)
             {
                 tmp.Append(SQLChar.SPACE);
@@ -70,7 +68,7 @@ namespace BCPWriter
             ////
 
             //Text should be in unicode
-            writer.Write(Encoding.Unicode.GetBytes(tmp.ToString()));
+            return SQLInt.ConcatByteArrays(sizeBytes, Encoding.Unicode.GetBytes(tmp.ToString()));
         }
     }
 }

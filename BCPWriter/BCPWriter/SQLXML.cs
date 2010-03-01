@@ -33,10 +33,19 @@ namespace BCPWriter
         /// <summary>
         /// Constructs a SQL xml.
         /// </summary>
-        /// <param name="xml">XML as a string</param>
-        public SQLXML(string xml)
-            : base(xml, SQLNVarChar.MAX)
+        public SQLXML()
+            : base(SQLNVarChar.MAX)
         {
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="xml">XML as a string</param>
+        /// <returns></returns>
+        public new byte[] ToBCP(string xml)
+        {
+            return base.ToBCP(xml);
         }
     }
 }

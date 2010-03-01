@@ -27,48 +27,46 @@ namespace BCPWriter
     /// </remarks>
     public class SQLChar : IBCPSerialization
     {
-        private string _text;
         private ushort _length;
 
-        public static readonly char SPACE = ' ';
+        public const char SPACE = ' ';
 
-        public static readonly ushort MIN_LENGTH = 1;
-        public static readonly ushort MAX_LENGTH = 8000;
+        public const ushort MIN_LENGTH = 1;
+        public const ushort MAX_LENGTH = 8000;
 
         /// <summary>
         /// Constructs a SQL char.
         /// </summary>
-        /// <param name="text">text</param>
+        /// <param name="writer">BinaryWriter</param>
         /// <param name="length">
         /// length of n bytes, where n is a value from 1 through 8,000.
         /// The storage size is n bytes.
         /// </param>
-        public SQLChar(string text, ushort length)
+        public SQLChar(ushort length)
         {
-            System.Diagnostics.Trace.Assert(text.Length <= length);
-
             //Can be a value from 1 through 8,000
             System.Diagnostics.Trace.Assert(length >= MIN_LENGTH);
             System.Diagnostics.Trace.Assert(length <= MAX_LENGTH);
 
-            _text = text;
             _length = length;
         }
 
-        public void ToBCP(BinaryWriter writer)
+        public byte[] ToBCP(string text)
         {
+            System.Diagnostics.Trace.Assert(text.Length <= _length);
+
             //ushort is 2 bytes long
-            writer.Write(_length);
+            byte[] sizeBytes = BitConverter.GetBytes(_length);
 
             //Append spaces if needed
-            StringBuilder tmp = new StringBuilder(_text);
+            StringBuilder tmp = new StringBuilder(text);
             while (tmp.Length < _length)
             {
                 tmp.Append(SPACE);
             }
             ////
 
-            writer.Write(EncodeToOEMCodePage(tmp.ToString()));
+            return SQLInt.ConcatByteArrays(sizeBytes, EncodeToOEMCodePage(tmp.ToString()));
         }
 
         /// <summary>

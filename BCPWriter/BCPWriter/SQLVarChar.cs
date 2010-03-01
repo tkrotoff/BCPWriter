@@ -18,23 +18,19 @@ namespace BCPWriter
     /// </remarks>
     public class SQLVarChar : IBCPSerialization
     {
-        private string _text;
         private uint _length;
 
-        public static readonly uint MAX = (uint) SQLInt.MAX_VALUE;
+        public const uint MAX = (uint)SQLInt.MAX_VALUE;
 
         /// <summary>
         /// Constructs a SQL varchar.
         /// </summary>
-        /// <param name="text">text</param>
         /// <param name="length">
         /// length of n bytes, where n is a value from 1 through 8,000.
         /// The storage size is n bytes.
         /// </param>
-        public SQLVarChar(string text, uint length)
+        public SQLVarChar(uint length)
         {
-            System.Diagnostics.Trace.Assert(text.Length <= length);
-
             if (length != MAX)
             {
                 //Can be a value from 1 through 8,000
@@ -42,26 +38,26 @@ namespace BCPWriter
                 System.Diagnostics.Trace.Assert(length <= SQLBinary.MAX_LENGTH);
             }
 
-            _text = text;
             _length = length;
         }
 
-        public void ToBCP(BinaryWriter writer)
+        public byte[] ToBCP(string text)
         {
+            System.Diagnostics.Trace.Assert(text.Length <= _length);
+
+            byte[] sizeBytes = null;
             if (_length == MAX)
             {
                 //ulong is 8 bytes long
-                ulong length = (ulong)_text.Length;
-                writer.Write(length);
+                sizeBytes = BitConverter.GetBytes((ulong)text.Length);
             }
             else
             {
                 //ushort is 2 bytes long
-                ushort length = (ushort)_text.Length;
-                writer.Write(length);
+                sizeBytes = BitConverter.GetBytes((ushort)text.Length);
             }
 
-            writer.Write(SQLChar.EncodeToOEMCodePage(_text));
+            return SQLInt.ConcatByteArrays(sizeBytes, SQLChar.EncodeToOEMCodePage(text));
         }
     }
 }
