@@ -18,9 +18,7 @@ namespace BCPWriter.Tests
         {
             string myFileName = "4columns.bcp";
 
-            FileStream stream = new FileStream(myFileName, FileMode.Create);
-
-            BCPWriter writer = new BCPWriter(new BinaryWriter(stream));
+            BCPWriter writer = new BCPWriter(myFileName);
 
             //FirstName
             writer.AddColumn(new SQLNVarChar(SQLNVarChar.MAX));
@@ -60,9 +58,7 @@ namespace BCPWriter.Tests
         {
             string myFileName = "0columns.bcp";
 
-            FileStream stream = new FileStream(myFileName, FileMode.Create);
-
-            BCPWriter writer = new BCPWriter(new BinaryWriter(stream));
+            BCPWriter writer = new BCPWriter(myFileName);
 
             List<object> rows = new List<object>();
             rows.Add("Frédéric François");
@@ -84,9 +80,7 @@ namespace BCPWriter.Tests
         {
             string myFileName = "3columns.bcp";
 
-            FileStream stream = new FileStream(myFileName, FileMode.Create);
-
-            BCPWriter writer = new BCPWriter(new BinaryWriter(stream));
+            BCPWriter writer = new BCPWriter(myFileName);
 
             //FirstName
             writer.AddColumn(new SQLNVarChar(SQLNVarChar.MAX));
@@ -131,9 +125,7 @@ namespace BCPWriter.Tests
         {
             string myFileName = "perf.bcp";
 
-            FileStream stream = new FileStream(myFileName, FileMode.Create);
-
-            BCPWriter writer = new BCPWriter(new BinaryWriter(stream));
+            BCPWriter writer = new BCPWriter(myFileName);
 
             //FirstName
             writer.AddColumn(new SQLNVarChar(SQLNVarChar.MAX));

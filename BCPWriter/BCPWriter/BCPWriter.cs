@@ -10,11 +10,16 @@ namespace BCPWriter
     {
         private List<IBCPSerialization> _columns = new List<IBCPSerialization>();
 
-        private BinaryWriter _writer = null;
+        private string _bcpFileName = string.Empty;
 
-        public BCPWriter(BinaryWriter writer)
+        public BCPWriter(string bcpFileName)
         {
-            _writer = writer;
+            if (string.IsNullOrEmpty(bcpFileName))
+            {
+                throw new ArgumentException("Empty bcp file name");
+            }
+
+            _bcpFileName = bcpFileName;
         }
 
         public void AddColumn(IBCPSerialization column)
@@ -34,6 +39,10 @@ namespace BCPWriter
                 throw new ArgumentException("No columns");
             }
 
+            FileStream stream = new FileStream(_bcpFileName, FileMode.Create);
+
+            BinaryWriter writer = new BinaryWriter(stream);
+
             for (int i = 0; i < rows.Count(); i++)
             {
                 IBCPSerialization column = _columns[i % _columns.Count()];
@@ -41,42 +50,43 @@ namespace BCPWriter
 
                 if (column is SQLBinary)
                 {
-                    _writer.Write(((SQLBinary)column).ToBCP((byte[])row));
+                    writer.Write(((SQLBinary)column).ToBCP((byte[])row));
                 }
                 else if (column is SQLChar)
                 {
-                    _writer.Write(((SQLChar)column).ToBCP((string)row));
+                    writer.Write(((SQLChar)column).ToBCP((string)row));
                 }
                 else if (column is SQLInt)
                 {
-                    _writer.Write(((SQLInt)column).ToBCP((int)row));
+                    writer.Write(((SQLInt)column).ToBCP((int)row));
                 }
                 else if (column is SQLNChar)
                 {
-                    _writer.Write(((SQLNChar)column).ToBCP((string)row));
+                    writer.Write(((SQLNChar)column).ToBCP((string)row));
                 }
                 else if (column is SQLNVarChar)
                 {
-                    _writer.Write(((SQLNVarChar)column).ToBCP((string)row));
+                    writer.Write(((SQLNVarChar)column).ToBCP((string)row));
                 }
                 else if (column is SQLVarBinary)
                 {
-                    _writer.Write(((SQLVarBinary)column).ToBCP((byte[])row));
+                    writer.Write(((SQLVarBinary)column).ToBCP((byte[])row));
                 }
                 else if (column is SQLVarChar)
                 {
-                    _writer.Write(((SQLVarChar)column).ToBCP((string)row));
+                    writer.Write(((SQLVarChar)column).ToBCP((string)row));
                 }
                 else if (column is SQLXML)
                 {
-                    _writer.Write(((SQLXML)column).ToBCP((string)row));
+                    writer.Write(((SQLXML)column).ToBCP((string)row));
                 }
                 else
                 {
                     System.Diagnostics.Trace.Assert(false);
                 }
             }
-            _writer.Close();
+
+            writer.Close();
         }
     }
 }
