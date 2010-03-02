@@ -43,6 +43,10 @@ namespace BCPWriter
     /// 4F = O
     /// 20 * 4 = 4 * Space, KIKOO is of length 4 so bcp append spaces until to reach length = 10
     /// </code>
+    /// <br/>
+    /// SQL types are prefixed with 'SQL' in order to avoid clash name with C# types,
+    /// i.e SQLInt and Int, SQLChar and Char...<br/>
+    /// Not all SQL types have been added to BCPWriter, feel free to add them if needed.
     /// </remarks>
     /// 
     /// <example>

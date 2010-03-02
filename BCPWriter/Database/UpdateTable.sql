@@ -17,9 +17,9 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[Table_1](
-	[column] uniqueidentifier  NULL
+	[column] bigint  NULL
 ) ON [PRIMARY]
 
 GO
 
-INSERT INTO [dbo].[Table_1]([column]) VALUES('6F9619FF-8B86-D011-B42D-00C04FC964FF')
+INSERT INTO [dbo].[Table_1]([column]) VALUES(9223372036854775807)
