@@ -12,6 +12,8 @@ namespace BCPWriter
     /// 
     /// <remarks>
     /// <a href="http://msdn.microsoft.com/en-us/library/ms162802.aspx">bcp Utility</a><br/>
+    /// <a href="http://msdn.microsoft.com/en-us/library/ms187752.aspx">Data Types (Transact-SQL)</a><br/>
+    /// <a href="http://databases.about.com/od/sqlserver/a/mssql_datatypes.htm">Microsoft SQL Server Data Types</a><br/>
     /// <br/>
     /// From SQL Server 2008 Books Online:<br/>
     /// The bcp utility bulk copies data between an instance of Microsoft SQL Server
@@ -196,6 +198,22 @@ namespace BCPWriter
                 else if (column is SQLReal)
                 {
                     writer.Write(((SQLReal)column).ToBCP((float)row));
+                }
+                else if (column is SQLUniqueIdentifier)
+                {
+                    writer.Write(((SQLUniqueIdentifier)column).ToBCP((Guid)row));
+                }
+                else if (column is SQLBigInt)
+                {
+                    writer.Write(((SQLBigInt)column).ToBCP((long)row));
+                }
+                else if (column is SQLDateTime)
+                {
+                    System.Diagnostics.Trace.Assert(false);
+                }
+                else if (column is SQLDateTime2)
+                {
+                    System.Diagnostics.Trace.Assert(false);
                 }
                 else
                 {

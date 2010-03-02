@@ -12,8 +12,6 @@ namespace BCPWriter
     /// 
     /// <remarks>
     /// <see>SQLBinary</see>
-    /// <a href="http://msdn.microsoft.com/en-us/library/ms187752.aspx">Data Types (Transact-SQL)</a><br/>
-    /// <a href="http://databases.about.com/od/sqlserver/a/mssql_datatypes.htm">Microsoft SQL Server Data Types</a><br/>
     /// <a href="http://msdn.microsoft.com/en-us/library/ms188362.aspx">binary and varbinary (Transact-SQL)</a><br/>
     /// </remarks>
     public class SQLVarBinary : IBCPSerialization

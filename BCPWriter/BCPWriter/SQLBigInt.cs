@@ -12,8 +12,6 @@ namespace BCPWriter
     /// 
     /// <remarks>
     /// <see>SQLInt</see>
-    /// <a href="http://msdn.microsoft.com/en-us/library/ms187752.aspx">Data Types (Transact-SQL)</a><br/>
-    /// <a href="http://databases.about.com/od/sqlserver/a/mssql_datatypes.htm">Microsoft SQL Server Data Types</a><br/>
     /// <a href="http://msdn.microsoft.com/en-us/library/ms187745.aspx">int, bigint, smallint, and tinyint (Transact-SQL)</a><br/>
     /// </remarks>
     public class SQLBigInt : IBCPSerialization

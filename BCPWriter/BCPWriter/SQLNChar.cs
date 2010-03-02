@@ -12,8 +12,6 @@ namespace BCPWriter
     /// 
     /// <remarks>
     /// <see>SQLChar</see>
-    /// <a href="http://msdn.microsoft.com/en-us/library/ms187752.aspx">Data Types (Transact-SQL)</a><br/>
-    /// <a href="http://databases.about.com/od/sqlserver/a/mssql_datatypes.htm">Microsoft SQL Server Data Types</a><br/>
     /// <a href="http://msdn.microsoft.com/en-us/library/ms186939.aspx">nchar and nvarchar (Transact-SQL)</a><br/>
     /// <br/>
     /// From SQL Server 2008 Books Online:<br/>

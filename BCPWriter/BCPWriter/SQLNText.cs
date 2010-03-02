@@ -12,8 +12,6 @@ namespace BCPWriter
     /// 
     /// <remarks>
     /// <see>SQLChar</see>
-    /// <a href="http://msdn.microsoft.com/en-us/library/ms187752.aspx">Data Types (Transact-SQL)</a><br/>
-    /// <a href="http://databases.about.com/od/sqlserver/a/mssql_datatypes.htm">Microsoft SQL Server Data Types</a><br/>
     /// <a href="http://msdn.microsoft.com/en-us/library/ms187993.aspx">ntext, text, and image (Transact-SQL)</a><br/>
     /// <br/>
     /// ntext, text, and image data types will be removed in a future version of Microsoft SQL Server.
