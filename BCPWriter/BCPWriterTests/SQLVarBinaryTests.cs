@@ -26,7 +26,7 @@ namespace BCPWriter.Tests
         [Test]
         public void TestVarBinary50()
         {
-            byte[] data = SQLBinary.StringToByteArray("KIKOO");
+            byte[] data = Util.StringToByteArray("KIKOO");
 
             string myFileName = "varbinary(50).bcp";
             WriteVarBinary(data, 50, myFileName);
@@ -36,7 +36,7 @@ namespace BCPWriter.Tests
         [Test]
         public void TestVarBinaryMax()
         {
-            byte[] data = SQLBinary.StringToByteArray("KIKOO");
+            byte[] data = Util.StringToByteArray("KIKOO");
 
             string myFileName = "varbinary(max).bcp";
             WriteVarBinary(data, SQLVarBinary.MAX, myFileName);

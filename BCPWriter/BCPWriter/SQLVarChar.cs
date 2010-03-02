@@ -61,7 +61,7 @@ namespace BCPWriter
                 sizeBytes = BitConverter.GetBytes((ushort)text.Length);
             }
 
-            return SQLInt.ConcatByteArrays(sizeBytes, SQLChar.EncodeToOEMCodePage(text));
+            return Util.ConcatByteArrays(sizeBytes, Util.EncodeToOEMCodePage(text));
         }
     }
 }

@@ -61,9 +61,11 @@
     <Compile Include="SQLNVarChar.cs" />
     <Compile Include="SQLReal.cs" />
     <Compile Include="SQLText.cs" />
+    <Compile Include="SQLUniqueIdentifier.cs" />
     <Compile Include="SQLVarBinary.cs" />
     <Compile Include="SQLVarChar.cs" />
     <Compile Include="SQLXML.cs" />
+    <Compile Include="Util.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="BCPWriter.BCPWriter.snk" />

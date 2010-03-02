@@ -37,7 +37,7 @@ namespace BCPWriter
             byte[] sizeBytes = BitConverter.GetBytes(length);
 
             //Text should be in unicode
-            return SQLInt.ConcatByteArrays(sizeBytes, Encoding.Unicode.GetBytes(text));
+            return Util.ConcatByteArrays(sizeBytes, Encoding.Unicode.GetBytes(text));
         }
     }
 }

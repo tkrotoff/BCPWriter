@@ -77,7 +77,7 @@ namespace BCPWriter
             ////
 
             //Text should be in unicode
-            return SQLInt.ConcatByteArrays(sizeBytes, Encoding.Unicode.GetBytes(tmp.ToString()));
+            return Util.ConcatByteArrays(sizeBytes, Encoding.Unicode.GetBytes(tmp.ToString()));
         }
     }
 }

@@ -68,8 +68,8 @@ namespace BCPWriter
             //ushort is 2 bytes long
             byte[] sizeBytes = BitConverter.GetBytes(_length);
 
-            string hex = ToHexString(data);
-            byte[] hexBytes = HexToByteArray(hex);
+            string hex = Util.ToHexString(data);
+            byte[] hexBytes = Util.HexToByteArray(hex);
 
             //Append 0s if needed
             List<byte> bytes = new List<byte>(hexBytes);
@@ -78,45 +78,7 @@ namespace BCPWriter
                 bytes.Add(0);
             }
 
-            return SQLInt.ConcatByteArrays(sizeBytes, bytes.ToArray());
-        }
-
-        public static string ToHexString(byte[] data)
-        {
-            StringBuilder hex = new StringBuilder();
-            foreach (byte b in data)
-            {
-                hex.AppendFormat(System.Globalization.CultureInfo.InvariantCulture, "{0:x2}", b);
-            }
-            return hex.ToString();
-        }
-
-        public static byte[] StringToByteArray(string text)
-        {
-            byte[] bytes = new byte[text.Length];
-            int i = 0;
-            foreach (char c in text.ToCharArray())
-            {
-                bytes[i] = (byte)c;
-                i++;
-            }
-            return bytes;
-        }
-
-        /// <summary>
-        /// See <a href="http://stackoverflow.com/questions/311165/how-do-you-convert-byte-array-to-hexadecimal-string-and-vice-versa-in-c">How do you convert Byte Array to Hexadecimal String, and vice versa, in C#?</a>
-        /// </summary>
-        /// <param name="hex"></param>
-        /// <returns></returns>
-        public static byte[] HexToByteArray(string hex)
-        {
-            int nbChars = hex.Length;
-            byte[] bytes = new byte[nbChars / 2];
-            for (int i = 0; i < nbChars; i += 2)
-            {
-                bytes[i / 2] = Convert.ToByte(hex.Substring(i, 2), 16);
-            }
-            return bytes;
+            return Util.ConcatByteArrays(sizeBytes, bytes.ToArray());
         }
     }
 }

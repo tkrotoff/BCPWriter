@@ -48,15 +48,7 @@ namespace BCPWriter
             //int is 4 bytes long
             byte[] valueBytes = BitConverter.GetBytes(value);
 
-            return ConcatByteArrays(sizeBytes, valueBytes);
-        }
-
-        public static byte[] ConcatByteArrays(byte[] array1, byte[] array2)
-        {
-            byte[] bytes = new byte[array1.Length + array2.Length];
-            Buffer.BlockCopy(array1, 0, bytes, 0, array1.Length);
-            Buffer.BlockCopy(array2, 0, bytes, array1.Length, array2.Length);
-            return bytes;
+            return Util.ConcatByteArrays(sizeBytes, valueBytes);
         }
     }
 }

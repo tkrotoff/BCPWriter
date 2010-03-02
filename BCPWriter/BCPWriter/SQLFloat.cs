@@ -62,7 +62,7 @@ namespace BCPWriter
             //double is 8 bytes long
             byte[] valueBytes = BitConverter.GetBytes(value);
 
-            return SQLInt.ConcatByteArrays(sizeBytes, valueBytes);
+            return Util.ConcatByteArrays(sizeBytes, valueBytes);
         }
 
         public byte[] ToBCP(float value)
@@ -79,7 +79,7 @@ namespace BCPWriter
             //float is 4 bytes long
             byte[] valueBytes = BitConverter.GetBytes(value);
 
-            return SQLInt.ConcatByteArrays(sizeBytes, valueBytes);
+            return Util.ConcatByteArrays(sizeBytes, valueBytes);
         }
 
     }

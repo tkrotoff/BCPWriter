@@ -68,10 +68,10 @@ namespace BCPWriter
                 sizeBytes = BitConverter.GetBytes((ushort)data.Length);
             }
 
-            string hex = SQLBinary.ToHexString(data);
-            byte[] hexBytes = SQLBinary.HexToByteArray(hex);
+            string hex = Util.ToHexString(data);
+            byte[] hexBytes = Util.HexToByteArray(hex);
 
-            return SQLInt.ConcatByteArrays(sizeBytes, hexBytes);
+            return Util.ConcatByteArrays(sizeBytes, hexBytes);
         }
     }
 }

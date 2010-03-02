@@ -101,7 +101,7 @@ namespace BCPWriter
         {
             if (string.IsNullOrEmpty(bcpFileName))
             {
-                throw new ArgumentException("Empty bcp file name");
+                throw new ArgumentNullException("Empty bcp file name");
             }
 
             _bcpFileName = bcpFileName;

@@ -70,18 +70,7 @@ namespace BCPWriter
             }
             ////
 
-            return SQLInt.ConcatByteArrays(sizeBytes, EncodeToOEMCodePage(tmp.ToString()));
-        }
-
-        /// <summary>
-        /// Encode text using OEM code page, see http://en.wikipedia.org/wiki/Windows_code_page
-        /// </summary>
-        /// <param name="text"></param>
-        /// <returns></returns>
-        public static byte[] EncodeToOEMCodePage(string text)
-        {
-            Encoding enc = Encoding.GetEncoding(System.Globalization.CultureInfo.CurrentCulture.TextInfo.OEMCodePage);
-            return enc.GetBytes(text);
+            return Util.ConcatByteArrays(sizeBytes, Util.EncodeToOEMCodePage(tmp.ToString()));
         }
     }
 }

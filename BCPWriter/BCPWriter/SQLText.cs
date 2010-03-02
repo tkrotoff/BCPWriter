@@ -33,7 +33,7 @@ namespace BCPWriter
             //uint is 4 bytes long
             byte[] sizeBytes = BitConverter.GetBytes((uint)(text.Length));
 
-            return SQLInt.ConcatByteArrays(sizeBytes, SQLChar.EncodeToOEMCodePage(text));
+            return Util.ConcatByteArrays(sizeBytes, Util.EncodeToOEMCodePage(text));
         }
     }
 }
