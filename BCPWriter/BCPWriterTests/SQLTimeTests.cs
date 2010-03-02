@@ -11,28 +11,28 @@ using BCPWriter;
 namespace BCPWriter.Tests
 {
     [TestFixture]
-    class SQLDateTests
+    class SQLTimeTests
     {
-        private void WriteDate(DateTime date, string myFileName)
+        private void WriteTime(DateTime time, string myFileName)
         {
             BinaryWriter writer = BCPTests.CreateBinaryFile(myFileName);
 
-            SQLDate sqlDate = new SQLDate();
-            writer.Write(sqlDate.ToBCP(date));
+            SQLTime sqlTime = new SQLTime();
+            writer.Write(sqlTime.ToBCP(time));
 
             writer.Close();
         }
 
         [Test]
-        public void TestDate()
+        public void TestTime()
         {
-            DateTime date = DateTime.Parse(
-                                    "2004-05-23",
+            DateTime time = DateTime.Parse(
+                                    "12:35:29.1234567",
                                     System.Globalization.CultureInfo.InvariantCulture
                                 );
 
-            string myFileName = "date.bcp";
-            WriteDate(date, myFileName);
+            string myFileName = "time.bcp";
+            WriteTime(time, myFileName);
             BCPTests.CheckFile(myFileName);
         }
     }

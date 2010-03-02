@@ -215,6 +215,14 @@ namespace BCPWriter
                 {
                     System.Diagnostics.Trace.Assert(false);
                 }
+                else if (column is SQLDate)
+                {
+                    writer.Write(((SQLDate)column).ToBCP((DateTime)row));
+                }
+                else if (column is SQLTime)
+                {
+                    writer.Write(((SQLTime)column).ToBCP((DateTime)row));
+                }
                 else
                 {
                     System.Diagnostics.Trace.Assert(false);

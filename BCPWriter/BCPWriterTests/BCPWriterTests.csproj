@@ -65,6 +65,7 @@
     <Compile Include="SQLNVarCharTests.cs" />
     <Compile Include="SQLReal.cs" />
     <Compile Include="SQLTextTests.cs" />
+    <Compile Include="SQLTimeTests.cs" />
     <Compile Include="SQLUniqueIdentifierTests.cs" />
     <Compile Include="SQLVarBinaryTests.cs" />
     <Compile Include="SQLVarCharTests.cs" />

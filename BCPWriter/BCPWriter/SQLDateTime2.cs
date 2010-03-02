@@ -8,7 +8,6 @@ namespace BCPWriter
 {
     /// <summary>
     /// SQL datetime2, to be used instead of SQL datetime.
-    /// FIXME Don't understand bcp datetime file format
     /// </summary>
     /// 
     /// <remarks>
@@ -19,8 +18,6 @@ namespace BCPWriter
     {
         public byte[] ToBCP(DateTime dateTime)
         {
-            //FIXME Don't understand bcp datetime file format
-
             //byte is 1 byte long :)
             byte size = 8;
             byte[] sizeBytes = { size };

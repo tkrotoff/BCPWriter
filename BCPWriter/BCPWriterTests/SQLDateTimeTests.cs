@@ -31,6 +31,13 @@ namespace BCPWriter.Tests
                                     System.Globalization.CultureInfo.InvariantCulture
                                 );
 
+
+            DateTime d1 = DateTime.Parse("0001-01-01", System.Globalization.CultureInfo.InvariantCulture);
+            DateTime d2 = DateTime.Parse("0002-01-01", System.Globalization.CultureInfo.InvariantCulture);
+            TimeSpan span = d2 - d1;
+            Console.WriteLine
+                     ("There're {0} days between {1} and {2}", span.TotalDays, d1.ToString(), d2.ToString());
+
             string myFileName = "datetime.bcp";
             WriteDateTime(dateTime, myFileName);
             //FIXME Don't understand bcp datetime file format
