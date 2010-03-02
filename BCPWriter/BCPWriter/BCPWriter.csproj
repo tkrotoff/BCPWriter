@@ -55,6 +55,7 @@
     <Compile Include="SQLChar.cs" />
     <Compile Include="IBCPSerialization.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SQLDate.cs" />
     <Compile Include="SQLDateTime.cs" />
     <Compile Include="SQLDateTime2.cs" />
     <Compile Include="SQLFloat.cs" />
