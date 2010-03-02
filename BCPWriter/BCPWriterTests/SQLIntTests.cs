@@ -54,7 +54,7 @@ namespace BCPWriter.Tests
         }
 
         [Test]
-        public void TestIntMinimum()
+        public void TestIntMin()
         {
             int value = SQLInt.MIN_VALUE;
 
@@ -64,7 +64,7 @@ namespace BCPWriter.Tests
         }
 
         [Test]
-        public void TestIntMaximum()
+        public void TestIntMax()
         {
             int value = SQLInt.MAX_VALUE;
 

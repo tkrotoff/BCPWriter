@@ -54,10 +54,12 @@
     <Compile Include="SQLChar.cs" />
     <Compile Include="IBCPSerialization.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SQLFloat.cs" />
     <Compile Include="SQLInt.cs" />
     <Compile Include="SQLNChar.cs" />
     <Compile Include="SQLNText.cs" />
     <Compile Include="SQLNVarChar.cs" />
+    <Compile Include="SQLReal.cs" />
     <Compile Include="SQLText.cs" />
     <Compile Include="SQLVarBinary.cs" />
     <Compile Include="SQLVarChar.cs" />

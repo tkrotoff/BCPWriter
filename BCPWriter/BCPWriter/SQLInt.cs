@@ -34,7 +34,7 @@ namespace BCPWriter
         public byte[] ToBCP(int value)
         {
             //Can be a value from -2^31 through -2^31-1
-            //FIXME useless exceptions since int cannot be less/more than MIN_VALUE/MAX_VALUE
+            //FIXME useless exception since int cannot be less/more than MIN_VALUE/MAX_VALUE
             //here for the beauty of it...
             if (value < MIN_VALUE || value > MAX_VALUE)
             {

@@ -64,7 +64,7 @@ namespace BCPWriter.Tests
         }
 
         [Test]
-        public void TestCharMinimum()
+        public void TestCharMin()
         {
             ushort length = SQLChar.MIN_LENGTH;
 
@@ -74,7 +74,7 @@ namespace BCPWriter.Tests
         }
 
         [Test]
-        public void TestCharMaximum()
+        public void TestCharMax()
         {
             ushort length = SQLChar.MAX_LENGTH;
 

@@ -53,11 +53,13 @@
     <Compile Include="BCPWriterTests.cs" />
     <Compile Include="NCharCharIntTest.cs" />
     <Compile Include="SQLBinaryTests.cs" />
+    <Compile Include="SQLFloatTests.cs" />
     <Compile Include="SQLIntTests.cs" />
     <Compile Include="SQLCharTests.cs" />
     <Compile Include="SQLNCharTests.cs" />
     <Compile Include="SQLNTextTests.cs" />
     <Compile Include="SQLNVarCharTests.cs" />
+    <Compile Include="SQLReal.cs" />
     <Compile Include="SQLTextTests.cs" />
     <Compile Include="SQLVarBinaryTests.cs" />
     <Compile Include="SQLVarCharTests.cs" />

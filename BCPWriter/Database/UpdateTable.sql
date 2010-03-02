@@ -17,9 +17,9 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[Table_1](
-	[column] ntext NULL
+	[column] real NULL
 ) ON [PRIMARY]
 
 GO
 
-INSERT INTO [dbo].[Table_1]([column]) VALUES('KIKOO éùà')
+INSERT INTO [dbo].[Table_1]([column]) VALUES(1234.5678)

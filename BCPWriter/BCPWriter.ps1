@@ -1,6 +1,6 @@
-# PowerShell script that uses BCPWriter assembly
+# PowerShell script that uses BCPWriter assembly and bcp
 
-[Reflection.Assembly]::LoadFrom("BCPWriter.dll");
+[Reflection.Assembly]::LoadFrom("BCPWriter\bin\Release\BCPWriter.dll");
 
 $bcpFileName = "data.bcp";
 $bcp = new-object BCPWriter.BCPWriter($bcpFileName);
@@ -27,10 +27,11 @@ $rows =
 
 $bcp.WriteRows($rows);
 
+
 $table = "[BCPTest].[dbo].[Table_1]";
 $servername = "FRDEVPC01";
 $username = "sa";
 $password = "Password01";
 
-# Call bcp and load the data inside the table
+# Calls bcp and load the data inside the table
 bcp $table in $bcpFileName -n -S $servername -U $username -P $password
