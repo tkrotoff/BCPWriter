@@ -27,7 +27,7 @@ namespace BCPWriter.Tests
         public void TestDate()
         {
             DateTime date = DateTime.Parse(
-                                    "2004-05-23",
+                                    "1753-01-01",
                                     System.Globalization.CultureInfo.InvariantCulture
                                 );
 

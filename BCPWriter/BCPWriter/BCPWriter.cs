@@ -192,8 +192,19 @@ namespace BCPWriter
                 }
                 else if (column is SQLFloat)
                 {
-                    //FIXME cast to float or double?
-                    writer.Write(((SQLFloat)column).ToBCP((double)row));
+                    if (row is double)
+                    {
+                        writer.Write(((SQLFloat)column).ToBCP((double)row));
+                    }
+                    else if (row is float)
+                    {
+                        writer.Write(((SQLFloat)column).ToBCP((float)row));
+                    }
+                    else
+                    {
+                        //If we don't know, let's cast it to double
+                        writer.Write(((SQLFloat)column).ToBCP((double)row));
+                    }
                 }
                 else if (column is SQLReal)
                 {
@@ -209,11 +220,11 @@ namespace BCPWriter
                 }
                 else if (column is SQLDateTime)
                 {
-                    System.Diagnostics.Trace.Assert(false);
+                    writer.Write(((SQLDateTime)column).ToBCP((DateTime)row));
                 }
                 else if (column is SQLDateTime2)
                 {
-                    System.Diagnostics.Trace.Assert(false);
+                    writer.Write(((SQLDateTime2)column).ToBCP((DateTime)row));
                 }
                 else if (column is SQLDate)
                 {

@@ -17,9 +17,9 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[Table_1](
-	[column] time  NULL
+	[column] datetime2  NULL
 ) ON [PRIMARY]
 
 GO
 
-INSERT INTO [dbo].[Table_1]([column]) VALUES('12:35:29.1234567')
+INSERT INTO [dbo].[Table_1]([column]) VALUES('2004-05-23T14:25:10')

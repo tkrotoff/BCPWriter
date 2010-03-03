@@ -24,17 +24,29 @@ namespace BCPWriter.Tests
         }
 
         [Test]
-        public void TestDateTime2()
+        public void TestDateTime2Seconds()
         {
             DateTime dateTime = DateTime.Parse(
                                     "2004-05-23T14:25:10",
                                     System.Globalization.CultureInfo.InvariantCulture
                                 );
 
-            string myFileName = "datetime2.bcp";
+            string myFileName = "datetime2_seconds.bcp";
             WriteDateTime2(dateTime, myFileName);
-            //FIXME Don't understand bcp datetime file format
-            //BCPTests.CheckFile(myFileName);
+            BCPTests.CheckFile(myFileName);
+        }
+
+        [Test]
+        public void TestDateTime2Milliseconds()
+        {
+            DateTime dateTime = DateTime.Parse(
+                                    "2004-05-23T14:25:10.123456789",
+                                    System.Globalization.CultureInfo.InvariantCulture
+                                );
+
+            string myFileName = "datetime2_milliseconds.bcp";
+            WriteDateTime2(dateTime, myFileName);
+            BCPTests.CheckFile(myFileName);
         }
     }
 }

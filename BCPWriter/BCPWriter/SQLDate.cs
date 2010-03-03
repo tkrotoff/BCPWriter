@@ -32,6 +32,7 @@ namespace BCPWriter
             DateTime initDate = DateTime.Parse("0001-01-01", System.Globalization.CultureInfo.InvariantCulture);
             TimeSpan span = date - initDate;
 
+            //3 bytes long
             byte[] valueBytes = BitConverter.GetBytes((int)span.TotalDays);
             List<byte> bytes = new List<byte>(valueBytes);
             bytes.RemoveAt(3);

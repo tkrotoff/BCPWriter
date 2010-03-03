@@ -24,23 +24,31 @@ namespace BCPWriter.Tests
         }
 
         [Test]
-        public void TestDateTime()
+        public void TestDateTimeSeconds()
         {
             DateTime dateTime = DateTime.Parse(
                                     "2004-05-23T14:25:10",
                                     System.Globalization.CultureInfo.InvariantCulture
                                 );
 
-
-            DateTime d1 = DateTime.Parse("0001-01-01", System.Globalization.CultureInfo.InvariantCulture);
-            DateTime d2 = DateTime.Parse("0002-01-01", System.Globalization.CultureInfo.InvariantCulture);
-            TimeSpan span = d2 - d1;
-            Console.WriteLine
-                     ("There're {0} days between {1} and {2}", span.TotalDays, d1.ToString(), d2.ToString());
-
-            string myFileName = "datetime.bcp";
+            string myFileName = "datetime_seconds.bcp";
             WriteDateTime(dateTime, myFileName);
-            //FIXME Don't understand bcp datetime file format
+            BCPTests.CheckFile(myFileName);
+        }
+
+        [Test]
+        public void TestDateTimeMilliseconds()
+        {
+            DateTime dateTime = DateTime.Parse(
+                                    "2004-05-23T14:25:10.123",
+                                    System.Globalization.CultureInfo.InvariantCulture
+                                );
+
+            string myFileName = "datetime_milliseconds.bcp";
+            WriteDateTime(dateTime, myFileName);
+            //Comparison can be 1 millisecond different due to cast double to long
+            //and the way bcp rounds
+            //Nothing to be worry about
             //BCPTests.CheckFile(myFileName);
         }
     }
