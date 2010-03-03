@@ -51,5 +51,25 @@ namespace BCPWriter.Tests
             WriteVarBinary(data, SQLVarBinary.MAX, myFileName);
             BCPTests.CheckFile(myFileName);
         }
+
+        [Test]
+        public void TestBinaryMaxNull()
+        {
+            byte[] data = null;
+
+            string myFileName = "varbinary(max)_null.bcp";
+            WriteVarBinary(data, SQLVarBinary.MAX, myFileName);
+            BCPTests.CheckFile(myFileName);
+        }
+
+        [Test]
+        public void TestBinary50Null()
+        {
+            byte[] data = null;
+
+            string myFileName = "varbinary(50)_null.bcp";
+            WriteVarBinary(data, 50, myFileName);
+            BCPTests.CheckFile(myFileName);
+        }
     }
 }

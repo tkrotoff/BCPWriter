@@ -19,7 +19,6 @@ namespace BCPWriter
         private uint _length;
 
         public const uint MAX = (uint)SQLInt.MAX_VALUE;
-        //public const int MAX_UNICODE = 2 ^ 30 - 1;
 
         /// <summary>
         /// Constructs a SQL varbinary.
@@ -49,6 +48,22 @@ namespace BCPWriter
         /// <returns></returns>
         public byte[] ToBCP(byte[] data)
         {
+            if (data == null)
+            {
+                if (_length == MAX)
+                {
+                    //8 bytes long
+                    byte[] nullBytes = { 255, 255, 255, 255, 255, 255, 255, 255 };
+                    return nullBytes;
+                }
+                else
+                {
+                    //2 bytes long
+                    byte[] nullBytes = { 255, 255 };
+                    return nullBytes;
+                }
+            }
+
             if (data.Length > _length)
             {
                 throw new ArgumentException("data is longer than the length declared inside the constructor");
