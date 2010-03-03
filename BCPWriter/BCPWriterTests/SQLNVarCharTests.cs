@@ -46,5 +46,21 @@ namespace BCPWriter.Tests
             WriteNVarChar("", SQLVarChar.MAX, myFileName);
             BCPTests.CheckFile(myFileName);
         }
+
+        [Test]
+        public void TestNVarCharMaxNull()
+        {
+            string myFileName = "nvarchar(max)_null.bcp";
+            WriteNVarChar(null, SQLVarBinary.MAX, myFileName);
+            BCPTests.CheckFile(myFileName);
+        }
+
+        [Test]
+        public void TestNVarChar50Null()
+        {
+            string myFileName = "nvarchar(50)_null.bcp";
+            WriteNVarChar(null, 50, myFileName);
+            BCPTests.CheckFile(myFileName);
+        }
     }
 }
