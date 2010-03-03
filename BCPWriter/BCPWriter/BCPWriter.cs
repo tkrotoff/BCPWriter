@@ -158,6 +158,7 @@ namespace BCPWriter
 
                 //FIXME Is there a better way than casting every type?
                 //Don't forget to add new SQL types here
+                //and to modify the unit tests accordingly
                 if (column is SQLBinary)
                 {
                     writer.Write(((SQLBinary)column).ToBCP((byte[])row));
@@ -185,6 +186,14 @@ namespace BCPWriter
                 else if (column is SQLVarChar)
                 {
                     writer.Write(((SQLVarChar)column).ToBCP((string)row));
+                }
+                else if (column is SQLNText)
+                {
+                    writer.Write(((SQLNText)column).ToBCP((string)row));
+                }
+                else if (column is SQLText)
+                {
+                    writer.Write(((SQLText)column).ToBCP((string)row));
                 }
                 else if (column is SQLXML)
                 {

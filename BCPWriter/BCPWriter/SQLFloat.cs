@@ -46,6 +46,14 @@ namespace BCPWriter
             _nbBits = nbBits;
         }
 
+        /// <summary>
+        /// Creates a float with the default value of n (53).
+        /// </summary>
+        public SQLFloat()
+            : this(53)
+        {
+        }
+
         public byte[] ToBCP(double value)
         {
             if (_nbBits < 25)

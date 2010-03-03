@@ -26,14 +26,7 @@ namespace BCPWriter.Tests
         [Test]
         public void TestBinary2()
         {
-            string test = "KI";
-            byte[] data = new byte[test.Length];
-            int i = 0;
-            foreach (char c in test.ToCharArray())
-            {
-                data[i] = (byte)c;
-                i++;
-            }
+            byte[] data = Util.StringToByteArray("KI");
 
             ushort length = 2;
 
@@ -45,14 +38,7 @@ namespace BCPWriter.Tests
         [Test]
         public void TestBinary50()
         {
-            string test = "KIKOO";
-            byte[] data = new byte[test.Length];
-            int i = 0;
-            foreach (char c in test.ToCharArray())
-            {
-                data[i] = (byte)c;
-                i++;
-            }
+            byte[] data = Util.StringToByteArray("KIKOO");
 
             ushort length = 50;
 
@@ -64,14 +50,7 @@ namespace BCPWriter.Tests
         [Test]
         public void TestBinary1000()
         {
-            string test = "KIKOO";
-            byte[] data = new byte[test.Length];
-            int i = 0;
-            foreach (char c in test.ToCharArray())
-            {
-                data[i] = (byte)c;
-                i++;
-            }
+            byte[] data = Util.StringToByteArray("KIKOO");
 
             ushort length = 1000;
 
