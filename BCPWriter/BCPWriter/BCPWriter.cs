@@ -7,7 +7,7 @@ using System.IO;
 namespace BCPWriter
 {
     /// <summary>
-    /// Writes a table (contains columns and rows) to a .bcp file.
+    /// Writes a table (contains columns and rows) to a .bcp (Bulk-copy Data) file.
     /// </summary>
     /// 
     /// <remarks>
@@ -54,7 +54,7 @@ namespace BCPWriter
     /// <example>
     /// BCPWrite example of use:
     /// <code>
-    /// BCPWriter writer = new BCPWriter("data.bcp");
+    /// BCPWriter writer = new BCPWriter();
     /// 
     /// //FirstName
     /// writer.AddColumn(new SQLNVarChar(SQLNVarChar.MAX));
@@ -84,7 +84,9 @@ namespace BCPWriter
     /// rows.Add(1804);
     /// rows.Add(1876);
     /// 
-    /// writer.WriteRows(rows);
+    /// BinaryWriter stream = new BinaryWriter(new FileStream("data.bcp", FileMode.Create));
+    /// writer.WriteRows(stream, rows);
+    /// stream.Close();
     /// </code>
     /// </example>
     public class BCPWriter
@@ -95,22 +97,10 @@ namespace BCPWriter
         private List<IBCPSerialization> _columns = new List<IBCPSerialization>();
 
         /// <summary>
-        /// .bcp file name.
+        /// Creates a bcp file format writer.
         /// </summary>
-        private string _bcpFileName = string.Empty;
-
-        /// <summary>
-        /// Creates a bcp file format writer given a .bcp file name.
-        /// </summary>
-        /// <param name="bcpFileName">.bcp file name where columns and rows will be written</param>
-        public BCPWriter(string bcpFileName)
+        public BCPWriter()
         {
-            if (string.IsNullOrEmpty(bcpFileName))
-            {
-                throw new ArgumentNullException("Empty bcp file name");
-            }
-
-            _bcpFileName = bcpFileName;
         }
 
         /// <summary>
@@ -140,16 +130,12 @@ namespace BCPWriter
         /// This method directly write to the .bcp file and then close it.
         /// </remarks>
         /// <param name="rows">the rows to write to the .bcp file</param>
-        public void WriteRows(IEnumerable<object> rows)
+        public void WriteRows(BinaryWriter writer, IEnumerable<object> rows)
         {
             if (_columns.Count() == 0)
             {
                 throw new ArgumentException("No columns");
             }
-
-            FileStream stream = new FileStream(_bcpFileName, FileMode.Create);
-
-            BinaryWriter writer = new BinaryWriter(stream);
 
             for (int i = 0; i < rows.Count(); i++)
             {
@@ -249,7 +235,8 @@ namespace BCPWriter
                 }
             }
 
-            writer.Close();
+            //Don't do that, user must do it
+            //writer.Close();
         }
     }
 }

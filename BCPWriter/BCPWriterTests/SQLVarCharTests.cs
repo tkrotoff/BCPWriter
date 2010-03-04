@@ -58,5 +58,49 @@ namespace BCPWriter.Tests
             WriteVarChar("", SQLVarChar.MAX, myFileName);
             BCPTests.CheckFile(myFileName);
         }
+
+        [Test]
+        public void Test_test1_xml()
+        {
+            StreamReader stream = new StreamReader("../../test1.xml");
+            string text = stream.ReadToEnd();
+
+            string myFileName = "SQLVarCharTest1.bcp";
+            WriteVarChar(text, SQLVarChar.MAX, myFileName);
+            BCPTests.CheckFile(myFileName);
+        }
+
+        [Test]
+        public void Test_test2_xml()
+        {
+            StreamReader stream = new StreamReader("../../test2.xml");
+            string text = stream.ReadToEnd();
+
+            string myFileName = "SQLVarCharTest2.bcp";
+            WriteVarChar(text, SQLVarChar.MAX, myFileName);
+            BCPTests.CheckFile(myFileName);
+        }
+
+        [Test]
+        public void Test_test3_xml()
+        {
+            StreamReader stream = new StreamReader("../../test3.xml");
+            string text = stream.ReadToEnd();
+
+            string myFileName = "SQLVarCharTest3.bcp";
+            WriteVarChar(text, SQLVarChar.MAX, myFileName);
+            BCPTests.CheckFile(myFileName);
+        }
+
+        [Test]
+        public void Test_test4_xml()
+        {
+            StreamReader stream = new StreamReader("../../test4.xml");
+            string text = stream.ReadToEnd();
+
+            string myFileName = "SQLVarCharTest4.bcp";
+            WriteVarChar(text, SQLVarChar.MAX, myFileName);
+            BCPTests.CheckFile(myFileName);
+        }
     }
 }

@@ -18,7 +18,7 @@ namespace BCPWriter.Tests
         {
             string myFileName = "allsqltypes.bcp";
 
-            BCPWriter writer = new BCPWriter(myFileName);
+            BCPWriter writer = new BCPWriter();
             writer.AddColumn(new SQLBigInt());
             writer.AddColumn(new SQLBinary(50));
             writer.AddColumn(new SQLChar(10));
@@ -58,7 +58,9 @@ namespace BCPWriter.Tests
             rows.Add("varchar");
             rows.Add("<content>XML</content>");
 
-            writer.WriteRows(rows);
+            BinaryWriter stream = new BinaryWriter(new FileStream(myFileName, FileMode.Create));
+            writer.WriteRows(stream, rows);
+            stream.Close();
 
             //BCPTests.CheckFile(myFileName);
         }
@@ -68,7 +70,7 @@ namespace BCPWriter.Tests
         {
             string myFileName = "4columns.bcp";
 
-            BCPWriter writer = new BCPWriter(myFileName);
+            BCPWriter writer = new BCPWriter();
 
             //FirstName
             writer.AddColumn(new SQLNVarChar(SQLNVarChar.MAX));
@@ -98,7 +100,9 @@ namespace BCPWriter.Tests
             rows.Add(1804);
             rows.Add(1876);
 
-            writer.WriteRows(rows);
+            BinaryWriter stream = new BinaryWriter(new FileStream(myFileName, FileMode.Create));
+            writer.WriteRows(stream, rows);
+            stream.Close();
 
             BCPTests.CheckFile(myFileName);
         }
@@ -108,7 +112,7 @@ namespace BCPWriter.Tests
         {
             string myFileName = "0columns.bcp";
 
-            BCPWriter writer = new BCPWriter(myFileName);
+            BCPWriter writer = new BCPWriter();
 
             List<object> rows = new List<object>();
             rows.Add("Frédéric François");
@@ -118,7 +122,9 @@ namespace BCPWriter.Tests
 
             try
             {
-                writer.WriteRows(rows);
+                BinaryWriter stream = new BinaryWriter(new FileStream(myFileName, FileMode.Create));
+                writer.WriteRows(stream, rows);
+                stream.Close();
             }
             catch (ArgumentException)
             {
@@ -130,7 +136,7 @@ namespace BCPWriter.Tests
         {
             string myFileName = "3columns.bcp";
 
-            BCPWriter writer = new BCPWriter(myFileName);
+            BCPWriter writer = new BCPWriter();
 
             //FirstName
             writer.AddColumn(new SQLNVarChar(SQLNVarChar.MAX));
@@ -163,7 +169,9 @@ namespace BCPWriter.Tests
 
             try
             {
-                writer.WriteRows(rows);
+                BinaryWriter stream = new BinaryWriter(new FileStream(myFileName, FileMode.Create));
+                writer.WriteRows(stream, rows);
+                stream.Close();
             }
             catch (InvalidCastException)
             {
@@ -175,7 +183,7 @@ namespace BCPWriter.Tests
         {
             string myFileName = "perf.bcp";
 
-            BCPWriter writer = new BCPWriter(myFileName);
+            BCPWriter writer = new BCPWriter();
 
             //FirstName
             writer.AddColumn(new SQLNVarChar(SQLNVarChar.MAX));
@@ -211,7 +219,9 @@ namespace BCPWriter.Tests
                 rows.Add(1876);
             }
 
-            writer.WriteRows(rows);
+            BinaryWriter stream = new BinaryWriter(new FileStream(myFileName, FileMode.Create));
+            writer.WriteRows(stream, rows);
+            stream.Close();
 
             //BCPTests.CheckFile(myFileName);
         }

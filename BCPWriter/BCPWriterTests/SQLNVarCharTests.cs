@@ -35,7 +35,7 @@ namespace BCPWriter.Tests
         public void TestNVarCharMax()
         {
             string myFileName = "nvarchar(max).bcp";
-            WriteNVarChar("KIKOO", SQLVarChar.MAX, myFileName);
+            WriteNVarChar("KIKOO", SQLNVarChar.MAX, myFileName);
             BCPTests.CheckFile(myFileName);
         }
 
@@ -43,7 +43,7 @@ namespace BCPWriter.Tests
         public void TestNVarCharMaxEmpty()
         {
             string myFileName = "nvarchar(max)_empty.bcp";
-            WriteNVarChar("", SQLVarChar.MAX, myFileName);
+            WriteNVarChar("", SQLNVarChar.MAX, myFileName);
             BCPTests.CheckFile(myFileName);
         }
 
@@ -51,7 +51,7 @@ namespace BCPWriter.Tests
         public void TestNVarCharMaxNull()
         {
             string myFileName = "nvarchar(max)_null.bcp";
-            WriteNVarChar(null, SQLVarBinary.MAX, myFileName);
+            WriteNVarChar(null, SQLNVarChar.MAX, myFileName);
             BCPTests.CheckFile(myFileName);
         }
 
@@ -60,6 +60,50 @@ namespace BCPWriter.Tests
         {
             string myFileName = "nvarchar(50)_null.bcp";
             WriteNVarChar(null, 50, myFileName);
+            BCPTests.CheckFile(myFileName);
+        }
+
+        [Test]
+        public void Test_test1_xml()
+        {
+            StreamReader stream = new StreamReader("../../test1.xml");
+            string text = stream.ReadToEnd();
+
+            string myFileName = "SQLNVarCharTest1.bcp";
+            WriteNVarChar(text, SQLNVarChar.MAX, myFileName);
+            BCPTests.CheckFile(myFileName);
+        }
+
+        [Test]
+        public void Test_test2_xml()
+        {
+            StreamReader stream = new StreamReader("../../test2.xml");
+            string text = stream.ReadToEnd();
+
+            string myFileName = "SQLNVarCharTest2.bcp";
+            WriteNVarChar(text, SQLNVarChar.MAX, myFileName);
+            BCPTests.CheckFile(myFileName);
+        }
+
+        [Test]
+        public void Test_test3_xml()
+        {
+            StreamReader stream = new StreamReader("../../test3.xml");
+            string text = stream.ReadToEnd();
+
+            string myFileName = "SQLNVarCharTest3.bcp";
+            WriteNVarChar(text, SQLNVarChar.MAX, myFileName);
+            BCPTests.CheckFile(myFileName);
+        }
+
+        [Test]
+        public void Test_test4_xml()
+        {
+            StreamReader stream = new StreamReader("../../test4.xml");
+            string text = stream.ReadToEnd();
+
+            string myFileName = "SQLNVarCharTest4.bcp";
+            WriteNVarChar(text, SQLNVarChar.MAX, myFileName);
             BCPTests.CheckFile(myFileName);
         }
     }

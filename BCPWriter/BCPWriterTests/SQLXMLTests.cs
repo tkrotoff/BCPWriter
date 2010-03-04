@@ -40,9 +40,9 @@ namespace BCPWriter.Tests
         }
 
         [Test]
-        public void Test_SQLXMLTest1()
+        public void Test_test1_xml()
         {
-            StreamReader stream = new StreamReader("../../SQLXMLTest1.xml");
+            StreamReader stream = new StreamReader("../../test1.xml");
             string xml = stream.ReadToEnd();
 
             string myFileName = "SQLXMLTest1.bcp";
@@ -51,9 +51,9 @@ namespace BCPWriter.Tests
         }
 
         [Test]
-        public void Test_SQLXMLTest2()
+        public void Test_test2_xml()
         {
-            StreamReader stream = new StreamReader("../../SQLXMLTest2.xml");
+            StreamReader stream = new StreamReader("../../test2.xml");
             string xml = stream.ReadToEnd();
 
             string myFileName = "SQLXMLTest2.bcp";
@@ -62,9 +62,9 @@ namespace BCPWriter.Tests
         }
 
         [Test]
-        public void Test_SQLXMLTest3()
+        public void Test_test3_xml()
         {
-            StreamReader stream = new StreamReader("../../SQLXMLTest3.xml");
+            StreamReader stream = new StreamReader("../../test3.xml");
             string xml = stream.ReadToEnd();
 
             string myFileName = "SQLXMLTest3.bcp";
@@ -73,9 +73,9 @@ namespace BCPWriter.Tests
         }
 
         [Test]
-        public void Test_SQLXMLTest4()
+        public void Test_test4_xml()
         {
-            StreamReader stream = new StreamReader("../../SQLXMLTest4.xml");
+            StreamReader stream = new StreamReader("../../test4.xml");
             string xml = stream.ReadToEnd();
 
             string myFileName = "SQLXMLTest4.bcp";
