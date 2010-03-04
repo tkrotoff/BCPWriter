@@ -71,5 +71,16 @@ namespace BCPWriter.Tests
             WriteXML(xml, myFileName);
             BCPTests.CheckFile(myFileName);
         }
+
+        [Test]
+        public void Test_SQLXMLTest4()
+        {
+            StreamReader stream = new StreamReader("../../SQLXMLTest4.xml");
+            string xml = stream.ReadToEnd();
+
+            string myFileName = "SQLXMLTest4.bcp";
+            WriteXML(xml, myFileName);
+            BCPTests.CheckFile(myFileName);
+        }
     }
 }
