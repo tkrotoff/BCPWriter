@@ -26,24 +26,62 @@ namespace BCPWriter
     /// The XML data must have one and only one root element.<br/>
     /// Text nodes are not allowed at the top level.<br/>
     /// </remarks>
-    public class SQLXML : SQLNVarChar
+    public class SQLXML : IBCPSerialization
     {
-        /// <summary>
-        /// Constructs a SQL xml.
-        /// </summary>
-        public SQLXML()
-            : base(SQLNVarChar.MAX)
-        {
-        }
-
         /// <summary>
         /// 
         /// </summary>
         /// <param name="xml">XML as a string</param>
         /// <returns></returns>
-        public new byte[] ToBCP(string xml)
+        public byte[] ToBCP(string xml)
         {
-            return base.ToBCP(xml);
+            if (xml == null)
+            {
+                //8 bytes long
+                byte[] nullBytes = { 255, 255, 255, 255, 255, 255, 255, 255 };
+                return nullBytes;
+            }
+
+            List<byte> xmlBytes = new List<byte>(Encoding.Unicode.GetBytes(xml));
+
+            //4 bytes: position of the next bytes to read
+            //00 00 03 FC = 1020
+            const int nextPosition = 1020;
+            byte[] nextPositionBytes = BitConverter.GetBytes(nextPosition);
+
+            if (xmlBytes.Count <= nextPosition)
+            {
+                //ulong is 8 bytes long
+                ulong xmlLength = (ulong)xmlBytes.Count;
+                byte[] sizeBytes = BitConverter.GetBytes(xmlLength);
+
+                return Util.ConcatByteArrays(sizeBytes, xmlBytes.ToArray());
+            }
+            else
+            {
+                int nbAnchors = xmlBytes.Count / nextPosition;
+                int modulo = xmlBytes.Count % nextPosition;
+
+                int position = 0;
+                for (int i = 0; i < nbAnchors; )
+                {
+                    xmlBytes.InsertRange(position, nextPositionBytes);
+                    i++;
+                    position = i * nextPosition;
+                    position += i * nextPositionBytes.Count();
+                }
+                xmlBytes.InsertRange(position, BitConverter.GetBytes(modulo));
+
+                //Start: 8 bytes: FE FF FF FF FF FF FF FF
+                byte[] start = { 254, 255, 255, 255, 255, 255, 255, 255 };
+                xmlBytes.InsertRange(0, start);
+
+                //End: 4 bytes: 00 00 00 00
+                byte[] end = { 0, 0, 0, 0 };
+                xmlBytes.AddRange(end);
+
+                return xmlBytes.ToArray();
+            }
         }
     }
 }
