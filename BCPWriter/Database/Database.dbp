@@ -1,10 +1,10 @@
 # Microsoft Developer Studio Project File - Database Project
 Begin DataProject = "Database"
    MSDTVersion = "80"
-   DefDBRef = "frdevpc01.BCPTest.dbo"
+   DefDBRef = "localhost.BCPTest.dbo"
    Begin DBRefFolder = "Database References"
-      Begin DBRefNode = "frdevpc01.BCPTest.dbo"
-         ConnectStr = "Data Source=FRDEVPC01;Initial Catalog=BCPTest;Integrated Security=True"
+      Begin DBRefNode = "localhost.BCPTest.dbo"
+         ConnectStr = "Data Source=localhost;Initial Catalog=BCPTest;Integrated Security=True"
          Provider = "{91510608-8809-4020-8897-FBA057E22D54}"
          Colorizer = 6
       End
