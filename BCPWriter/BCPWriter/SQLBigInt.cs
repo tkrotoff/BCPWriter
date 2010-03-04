@@ -16,14 +16,21 @@ namespace BCPWriter
     /// </remarks>
     public class SQLBigInt : IBCPSerialization
     {
-        public byte[] ToBCP(long value)
+        public byte[] ToBCP(long? value)
         {
+            if (!value.HasValue)
+            {
+                //9 bytes long
+                byte[] nullBytes = { 255, 255, 255, 255, 255, 255, 255, 255, 255 };
+                return nullBytes;
+            }
+
             //byte is 1 byte long :)
             byte size = 8;
             byte[] sizeBytes = { size };
 
             //long is 8 bytes long
-            byte[] valueBytes = BitConverter.GetBytes(value);
+            byte[] valueBytes = BitConverter.GetBytes(value.Value);
 
             return Util.ConcatByteArrays(sizeBytes, valueBytes);
         }

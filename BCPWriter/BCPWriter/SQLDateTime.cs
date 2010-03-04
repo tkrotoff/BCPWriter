@@ -24,8 +24,15 @@ namespace BCPWriter
     [Obsolete]
     public class SQLDateTime : IBCPSerialization
     {
-        public byte[] ToBCP(DateTime dateTime)
+        public byte[] ToBCP(DateTime? dateTime)
         {
+            if (!dateTime.HasValue)
+            {
+                //1 byte long
+                byte[] nullBytes = { 255 };
+                return nullBytes;
+            }
+
             //byte is 1 byte long :)
             byte size = 8;
             byte[] sizeBytes = { size };
@@ -63,13 +70,13 @@ namespace BCPWriter
             //2004-05-23T14:25:10.123 gives 08 F0 94 00 00 2D A0 ED 00 -> 00 ED A0 2D = 15573037
 
             //Date, 4 bytes long
-            DateTime date = dateTime.Date;
+            DateTime date = dateTime.Value.Date;
             DateTime initDate = DateTime.Parse("1900-01-01", System.Globalization.CultureInfo.InvariantCulture);
             TimeSpan span = date - initDate;
             byte[] dateBytes = BitConverter.GetBytes((int)span.TotalDays);
 
             //Time, 4 bytes long
-            DateTime time = DateTime.Parse(dateTime.ToString("HH:mm:ss.fffffff"));
+            DateTime time = DateTime.Parse(dateTime.Value.ToString("HH:mm:ss.fffffff"));
             DateTime initTime = DateTime.Parse("00:00:00", System.Globalization.CultureInfo.InvariantCulture);
             span = time - initTime;
             int bcpTimeFormat = (int)(span.TotalMilliseconds * 0.3);

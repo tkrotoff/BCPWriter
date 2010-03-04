@@ -58,6 +58,13 @@ namespace BCPWriter
         /// <returns></returns>
         public byte[] ToBCP(byte[] data)
         {
+            if (data == null)
+            {
+                //2 bytes long
+                byte[] nullBytes = { 255, 255 };
+                return nullBytes;
+            }
+
             if (data.Length > _length)
             {
                 throw new ArgumentException("data is longer than the length declared inside the constructor");

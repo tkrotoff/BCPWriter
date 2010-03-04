@@ -13,7 +13,7 @@ namespace BCPWriter.Tests
     [TestFixture]
     class SQLBigIntTests
     {
-        private void WriteBigInt(long value, string myFileName)
+        private void WriteBigInt(long? value, string myFileName)
         {
             BinaryWriter writer = BCPTests.CreateBinaryFile(myFileName);
 
@@ -39,6 +39,13 @@ namespace BCPWriter.Tests
 
             string myFileName = "bigint(max).bcp";
             WriteBigInt(value, myFileName);
+            BCPTests.CheckFile(myFileName);
+        }
+
+        public void TestBigIntNull()
+        {
+            string myFileName = "bigint_null.bcp";
+            WriteBigInt(null, myFileName);
             BCPTests.CheckFile(myFileName);
         }
     }

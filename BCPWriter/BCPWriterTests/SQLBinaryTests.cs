@@ -58,5 +58,45 @@ namespace BCPWriter.Tests
             WriteBinary(data, length, myFileName);
             BCPTests.CheckFile(myFileName);
         }
+
+        [Test]
+        public void TestBinary2Null()
+        {
+            ushort length = 2;
+
+            string myFileName = string.Format("binary({0})_null.bcp", length);
+            WriteBinary(null, length, myFileName);
+            BCPTests.CheckFile(myFileName);
+        }
+
+        [Test]
+        public void TestBinary50Null()
+        {
+            ushort length = 50;
+
+            string myFileName = string.Format("binary({0})_null.bcp", length);
+            WriteBinary(null, length, myFileName);
+            BCPTests.CheckFile(myFileName);
+        }
+
+        [Test]
+        public void TestBinaryMinNull()
+        {
+            ushort length = SQLBinary.MIN_LENGTH;
+
+            string myFileName = string.Format("binary({0})_null.bcp", length);
+            WriteBinary(null, length, myFileName);
+            BCPTests.CheckFile(myFileName);
+        }
+
+        [Test]
+        public void TestBinaryMaxNull()
+        {
+            ushort length = SQLBinary.MAX_LENGTH;
+
+            string myFileName = string.Format("binary({0})_null.bcp", length);
+            WriteBinary(null, length, myFileName);
+            BCPTests.CheckFile(myFileName);
+        }
     }
 }

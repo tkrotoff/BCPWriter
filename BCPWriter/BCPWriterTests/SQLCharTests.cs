@@ -82,5 +82,25 @@ namespace BCPWriter.Tests
             WriteChar("", length, myFileName);
             BCPTests.CheckFile(myFileName);
         }
+
+        [Test]
+        public void TestCharMinNull()
+        {
+            ushort length = SQLChar.MIN_LENGTH;
+
+            string myFileName = string.Format("char({0})_null.bcp", length);
+            WriteChar(null, length, myFileName);
+            BCPTests.CheckFile(myFileName);
+        }
+
+        [Test]
+        public void TestCharMaxNull()
+        {
+            ushort length = SQLChar.MAX_LENGTH;
+
+            string myFileName = string.Format("char({0})_null.bcp", length);
+            WriteChar(null, length, myFileName);
+            BCPTests.CheckFile(myFileName);
+        }
     }
 }

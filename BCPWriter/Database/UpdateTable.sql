@@ -17,9 +17,9 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[Table_1](
-	[column1] nvarchar(max) NULL
+	[column1] xml NULL
 ) ON [PRIMARY]
 
 GO
 
-INSERT INTO [dbo].[Table_1]([column1]) VALUES(NULL)
+INSERT INTO [dbo].[Table_1]([column1]) VALUES('<holdings name="GBTRAN" date="20080502"><record abcdefghijklmn="" price="7,13" accruedint="0" coupon="" inc="" prch="" sale="" emv="918957,18" assettype="EQUITY" date="20080502" custom="TRANSACT1"/><record symbol="GB00B19NLV48" symtype="ISIN" portcode="GBTRAN" portname="EQUITIES GB" isin="GB00B19NLV48" holdings="470489" issuer="EXPERIAN GROUP LTD" ccy="GBP" ticker="EXPN.LN" price="4,01" accruedint="0" coupon="" inc="" prch="" sale="" emv="1890189,56" assettype="EQUITY" date="20080502" custom="TRANSACT1"/></holdings>')

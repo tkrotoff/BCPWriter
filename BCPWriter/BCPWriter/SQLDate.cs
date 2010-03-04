@@ -15,8 +15,15 @@ namespace BCPWriter
     /// </remarks>
     public class SQLDate : IBCPSerialization
     {
-        public byte[] ToBCP(DateTime date)
+        public byte[] ToBCP(DateTime? date)
         {
+            if (!date.HasValue)
+            {
+                //1 byte long
+                byte[] nullBytes = { 255 };
+                return nullBytes;
+            }
+
             //byte is 1 byte long :)
             byte size = 3;
             byte[] sizeBytes = { size };
@@ -30,7 +37,7 @@ namespace BCPWriter
             //1000-01-01 gives 03 4D 91 05 -> 05 91 4D = 364 877 days
 
             DateTime initDate = DateTime.Parse("0001-01-01", System.Globalization.CultureInfo.InvariantCulture);
-            TimeSpan span = date - initDate;
+            TimeSpan span = date.Value - initDate;
 
             //3 bytes long
             byte[] valueBytes = BitConverter.GetBytes((int)span.TotalDays);

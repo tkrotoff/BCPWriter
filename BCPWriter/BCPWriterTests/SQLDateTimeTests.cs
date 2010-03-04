@@ -13,7 +13,7 @@ namespace BCPWriter.Tests
     [TestFixture]
     class SQLDateTimeTests
     {
-        private void WriteDateTime(DateTime dateTime, string myFileName)
+        private void WriteDateTime(DateTime? dateTime, string myFileName)
         {
             BinaryWriter writer = BCPTests.CreateBinaryFile(myFileName);
 
@@ -50,6 +50,14 @@ namespace BCPWriter.Tests
             //and the way bcp rounds
             //Nothing to be worry about
             //BCPTests.CheckFile(myFileName);
+        }
+
+        [Test]
+        public void TestDateTimeNull()
+        {
+            string myFileName = "datetime_null.bcp";
+            WriteDateTime(null, myFileName);
+            BCPTests.CheckFile(myFileName);
         }
     }
 }

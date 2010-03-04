@@ -69,22 +69,57 @@ namespace BCPWriter
                 throw new ArgumentException("text is longer than the length declared inside the constructor");
             }
 
-            byte[] sizeBytes = null;
             if (_length == MAX)
             {
-                //ulong is 8 bytes long
-                //* 2 because we are in unicode, thus 1 char is 2 bytes long
-                sizeBytes = BitConverter.GetBytes((ulong)(text.Length * 2));
+                List<byte> textBytes = new List<byte>(Encoding.Unicode.GetBytes(text));
+
+                //4 bytes: position of the next bytes to read
+                //00 00 03 FC = 1020
+                const int nextPosition = 1020;
+                byte[] nextPositionBytes = BitConverter.GetBytes(nextPosition);
+
+                if (textBytes.Count <= nextPosition)
+                {
+                    //ulong is 8 bytes long
+                    ulong textLength = (ulong)textBytes.Count;
+                    byte[] sizeBytes = BitConverter.GetBytes(textLength);
+
+                    return Util.ConcatByteArrays(sizeBytes, textBytes.ToArray());
+                }
+                else
+                {
+                    int nbAnchors = textBytes.Count / nextPosition;
+                    int modulo = textBytes.Count % nextPosition;
+
+                    int position = 0;
+                    for (int i = 0; i < nbAnchors; )
+                    {
+                        textBytes.InsertRange(position, nextPositionBytes);
+                        i++;
+                        position += i * nextPosition;
+                        position += nextPositionBytes.Count();
+                    }
+                    textBytes.InsertRange(position, BitConverter.GetBytes(modulo));
+
+                    //Start: 8 bytes: FE FF FF FF FF FF FF FF
+                    byte[] start = { 254, 255, 255, 255, 255, 255, 255, 255 };
+                    textBytes.InsertRange(0, start);
+
+                    //End: 4 bytes: 00 00 00 00
+                    byte[] end = { 0, 0, 0, 0 };
+                    textBytes.AddRange(end);
+
+                    return textBytes.ToArray();
+                }
             }
             else
             {
                 //ushort is 2 bytes long
                 //* 2 because we are in unicode, thus 1 char is 2 bytes long
-                sizeBytes = BitConverter.GetBytes((ushort)(text.Length * 2));
-            }
+                byte[] sizeBytes = BitConverter.GetBytes((ushort)(text.Length * 2));
 
-            //Text should be in unicode
-            return Util.ConcatByteArrays(sizeBytes, Encoding.Unicode.GetBytes(text));
+                return Util.ConcatByteArrays(sizeBytes, Encoding.Unicode.GetBytes(text));
+            }
         }
     }
 }
