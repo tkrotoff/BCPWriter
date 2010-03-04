@@ -69,10 +69,10 @@ namespace BCPWriter
                 throw new ArgumentException("text is longer than the length declared inside the constructor");
             }
 
+            List<byte> textBytes = new List<byte>(Encoding.Unicode.GetBytes(text));
+
             if (_length == MAX)
             {
-                List<byte> textBytes = new List<byte>(Encoding.Unicode.GetBytes(text));
-
                 //4 bytes: position of the next bytes to read
                 //00 00 03 FC = 1020
                 const int nextPosition = 1020;
@@ -96,8 +96,8 @@ namespace BCPWriter
                     {
                         textBytes.InsertRange(position, nextPositionBytes);
                         i++;
-                        position += i * nextPosition;
-                        position += nextPositionBytes.Count();
+                        position = i * nextPosition;
+                        position += i * nextPositionBytes.Count();
                     }
                     textBytes.InsertRange(position, BitConverter.GetBytes(modulo));
 
@@ -115,8 +115,8 @@ namespace BCPWriter
             else
             {
                 //ushort is 2 bytes long
-                //* 2 because we are in unicode, thus 1 char is 2 bytes long
-                byte[] sizeBytes = BitConverter.GetBytes((ushort)(text.Length * 2));
+                ushort textLength = (ushort)textBytes.Count;
+                byte[] sizeBytes = BitConverter.GetBytes(textLength);
 
                 return Util.ConcatByteArrays(sizeBytes, Encoding.Unicode.GetBytes(text));
             }
