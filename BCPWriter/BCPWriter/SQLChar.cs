@@ -50,13 +50,24 @@ namespace BCPWriter
             _length = length;
         }
 
-        public byte[] ToBCP(string text)
+        public ushort Length
+        {
+            get { return _length; }
+        }
+
+        public void Write(BinaryWriter writer, object value)
+        {
+            Write(writer, (string)value);
+        }
+
+        public void Write(BinaryWriter writer, string text)
         {
             if (text == null)
             {
                 //2 bytes long
                 byte[] nullBytes = { 255, 255 };
-                return nullBytes;
+                writer.Write(nullBytes);
+                return;
             }
 
             if (text.Length > _length)
@@ -65,7 +76,7 @@ namespace BCPWriter
             }
 
             //ushort is 2 bytes long
-            byte[] sizeBytes = BitConverter.GetBytes(_length);
+            writer.Write(_length);
 
             //Append spaces if needed
             StringBuilder tmp = new StringBuilder(text);
@@ -75,7 +86,7 @@ namespace BCPWriter
             }
             ////
 
-            return Util.ConcatByteArrays(sizeBytes, Util.EncodeToOEMCodePage(tmp.ToString()));
+            writer.Write(Util.EncodeToOEMCodePage(tmp.ToString()));
         }
     }
 }

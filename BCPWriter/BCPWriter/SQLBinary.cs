@@ -51,18 +51,29 @@ namespace BCPWriter
             _length = length;
         }
 
+        public ushort Length
+        {
+            get { return _length; }
+        }
+
+        public void Write(BinaryWriter writer, object value)
+        {
+            Write(writer, (byte[])value);
+        }
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="data">binary data</param>
         /// <returns></returns>
-        public byte[] ToBCP(byte[] data)
+        public void Write(BinaryWriter writer, byte[] data)
         {
             if (data == null)
             {
                 //2 bytes long
                 byte[] nullBytes = { 255, 255 };
-                return nullBytes;
+                writer.Write(nullBytes);
+                return;
             }
 
             if (data.Length > _length)
@@ -71,7 +82,7 @@ namespace BCPWriter
             }
 
             //ushort is 2 bytes long
-            byte[] sizeBytes = BitConverter.GetBytes(_length);
+            writer.Write(_length);
 
             string hex = Util.ToHexString(data);
             byte[] hexBytes = Util.HexToByteArray(hex);
@@ -83,7 +94,7 @@ namespace BCPWriter
                 bytes.Add(0);
             }
 
-            return Util.ConcatByteArrays(sizeBytes, bytes.ToArray());
+            writer.Write(bytes.ToArray());
         }
     }
 }

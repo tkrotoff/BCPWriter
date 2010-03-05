@@ -29,7 +29,12 @@ namespace BCPWriter
         //Math.Pow(2, 31) - 1
         public const int MAX_VALUE = 2147483647;
 
-        public byte[] ToBCP(int value)
+        public void Write(BinaryWriter writer, object value)
+        {
+            Write(writer, (int)value);
+        }
+
+        public void Write(BinaryWriter writer, int? value)
         {
             //Can be a value from -2^31 through -2^31-1
             //FIXME useless exception since int cannot be less/more than MIN_VALUE/MAX_VALUE
@@ -41,12 +46,10 @@ namespace BCPWriter
 
             //byte is 1 byte long :)
             byte size = 4;
-            byte[] sizeBytes = { size };
+            writer.Write(size);
 
             //int is 4 bytes long
-            byte[] valueBytes = BitConverter.GetBytes(value);
-
-            return Util.ConcatByteArrays(sizeBytes, valueBytes);
+            writer.Write(value.Value);
         }
     }
 }

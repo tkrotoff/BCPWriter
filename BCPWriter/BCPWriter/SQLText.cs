@@ -21,7 +21,12 @@ namespace BCPWriter
         //2^31-1 (2,147,483,647)
         public const uint MAX_LENGTH = SQLInt.MAX_VALUE;
 
-        public byte[] ToBCP(string text)
+        public void Write(BinaryWriter writer, object value)
+        {
+            Write(writer, (string)value);
+        }
+
+        public void Write(BinaryWriter writer, string text)
         {
             if (text.Length > MAX_LENGTH)
             {
@@ -29,9 +34,9 @@ namespace BCPWriter
             }
 
             //uint is 4 bytes long
-            byte[] sizeBytes = BitConverter.GetBytes((uint)(text.Length));
+            writer.Write((uint)(text.Length));
 
-            return Util.ConcatByteArrays(sizeBytes, Util.EncodeToOEMCodePage(text));
+            writer.Write(Util.EncodeToOEMCodePage(text));
         }
     }
 }

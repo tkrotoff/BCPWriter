@@ -222,9 +222,9 @@ namespace BCPWriter.Tests
                 rows.Add(1876);
             }
 
-            BinaryWriter stream = new BinaryWriter(new FileStream(myFileName, FileMode.Create));
-            writer.WriteRows(stream, rows);
-            stream.Close();
+            //BinaryWriter stream = new BinaryWriter(new FileStream(myFileName, FileMode.Create));
+            //writer.WriteRows(stream, rows);
+            //stream.Close();
 
             //BCPTests.CheckFile(myFileName);
         }

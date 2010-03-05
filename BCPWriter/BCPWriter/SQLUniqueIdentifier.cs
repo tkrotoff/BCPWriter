@@ -23,6 +23,11 @@ namespace BCPWriter
     /// </remarks>
     public class SQLUniqueIdentifier : IBCPSerialization
     {
+        public void Write(BinaryWriter writer, object value)
+        {
+            Write(writer, (Guid)value);
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -31,7 +36,7 @@ namespace BCPWriter
         /// see http://en.wikipedia.org/wiki/Globally_Unique_Identifier
         /// </param>
         /// <returns></returns>
-        public byte[] ToBCP(Guid guid)
+        public void Write(BinaryWriter writer, Guid guid)
         {
             if (string.IsNullOrEmpty(guid.ToString()))
             {
@@ -41,12 +46,10 @@ namespace BCPWriter
             //byte is 1 byte long :)
             //Guid is always of length 16
             byte size = 16;
-            byte[] sizeBytes = { size };
+            writer.Write(size);
 
             //int is 4 bytes long
-            byte[] valueBytes = guid.ToByteArray();
-
-            return Util.ConcatByteArrays(sizeBytes, valueBytes);
+            writer.Write(guid.ToByteArray());
         }
     }
 }

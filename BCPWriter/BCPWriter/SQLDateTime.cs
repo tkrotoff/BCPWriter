@@ -24,18 +24,24 @@ namespace BCPWriter
     [Obsolete]
     public class SQLDateTime : IBCPSerialization
     {
-        public byte[] ToBCP(DateTime? dateTime)
+        public void Write(BinaryWriter writer, object value)
+        {
+            Write(writer, (DateTime)value);
+        }
+
+        public void Write(BinaryWriter writer, DateTime? dateTime)
         {
             if (!dateTime.HasValue)
             {
                 //8 bytes long
                 byte[] nullBytes = { 255, 255, 255, 255, 255, 255, 255, 255 };
-                return nullBytes;
+                writer.Write(nullBytes);
+                return;
             }
 
             //byte is 1 byte long :)
             byte size = 8;
-            byte[] sizeBytes = { size };
+            writer.Write(size);
 
             //Format:
             //1753-01-01T00:00:00 gives 08 46 2E FF FF 00 00 00 00
@@ -73,19 +79,14 @@ namespace BCPWriter
             DateTime date = dateTime.Value.Date;
             DateTime initDate = DateTime.Parse("1900-01-01", System.Globalization.CultureInfo.InvariantCulture);
             TimeSpan span = date - initDate;
-            byte[] dateBytes = BitConverter.GetBytes((int)span.TotalDays);
+            writer.Write((int)span.TotalDays);
 
             //Time, 4 bytes long
             DateTime time = DateTime.Parse(dateTime.Value.ToString("HH:mm:ss.fffffff"));
             DateTime initTime = DateTime.Parse("00:00:00", System.Globalization.CultureInfo.InvariantCulture);
             span = time - initTime;
             int bcpTimeFormat = (int)(span.TotalMilliseconds * 0.3);
-            byte[] timeBytes = BitConverter.GetBytes(bcpTimeFormat);
-
-            //int + int is 8 bytes long
-            byte[] valueBytes = Util.ConcatByteArrays(dateBytes, timeBytes);
-
-            return Util.ConcatByteArrays(sizeBytes, valueBytes);
+            writer.Write(bcpTimeFormat);
         }
     }
 }

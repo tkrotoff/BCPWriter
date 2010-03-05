@@ -22,17 +22,17 @@ namespace BCPWriter.Tests
             BinaryWriter writer = new BinaryWriter(stream);
 
             SQLNChar sqlNChar = new SQLNChar(10);
-            writer.Write(sqlNChar.ToBCP("KIKOO"));
+            sqlNChar.Write(writer, "KIKOO");
 
             SQLChar sqlChar = new SQLChar(10);
-            writer.Write(sqlChar.ToBCP("KIKOO"));
+            sqlChar.Write(writer, "KIKOO");
 
             SQLInt sqlInt = new SQLInt();
-            writer.Write(sqlInt.ToBCP(10));
+            sqlInt.Write(writer, 10);
 
             writer.Close();
 
             BCPTests.CheckFile(myFileName);
         }
     }
-}
+}

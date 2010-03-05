@@ -49,12 +49,22 @@ namespace BCPWriter
             _length = length;
         }
 
+        public ushort Length
+        {
+            get { return _length; }
+        }
+
+        public void Write(BinaryWriter writer, object value)
+        {
+            Write(writer, (string)value);
+        }
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="text">text</param>
         /// <returns></returns>
-        public byte[] ToBCP(string text)
+        public void Write(BinaryWriter writer, string text)
         {
             if (text.Length > _length)
             {
@@ -62,9 +72,9 @@ namespace BCPWriter
             }
 
             //ushort is 2 bytes long
-            //* 2 because we are in unicode, thus 1 char is 2 bytes long
+            //* 2 because we are in UTF-16, thus 1 char is 2 bytes long
             short length = (short) (_length * 2);
-            byte[] sizeBytes = BitConverter.GetBytes(length);
+            writer.Write(length);
 
             //Append spaces if needed
             StringBuilder tmp = new StringBuilder(text);
@@ -74,8 +84,8 @@ namespace BCPWriter
             }
             ////
 
-            //Text should be in unicode
-            return Util.ConcatByteArrays(sizeBytes, Encoding.Unicode.GetBytes(tmp.ToString()));
+            //Text should be in unicode UTF-16
+            writer.Write(Encoding.Unicode.GetBytes(tmp.ToString()));
         }
     }
 }

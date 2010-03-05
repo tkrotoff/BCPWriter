@@ -29,62 +29,80 @@ namespace BCPWriter
     /// </remarks>
     public class SQLXML : IBCPSerialization
     {
+        public void Write(BinaryWriter writer, object value)
+        {
+            Write(writer, (XmlDocument)value);
+        }
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="xml">XML</param>
         /// <returns></returns>
-        public byte[] ToBCP(XmlDocument xml)
+        public void Write(BinaryWriter writer, XmlDocument xml)
         {
             if (xml == null)
             {
                 //8 bytes long
                 byte[] nullBytes = { 255, 255, 255, 255, 255, 255, 255, 255 };
-                return nullBytes;
+                writer.Write(nullBytes);
+                return;
             }
 
-            string tmp = xml.DocumentElement.OuterXml;
+            string xmlString = xml.DocumentElement.OuterXml;
             //System.Xml.XmlDocument does not give the same string as MS SQL Server :/
-            tmp = tmp.Replace(" />", "/>");
-            List<byte> xmlBytes = new List<byte>(Encoding.Unicode.GetBytes(tmp));
+            xmlString = xmlString.Replace(" />", "/>");
+            int xmlLength = xmlString.Length;
 
             //4 bytes: position of the next bytes to read
             //00 00 03 FC = 1020
-            const int nextPosition = 1020;
-            byte[] nextPositionBytes = BitConverter.GetBytes(nextPosition);
+            const int chunkValue = 1020;
+            const int chunkSize = chunkValue / 2;
 
-            if (xmlBytes.Count <= nextPosition)
+            if (xmlLength <= chunkSize)
             {
                 //ulong is 8 bytes long
-                ulong xmlLength = (ulong)xmlBytes.Count;
-                byte[] sizeBytes = BitConverter.GetBytes(xmlLength);
+                //* 2 because we are in UTF-16, thus 1 char is 2 bytes long
+                ulong length = (ulong)(xmlLength * 2);
+                writer.Write(length);
 
-                return Util.ConcatByteArrays(sizeBytes, xmlBytes.ToArray());
+                writer.Write(Encoding.Unicode.GetBytes(xmlString));
             }
             else
             {
-                int nbAnchors = xmlBytes.Count / nextPosition;
-                int modulo = xmlBytes.Count % nextPosition;
+                //Start: 8 bytes: FE FF FF FF FF FF FF FF
+                byte[] start = { 254, 255, 255, 255, 255, 255, 255, 255 };
+                writer.Write(start);
+                ////
 
+                //Cut in chunks and write them
+                int nbAnchors = xmlLength / chunkSize;
                 int position = 0;
                 for (int i = 0; i < nbAnchors; )
                 {
-                    xmlBytes.InsertRange(position, nextPositionBytes);
-                    i++;
-                    position = i * nextPosition;
-                    position += i * nextPositionBytes.Count();
-                }
-                xmlBytes.InsertRange(position, BitConverter.GetBytes(modulo));
+                    writer.Write(chunkValue);
 
-                //Start: 8 bytes: FE FF FF FF FF FF FF FF
-                byte[] start = { 254, 255, 255, 255, 255, 255, 255, 255 };
-                xmlBytes.InsertRange(0, start);
+                    string chunk = xmlString.Substring(position, chunkSize);
+                    writer.Write(Encoding.Unicode.GetBytes(chunk));
+
+                    i++;
+                    position = i * chunkSize;
+                }
+                ////
+                
+                //Write last chunk
+                int lastChunkSize = xmlLength % chunkSize;
+                //* 2 because we are in UTF-16
+                writer.Write(lastChunkSize * 2);
+
+                string lastChunk = xmlString.Substring(position);
+                writer.Write(Encoding.Unicode.GetBytes(lastChunk));
+                ////
 
                 //End: 4 bytes: 00 00 00 00
                 byte[] end = { 0, 0, 0, 0 };
-                xmlBytes.AddRange(end);
-
-                return xmlBytes.ToArray();
+                writer.Write(end);
+                ////
             }
         }
     }

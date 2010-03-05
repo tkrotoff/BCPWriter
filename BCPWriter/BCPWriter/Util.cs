@@ -11,20 +11,6 @@ namespace BCPWriter
     public class Util
     {
         /// <summary>
-        /// Concats 2 byte[]
-        /// </summary>
-        /// <param name="array1">First array to concat</param>
-        /// <param name="array2">Second array to concat</param>
-        /// <returns>byte[] resulting from the concatenation</returns>
-        public static byte[] ConcatByteArrays(byte[] array1, byte[] array2)
-        {
-            byte[] bytes = new byte[array1.Length + array2.Length];
-            Buffer.BlockCopy(array1, 0, bytes, 0, array1.Length);
-            Buffer.BlockCopy(array2, 0, bytes, array1.Length, array2.Length);
-            return bytes;
-        }
-
-        /// <summary>
         /// Encode text using OEM code page, see http://en.wikipedia.org/wiki/Windows_code_page
         /// </summary>
         /// <remarks>
@@ -48,14 +34,14 @@ namespace BCPWriter
         /// <returns>string containing hexadecimal</returns>
         public static string ToHexString(byte[] data)
         {
-            StringBuilder hex = new StringBuilder();
+            /*StringBuilder hex = new StringBuilder();
             foreach (byte b in data)
             {
                 hex.AppendFormat(System.Globalization.CultureInfo.InvariantCulture, "{0:x2}", b);
             }
-            return hex.ToString();
-            /*string hex = BitConverter.ToString(data).Replace("-", string.Empty);
-            return hex;*/
+            return hex.ToString();*/
+
+            return BitConverter.ToString(data).Replace("-", string.Empty);
         }
 
         /// <summary>
@@ -65,15 +51,7 @@ namespace BCPWriter
         /// <returns>byte[]</returns>
         public static byte[] StringToByteArray(string text)
         {
-            byte[] bytes = new byte[text.Length];
-            int i = 0;
-            foreach (char c in text.ToCharArray())
-            {
-                bytes[i] = (byte)c;
-                i++;
-            }
-            return bytes;
-            //return ASCIIEncoding.UTF8.GetBytes(text);
+            return Encoding.Default.GetBytes(text);
         }
 
         /// <summary>

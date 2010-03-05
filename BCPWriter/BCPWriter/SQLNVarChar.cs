@@ -41,12 +41,22 @@ namespace BCPWriter
             _length = length;
         }
 
+        public uint Length
+        {
+            get { return _length; }
+        }
+
+        public void Write(BinaryWriter writer, object value)
+        {
+            Write(writer, (string)value);
+        }
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="text">text</param>
         /// <returns></returns>
-        public byte[] ToBCP(string text)
+        public void Write(BinaryWriter writer, string text)
         {
             if (text == null)
             {
@@ -54,14 +64,15 @@ namespace BCPWriter
                 {
                     //8 bytes long
                     byte[] nullBytes = { 255, 255, 255, 255, 255, 255, 255, 255 };
-                    return nullBytes;
+                    writer.Write(nullBytes);
                 }
                 else
                 {
                     //2 bytes long
                     byte[] nullBytes = { 255, 255 };
-                    return nullBytes;
+                    writer.Write(nullBytes);
                 }
+                return;
             }
 
             if (text.Length > _length)
@@ -69,22 +80,21 @@ namespace BCPWriter
                 throw new ArgumentException("text is longer than the length declared inside the constructor");
             }
 
-            byte[] sizeBytes = null;
             if (_length == MAX)
             {
                 //ulong is 8 bytes long
-                //* 2 because we are in unicode, thus 1 char is 2 bytes long
-                sizeBytes = BitConverter.GetBytes((ulong)(text.Length * 2));
+                //* 2 because we are in UTF-16, thus 1 char is 2 bytes long
+                writer.Write((ulong)(text.Length * 2));
             }
             else
             {
                 //ushort is 2 bytes long
-                //* 2 because we are in unicode, thus 1 char is 2 bytes long
-                sizeBytes = BitConverter.GetBytes((ushort)(text.Length * 2));
+                //* 2 because we are in UTF-16, thus 1 char is 2 bytes long
+                writer.Write((ushort)(text.Length * 2));
             }
 
-            //Text should be in unicode
-            return Util.ConcatByteArrays(sizeBytes, Encoding.Unicode.GetBytes(text));
+            //Text should be in unicode UTF-16
+            writer.Write(Encoding.Unicode.GetBytes(text));
         }
     }
 }

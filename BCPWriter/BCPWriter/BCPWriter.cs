@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
 using System.Xml;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace BCPWriter
 {
@@ -141,103 +144,304 @@ namespace BCPWriter
                 throw new ArgumentException("No columns");
             }
 
+            StringBuilder createTableString = new StringBuilder();
+            createTableString.AppendLine("CREATE TABLE BCPTest (");
+
+            StringBuilder insertIntoString = new StringBuilder();
+            insertIntoString.AppendLine("INSERT INTO BCPTest VALUES (");
+
             for (int i = 0; i < rows.Count(); i++)
             {
                 IBCPSerialization column = _columns[i % _columns.Count()];
                 object row = rows.ElementAt(i);
+
+                //column.Write(writer, row);
+
+                createTableString.AppendFormat("col{0} ", i);
 
                 //FIXME Is there a better way than casting every type?
                 //Don't forget to add new SQL types here
                 //and to modify the unit tests accordingly
                 if (column is SQLBinary)
                 {
-                    writer.Write(((SQLBinary)column).ToBCP((byte[])row));
+                    SQLBinary sql = (SQLBinary)column;
+                    byte[] value = (byte[])row;
+
+                    createTableString.AppendFormat("binary({0})", sql.Length);
+                    insertIntoString.AppendFormat(
+                        "CAST('{0}' AS binary({1}))",
+                        Encoding.Default.GetString(value), sql.Length);
+                    
+                    sql.Write(writer, value);
                 }
                 else if (column is SQLChar)
                 {
-                    writer.Write(((SQLChar)column).ToBCP((string)row));
+                    SQLChar sql = (SQLChar)column;
+                    string value = (string)row;
+
+                    createTableString.AppendFormat("char({0})", sql.Length);
+                    insertIntoString.AppendFormat("'{0}'", value);
+
+                    sql.Write(writer, value);
                 }
                 else if (column is SQLInt)
                 {
-                    writer.Write(((SQLInt)column).ToBCP((int)row));
+                    SQLInt sql = (SQLInt)column;
+                    int value = (int)row;
+
+                    createTableString.Append("int");
+                    insertIntoString.AppendFormat("{0}", value);
+
+                    sql.Write(writer, value);
                 }
                 else if (column is SQLNChar)
                 {
-                    writer.Write(((SQLNChar)column).ToBCP((string)row));
+                    SQLNChar sql = (SQLNChar)column;
+                    string value = (string)row;
+
+                    createTableString.AppendFormat("nchar({0})", sql.Length);
+                    insertIntoString.AppendFormat("'{0}'", value);
+
+                    sql.Write(writer, value);
                 }
                 else if (column is SQLNVarChar)
                 {
-                    writer.Write(((SQLNVarChar)column).ToBCP((string)row));
+                    SQLNVarChar sql = (SQLNVarChar)column;
+                    string value = (string)row;
+
+                    if (sql.Length == SQLNVarChar.MAX)
+                    {
+                        createTableString.Append("nvarchar(max)");
+                    }
+                    else
+                    {
+                        createTableString.AppendFormat("nvarchar({0})", sql.Length);
+                    }
+                    insertIntoString.AppendFormat("'{0}'", value);
+                    
+                    sql.Write(writer, value);
                 }
                 else if (column is SQLVarBinary)
                 {
-                    writer.Write(((SQLVarBinary)column).ToBCP((byte[])row));
+                    SQLVarBinary sql = (SQLVarBinary)column;
+                    byte[] value = (byte[])row;
+
+                    if (sql.Length == SQLVarBinary.MAX)
+                    {
+                        createTableString.Append("varbinary(max)");
+                        insertIntoString.AppendFormat(
+                            "CAST('{0}' AS varbinary(max))",
+                            Encoding.Default.GetString(value));
+                    }
+                    else
+                    {
+                        createTableString.AppendFormat("varbinary({0})", sql.Length);
+                        insertIntoString.AppendFormat(
+                            "CAST('{0}' AS varbinary({1}))",
+                            Encoding.Default.GetString(value), sql.Length);
+
+                    }
+
+                    sql.Write(writer, value);
                 }
                 else if (column is SQLVarChar)
                 {
-                    writer.Write(((SQLVarChar)column).ToBCP((string)row));
+                    SQLVarChar sql = (SQLVarChar)column;
+                    string value = (string)row;
+
+                    if (sql.Length == SQLVarChar.MAX)
+                    {
+                        createTableString.Append("varchar(max)");
+                    }
+                    else
+                    {
+                        createTableString.AppendFormat("varchar({0})", sql.Length);
+                    }
+                    insertIntoString.AppendFormat("'{0}'", value);
+
+                    sql.Write(writer, value);
                 }
                 else if (column is SQLNText)
                 {
-                    writer.Write(((SQLNText)column).ToBCP((string)row));
+                    SQLNText sql = (SQLNText)column;
+                    string value = (string)row;
+
+                    createTableString.Append("ntext");
+                    insertIntoString.AppendFormat("'{0}'", value);
+
+                    sql.Write(writer, value);
                 }
                 else if (column is SQLText)
                 {
-                    writer.Write(((SQLText)column).ToBCP((string)row));
+                    SQLText sql = (SQLText)column;
+                    string value = (string)row;
+
+                    createTableString.Append("text");
+                    insertIntoString.AppendFormat("'{0}'", value);
+
+                    sql.Write(writer, value);
                 }
                 else if (column is SQLXML)
                 {
-                    writer.Write(((SQLXML)column).ToBCP((XmlDocument)row));
+                    SQLXML sql = (SQLXML)column;
+                    XmlDocument value = (XmlDocument)row;
+
+                    createTableString.Append("xml");
+                    insertIntoString.AppendFormat("'{0}'", value.DocumentElement.OuterXml);
+
+                    sql.Write(writer, value);
                 }
                 else if (column is SQLFloat)
                 {
-                    if (row is double)
+                    SQLFloat sql = (SQLFloat)column;
+
+                    createTableString.Append("float");
+
+                    if (row is float)
                     {
-                        writer.Write(((SQLFloat)column).ToBCP((double)row));
-                    }
-                    else if (row is float)
-                    {
-                        writer.Write(((SQLFloat)column).ToBCP((float)row));
+                        float value = (float)row;
+
+                        insertIntoString.AppendFormat("{0}", value);
+
+                        sql.Write(writer, value);
                     }
                     else
                     {
                         //If we don't know, let's cast it to double
-                        writer.Write(((SQLFloat)column).ToBCP((double)row));
+                        double value = (double)row;
+
+                        insertIntoString.AppendFormat("{0}", value);
+
+                        sql.Write(writer, value);
                     }
                 }
                 else if (column is SQLReal)
                 {
-                    writer.Write(((SQLReal)column).ToBCP((float)row));
+                    SQLReal sql = (SQLReal)column;
+                    float value = (float)row;
+
+                    createTableString.Append("real");
+                    insertIntoString.AppendFormat("{0}", value);
+
+                    sql.Write(writer, value);
                 }
                 else if (column is SQLUniqueIdentifier)
                 {
-                    writer.Write(((SQLUniqueIdentifier)column).ToBCP((Guid)row));
+                    SQLUniqueIdentifier sql = (SQLUniqueIdentifier)column;
+                    Guid value = (Guid)row;
+
+                    createTableString.Append("uniqueidentifier");
+                    insertIntoString.AppendFormat("'{0}'", value);
+
+                    sql.Write(writer, value);
                 }
                 else if (column is SQLBigInt)
                 {
-                    writer.Write(((SQLBigInt)column).ToBCP((long)row));
+                    SQLBigInt sql = (SQLBigInt)column;
+                    long value = (long)row;
+
+                    createTableString.Append("bigint");
+                    insertIntoString.AppendFormat("{0}", value);
+
+                    sql.Write(writer, value);
                 }
                 else if (column is SQLDateTime)
                 {
-                    writer.Write(((SQLDateTime)column).ToBCP((DateTime)row));
+                    SQLDateTime sql = (SQLDateTime)column;
+                    DateTime value = (DateTime)row;
+
+                    createTableString.Append("datetime");
+                    insertIntoString.AppendFormat("'{0}'", value);
+
+                    sql.Write(writer, value);
                 }
                 else if (column is SQLDateTime2)
                 {
-                    writer.Write(((SQLDateTime2)column).ToBCP((DateTime)row));
+                    SQLDateTime2 sql = (SQLDateTime2)column;
+                    DateTime value = (DateTime)row;
+
+                    createTableString.Append("datetime2");
+                    insertIntoString.AppendFormat("'{0}'", value);
+
+                    sql.Write(writer, value);
                 }
                 else if (column is SQLDate)
                 {
-                    writer.Write(((SQLDate)column).ToBCP((DateTime)row));
+                    SQLDate sql = (SQLDate)column;
+                    DateTime value = (DateTime)row;
+
+                    createTableString.Append("date");
+                    insertIntoString.AppendFormat("'{0}'", value);
+
+                    sql.Write(writer, value);
                 }
                 else if (column is SQLTime)
                 {
-                    writer.Write(((SQLTime)column).ToBCP((DateTime)row));
+                    SQLTime sql = (SQLTime)column;
+                    DateTime value = (DateTime)row;
+
+                    createTableString.Append("time");
+                    insertIntoString.AppendFormat("'{0}'", value);
+
+                    sql.Write(writer, value);
                 }
                 else
                 {
                     System.Diagnostics.Trace.Assert(false);
                 }
+
+                if (i < rows.Count() - 1)
+                {
+                    createTableString.AppendLine(",");
+                    insertIntoString.AppendLine(",");
+                }
             }
+
+
+
+            createTableString.Append(")");
+            insertIntoString.Append(")");
+
+            string server = "localhost";
+            string username = "sa";
+            string password = "Password01";
+            string database = "BCPTest";
+
+            string connectionString = string.Format(
+                "Data Source={0};User ID={1};Password={2};Initial Catalog={3}",
+                server, username, password, database
+            );
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                SqlCommand command = new SqlCommand();
+                command.Connection = connection;
+                command.CommandText = "SELECT * FROM INFORMATION_SCHEMA.TABLES";
+                ArrayList result = new ArrayList();
+                IDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    result.Add(reader.GetString(0));
+                }
+                reader.Close();
+                reader.Dispose();
+
+                command.CommandText = "IF OBJECT_ID('BCPTest','U') IS NOT NULL DROP TABLE BCPTest";
+                command.ExecuteNonQuery();
+
+                command.CommandText = createTableString.ToString();
+                command.ExecuteNonQuery();
+
+                command.CommandText = insertIntoString.ToString();
+                command.ExecuteNonQuery();
+
+                connection.Close();
+            }
+
+
+
 
             //Don't do that, user must do it
             //writer.Close();

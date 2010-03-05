@@ -11,6 +11,6 @@ namespace BCPWriter
     /// </summary>
     public interface IBCPSerialization
     {
-        //byte[] ToBCP<T>(T value);
+        void Write(BinaryWriter writer, object value);
     }
 }

@@ -15,11 +15,24 @@ namespace BCPWriter
     /// </remarks>
     public class SQLTime : IBCPSerialization
     {
-        public byte[] ToBCP(DateTime time)
+        public void Write(BinaryWriter writer, object value)
         {
+            Write(writer, (DateTime)value);
+        }
+
+        public void Write(BinaryWriter writer, DateTime? time)
+        {
+            if (!time.HasValue)
+            {
+                //1 byte long
+                byte[] nullBytes = { 255 };
+                writer.Write(nullBytes);
+                return;
+            }
+
             //byte is 1 byte long :)
             byte size = 5;
-            byte[] sizeBytes = { size };
+            writer.Write(size);
 
             //Format:
             //00:00:00 gives 05 00 00 00 00 00
@@ -28,15 +41,14 @@ namespace BCPWriter
             //01:00:00 gives 05 00 68 C4 61 08 -> 08 61 C4 68 00 = 3600.0000000
 
             DateTime initTime = DateTime.Parse("00:00:00", System.Globalization.CultureInfo.InvariantCulture);
-            TimeSpan span = time - initTime;
+            TimeSpan span = time.Value - initTime;
 
             byte[] valueBytes = BitConverter.GetBytes((long)(span.TotalSeconds * 10000000));
             List<byte> bytes = new List<byte>(valueBytes);
             bytes.RemoveAt(7);
             bytes.RemoveAt(6);
             bytes.RemoveAt(5);
-
-            return Util.ConcatByteArrays(sizeBytes, bytes.ToArray());
+            writer.Write(bytes.ToArray());
         }
     }
 }

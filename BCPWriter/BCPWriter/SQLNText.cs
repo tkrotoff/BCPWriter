@@ -22,7 +22,12 @@ namespace BCPWriter
         //2^30 - 1 (1,073,741,823)
         public const uint MAX_LENGTH = 1073741823;
 
-        public byte[] ToBCP(string text)
+        public void Write(BinaryWriter writer, object value)
+        {
+            Write(writer, (string)value);
+        }
+
+        public void Write(BinaryWriter writer, string text)
         {
             if (text.Length > MAX_LENGTH)
             {
@@ -30,12 +35,12 @@ namespace BCPWriter
             }
 
             //uint is 4 bytes long
-            //* 2 because we are in unicode, thus 1 char is 2 bytes long
+            //* 2 because we are in UTF-16, thus 1 char is 2 bytes long
             uint length = (uint)(text.Length * 2);
-            byte[] sizeBytes = BitConverter.GetBytes(length);
+            writer.Write(length);
 
-            //Text should be in unicode
-            return Util.ConcatByteArrays(sizeBytes, Encoding.Unicode.GetBytes(text));
+            //Text should be in unicode UTF-16
+            writer.Write(Encoding.Unicode.GetBytes(text));
         }
     }
 }

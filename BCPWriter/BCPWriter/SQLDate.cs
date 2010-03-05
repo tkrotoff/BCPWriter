@@ -15,18 +15,24 @@ namespace BCPWriter
     /// </remarks>
     public class SQLDate : IBCPSerialization
     {
-        public byte[] ToBCP(DateTime? date)
+        public void Write(BinaryWriter writer, object value)
+        {
+            Write(writer, (DateTime)value);
+        }
+
+        public void Write(BinaryWriter writer, DateTime? date)
         {
             if (!date.HasValue)
             {
                 //1 byte long
                 byte[] nullBytes = { 255 };
-                return nullBytes;
+                writer.Write(nullBytes);
+                return;
             }
 
             //byte is 1 byte long :)
             byte size = 3;
-            byte[] sizeBytes = { size };
+            writer.Write(size);
 
             //Format is the number of days since 0001-01-01
             //0001-01-01 gives 03 00 00 00
@@ -43,8 +49,7 @@ namespace BCPWriter
             byte[] valueBytes = BitConverter.GetBytes((int)span.TotalDays);
             List<byte> bytes = new List<byte>(valueBytes);
             bytes.RemoveAt(3);
-
-            return Util.ConcatByteArrays(sizeBytes, bytes.ToArray());
+            writer.Write(bytes.ToArray());
         }
     }
 }

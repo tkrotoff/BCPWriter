@@ -16,11 +16,16 @@ namespace BCPWriter
     /// </remarks>
     public class SQLDateTime2 : IBCPSerialization
     {
-        public byte[] ToBCP(DateTime dateTime)
+        public void Write(BinaryWriter writer, object value)
+        {
+            Write(writer, (DateTime)value);
+        }
+
+        public void Write(BinaryWriter writer, DateTime? dateTime)
         {
             //byte is 1 byte long :)
             byte size = 8;
-            byte[] sizeBytes = { size };
+            writer.Write(size);
 
             //Format:
             //0001-01-01T00:00:00 gives 08 00 00 00 00 00 00 00 00
@@ -45,7 +50,7 @@ namespace BCPWriter
             //                                                      -> 78 DC C5 67 00 = 519100000000
 
             //Time, 5 bytes long
-            DateTime time = DateTime.Parse(dateTime.ToString("HH:mm:ss.fffffff"));
+            DateTime time = DateTime.Parse(dateTime.Value.ToString("HH:mm:ss.fffffff"));
             DateTime initTime = DateTime.Parse("00:00:00", System.Globalization.CultureInfo.InvariantCulture);
             TimeSpan span = time - initTime;
             long bcpTimeFormat = (long)(span.TotalMilliseconds * 10000);
@@ -53,18 +58,15 @@ namespace BCPWriter
             timeBytes.RemoveAt(7);
             timeBytes.RemoveAt(6);
             timeBytes.RemoveAt(5);
+            writer.Write(timeBytes.ToArray());
 
             //Date, 3 bytes long
-            DateTime date = dateTime.Date;
+            DateTime date = dateTime.Value.Date;
             DateTime initDate = DateTime.Parse("0001-01-01", System.Globalization.CultureInfo.InvariantCulture);
             span = date - initDate;
             List<byte> dateBytes = new List<byte>(BitConverter.GetBytes((int)span.TotalDays));
             dateBytes.RemoveAt(3);
-
-            //8 bytes long
-            byte[] valueBytes = Util.ConcatByteArrays(timeBytes.ToArray(), dateBytes.ToArray());
-
-            return Util.ConcatByteArrays(sizeBytes, valueBytes);
+            writer.Write(dateBytes.ToArray());
         }
     }
 }

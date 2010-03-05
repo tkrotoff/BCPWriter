@@ -17,8 +17,8 @@ namespace BCPWriter.Tests
         {
             BinaryWriter writer = BCPTests.CreateBinaryFile(myFileName);
 
-            SQLNText sqlNText = new SQLNText();
-            writer.Write(sqlNText.ToBCP(text));
+            SQLNText sql = new SQLNText();
+            sql.Write(writer, text);
 
             writer.Close();
         }

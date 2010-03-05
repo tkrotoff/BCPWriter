@@ -54,7 +54,17 @@ namespace BCPWriter
         {
         }
 
-        public byte[] ToBCP(double value)
+        public uint NbBits
+        {
+            get { return _nbBits; }
+        }
+
+        public void Write(BinaryWriter writer, object value)
+        {
+            Write(writer, (double)value);
+        }
+
+        public void Write(BinaryWriter writer, double? value)
         {
             if (_nbBits < 25)
             {
@@ -63,15 +73,13 @@ namespace BCPWriter
 
             //byte is 1 byte long :)
             byte size = 4 * 2;
-            byte[] sizeBytes = { size };
+            writer.Write(size);
 
             //double is 8 bytes long
-            byte[] valueBytes = BitConverter.GetBytes(value);
-
-            return Util.ConcatByteArrays(sizeBytes, valueBytes);
+            writer.Write(value.Value);
         }
 
-        public byte[] ToBCP(float value)
+        public void Write(BinaryWriter writer, float? value)
         {
             if (_nbBits > 24)
             {
@@ -80,13 +88,10 @@ namespace BCPWriter
 
             //byte is 1 byte long :)
             byte size = 4;
-            byte[] sizeBytes = { size };
+            writer.Write(size);
 
             //float is 4 bytes long
-            byte[] valueBytes = BitConverter.GetBytes(value);
-
-            return Util.ConcatByteArrays(sizeBytes, valueBytes);
+            writer.Write(value.Value);
         }
-
     }
 }

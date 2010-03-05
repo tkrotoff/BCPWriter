@@ -17,8 +17,8 @@ namespace BCPWriter.Tests
         {
             BinaryWriter writer = BCPTests.CreateBinaryFile(myFileName);
 
-            SQLFloat sqlFloat = new SQLFloat(nbBits);
-            writer.Write(sqlFloat.ToBCP(value));
+            SQLFloat sql = new SQLFloat(nbBits);
+            sql.Write(writer, value);
 
             writer.Close();
         }
@@ -27,8 +27,8 @@ namespace BCPWriter.Tests
         {
             BinaryWriter writer = BCPTests.CreateBinaryFile(myFileName);
 
-            SQLFloat sqlFloat = new SQLFloat(nbBits);
-            writer.Write(sqlFloat.ToBCP(value));
+            SQLFloat sql = new SQLFloat(nbBits);
+            sql.Write(writer, value);
 
             writer.Close();
         }

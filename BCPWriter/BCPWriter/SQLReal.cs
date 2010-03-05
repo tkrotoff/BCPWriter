@@ -21,9 +21,9 @@ namespace BCPWriter
         {
         }
 
-        public new byte[] ToBCP(float value)
+        public new void Write(BinaryWriter writer, float value)
         {
-            return base.ToBCP(value);
+            base.Write(writer, value);
         }
     }
 }

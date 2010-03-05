@@ -41,12 +41,22 @@ namespace BCPWriter
             _length = length;
         }
 
+        public uint Length
+        {
+            get { return _length; }
+        }
+
+        public void Write(BinaryWriter writer, object value)
+        {
+            Write(writer, (byte[])value);
+        }
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="data">binary data</param>
         /// <returns></returns>
-        public byte[] ToBCP(byte[] data)
+        public void Write(BinaryWriter writer, byte[] data)
         {
             if (data == null)
             {
@@ -54,14 +64,15 @@ namespace BCPWriter
                 {
                     //8 bytes long
                     byte[] nullBytes = { 255, 255, 255, 255, 255, 255, 255, 255 };
-                    return nullBytes;
+                    writer.Write(nullBytes);
                 }
                 else
                 {
                     //2 bytes long
                     byte[] nullBytes = { 255, 255 };
-                    return nullBytes;
+                    writer.Write(nullBytes);
                 }
+                return;
             }
 
             if (data.Length > _length)
@@ -69,22 +80,21 @@ namespace BCPWriter
                 throw new ArgumentException("data is longer than the length declared inside the constructor");
             }
 
-            byte[] sizeBytes = null;
             if (_length == MAX)
             {
                 //ulong is 8 bytes long
-                sizeBytes = BitConverter.GetBytes((ulong)data.Length);
+                writer.Write((ulong)data.Length);
             }
             else
             {
                 //ushort is 2 bytes long
-                sizeBytes = BitConverter.GetBytes((ushort)data.Length);
+                writer.Write((ushort)data.Length);
             }
 
             string hex = Util.ToHexString(data);
             byte[] hexBytes = Util.HexToByteArray(hex);
 
-            return Util.ConcatByteArrays(sizeBytes, hexBytes);
+            writer.Write(hexBytes);
         }
     }
 }

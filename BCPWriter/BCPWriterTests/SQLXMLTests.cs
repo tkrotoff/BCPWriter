@@ -21,8 +21,8 @@ namespace BCPWriter.Tests
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.LoadXml(xml);
 
-            SQLXML sqlXML = new SQLXML();
-            writer.Write(sqlXML.ToBCP(xmlDoc));
+            SQLXML sql = new SQLXML();
+            sql.Write(writer, xmlDoc);
 
             writer.Close();
         }
@@ -55,8 +55,8 @@ namespace BCPWriter.Tests
 
             BinaryWriter writer = BCPTests.CreateBinaryFile(myFileName);
 
-            SQLXML sqlXML = new SQLXML();
-            writer.Write(sqlXML.ToBCP(null));
+            SQLXML sql = new SQLXML();
+            sql.Write(writer, null);
 
             writer.Close();
 

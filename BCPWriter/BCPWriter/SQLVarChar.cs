@@ -40,26 +40,35 @@ namespace BCPWriter
             _length = length;
         }
 
-        public byte[] ToBCP(string text)
+        public uint Length
+        {
+            get { return _length; }
+        }
+
+        public void Write(BinaryWriter writer, object value)
+        {
+            Write(writer, (string)value);
+        }
+
+        public void Write(BinaryWriter writer, string text)
         {
             if (text.Length > _length)
             {
                 throw new ArgumentException("text is longer than the length declared inside the constructor");
             }
 
-            byte[] sizeBytes = null;
             if (_length == MAX)
             {
                 //ulong is 8 bytes long
-                sizeBytes = BitConverter.GetBytes((ulong)text.Length);
+                writer.Write((ulong)text.Length);
             }
             else
             {
                 //ushort is 2 bytes long
-                sizeBytes = BitConverter.GetBytes((ushort)text.Length);
+                writer.Write((ushort)text.Length);
             }
 
-            return Util.ConcatByteArrays(sizeBytes, Util.EncodeToOEMCodePage(text));
+            writer.Write(Util.EncodeToOEMCodePage(text));
         }
     }
 }
