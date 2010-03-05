@@ -402,6 +402,14 @@ namespace BCPWriter
             createTableString.Append(")");
             insertIntoString.Append(")");
 
+            //CreateTable(createTableString.ToString(), insertIntoString.ToString());
+
+            //Don't do that, user must do it
+            //writer.Close();
+        }
+
+        private void CreateTable(string createTable, string insertInto)
+        {
             string server = "localhost";
             string username = "sa";
             string password = "Password01";
@@ -431,20 +439,17 @@ namespace BCPWriter
                 command.CommandText = "IF OBJECT_ID('BCPTest','U') IS NOT NULL DROP TABLE BCPTest";
                 command.ExecuteNonQuery();
 
-                command.CommandText = createTableString.ToString();
+                command.CommandText = createTable;
                 command.ExecuteNonQuery();
 
-                command.CommandText = insertIntoString.ToString();
+                command.CommandText = insertInto;
                 command.ExecuteNonQuery();
 
                 connection.Close();
             }
 
-
-
-
-            //Don't do that, user must do it
-            //writer.Close();
+            //bcp out
+            //Compare bcp
         }
     }
 }
