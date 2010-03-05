@@ -55,6 +55,7 @@ namespace BCPWriter
     /// <example>
     /// BCPWrite example of use:
     /// <code>
+    /// <![CDATA[
     /// BCPWriter writer = new BCPWriter();
     /// 
     /// //FirstName
@@ -88,6 +89,7 @@ namespace BCPWriter
     /// BinaryWriter stream = new BinaryWriter(new FileStream("data.bcp", FileMode.Create));
     /// writer.WriteRows(stream, rows);
     /// stream.Close();
+    /// ]]>
     /// </code>
     /// </example>
     public class BCPWriter
@@ -128,8 +130,9 @@ namespace BCPWriter
         /// <remarks>
         /// You must call AddColumn() or AddColumns() before.<br/>
         /// The rows given to this method should match the SQL types (the columns).</br>
-        /// This method directly write to the .bcp file and then close it.
+        /// Don't forget to close your BinaryWriter after using this method.
         /// </remarks>
+        /// <param name="writer">BinaryWriter to use to write the .bcp file</param>
         /// <param name="rows">the rows to write to the .bcp file</param>
         public void WriteRows(BinaryWriter writer, IEnumerable<object> rows)
         {
