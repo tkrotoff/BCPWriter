@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using System.Xml;
 
 using NUnit.Framework;
 
@@ -17,8 +18,11 @@ namespace BCPWriter.Tests
         {
             BinaryWriter writer = BCPTests.CreateBinaryFile(myFileName);
 
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(xml);
+
             SQLXML sqlXML = new SQLXML();
-            writer.Write(sqlXML.ToBCP(xml));
+            writer.Write(sqlXML.ToBCP(xmlDoc));
 
             writer.Close();
         }
@@ -34,8 +38,28 @@ namespace BCPWriter.Tests
         [Test]
         public void TestXMLEmpty()
         {
+            //Will throw an XmlException : Root element is missing
+            //so no need to test
+
+            /*
             string myFileName = "xml_empty.bcp";
             WriteXML("", myFileName);
+            BCPTests.CheckFile(myFileName);
+            */
+        }
+
+        [Test]
+        public void TestXMLNull()
+        {
+            string myFileName = "xml_null.bcp";
+
+            BinaryWriter writer = BCPTests.CreateBinaryFile(myFileName);
+
+            SQLXML sqlXML = new SQLXML();
+            writer.Write(sqlXML.ToBCP(null));
+
+            writer.Close();
+
             BCPTests.CheckFile(myFileName);
         }
 
@@ -79,6 +103,26 @@ namespace BCPWriter.Tests
             string xml = stream.ReadToEnd();
 
             string myFileName = "SQLXMLTest4.bcp";
+            WriteXML(xml, myFileName);
+            BCPTests.CheckFile(myFileName);
+        }
+
+        [Test]
+        public void TestWithXMLDeclaration1()
+        {
+            string xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?><Header Table=\"HoldingData\" User=\"CRED-TS\" Name=\"90GIFD\" Date=\"20060329\" Type=\"HOLDINGS\" ContentsType=\"XML\" Modifier=\"GB\" Action=\"ADD\" />";
+
+            string myFileName = "xmldeclaration1.bcp";
+            WriteXML(xml, myFileName);
+            BCPTests.CheckFile(myFileName);
+        }
+
+        [Test]
+        public void TestWithXMLDeclaration2()
+        {
+            string xml = "<?xml version=\"1.0\"?><Header Table=\"HoldingData\" User=\"CRED-TS\" Name=\"90GIFD\" Date=\"20060329\" Type=\"HOLDINGS\" ContentsType=\"XML\" Modifier=\"GB\" Action=\"ADD\" />";
+
+            string myFileName = "xmldeclaration2.bcp";
             WriteXML(xml, myFileName);
             BCPTests.CheckFile(myFileName);
         }

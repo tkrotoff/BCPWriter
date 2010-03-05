@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using System.Xml;
 
 namespace BCPWriter
 {
@@ -31,9 +32,9 @@ namespace BCPWriter
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="xml">XML as a string</param>
+        /// <param name="xml">XML</param>
         /// <returns></returns>
-        public byte[] ToBCP(string xml)
+        public byte[] ToBCP(XmlDocument xml)
         {
             if (xml == null)
             {
@@ -42,7 +43,10 @@ namespace BCPWriter
                 return nullBytes;
             }
 
-            List<byte> xmlBytes = new List<byte>(Encoding.Unicode.GetBytes(xml));
+            string tmp = xml.DocumentElement.OuterXml;
+            //System.Xml.XmlDocument does not give the same string as MS SQL Server :/
+            tmp = tmp.Replace(" />", "/>");
+            List<byte> xmlBytes = new List<byte>(Encoding.Unicode.GetBytes(tmp));
 
             //4 bytes: position of the next bytes to read
             //00 00 03 FC = 1020

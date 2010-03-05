@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using System.Xml;
 
 using NUnit.Framework;
 
@@ -56,7 +57,9 @@ namespace BCPWriter.Tests
             rows.Add(new Guid("936DA01F-9ABD-4d9d-80C7-02AF85C822A8"));
             rows.Add(Util.StringToByteArray("varbinary"));
             rows.Add("varchar");
-            rows.Add("<content>XML</content>");
+            XmlDocument xml = new XmlDocument();
+            xml.LoadXml("<content>XML</content>");
+            rows.Add(xml);
 
             BinaryWriter stream = new BinaryWriter(new FileStream(myFileName, FileMode.Create));
             writer.WriteRows(stream, rows);

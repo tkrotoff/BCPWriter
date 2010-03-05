@@ -27,6 +27,9 @@ namespace BCPWriter
         /// <summary>
         /// Encode text using OEM code page, see http://en.wikipedia.org/wiki/Windows_code_page
         /// </summary>
+        /// <remarks>
+        /// When we use SQLChar and SQLVarChar unicode is not used and text is encoded using OEM code page.
+        /// </remarks>
         /// <param name="text">text to encode</param>
         /// <returns>text encoded using OEM code page</returns>
         public static byte[] EncodeToOEMCodePage(string text)
@@ -38,6 +41,9 @@ namespace BCPWriter
         /// <summary>
         /// Converts a byte[] to hexadecimal.
         /// </summary>
+        /// <remarks>
+        /// See http://stackoverflow.com/questions/623104/c-byte-to-hex-string
+        /// </remarks>
         /// <param name="data">data to convert</param>
         /// <returns>string containing hexadecimal</returns>
         public static string ToHexString(byte[] data)
@@ -48,6 +54,8 @@ namespace BCPWriter
                 hex.AppendFormat(System.Globalization.CultureInfo.InvariantCulture, "{0:x2}", b);
             }
             return hex.ToString();
+            /*string hex = BitConverter.ToString(data).Replace("-", string.Empty);
+            return hex;*/
         }
 
         /// <summary>
@@ -65,6 +73,7 @@ namespace BCPWriter
                 i++;
             }
             return bytes;
+            //return ASCIIEncoding.UTF8.GetBytes(text);
         }
 
         /// <summary>

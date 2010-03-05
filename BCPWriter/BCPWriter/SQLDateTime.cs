@@ -28,8 +28,8 @@ namespace BCPWriter
         {
             if (!dateTime.HasValue)
             {
-                //1 byte long
-                byte[] nullBytes = { 255 };
+                //8 bytes long
+                byte[] nullBytes = { 255, 255, 255, 255, 255, 255, 255, 255 };
                 return nullBytes;
             }
 

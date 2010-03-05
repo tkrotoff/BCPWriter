@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using System.Xml;
 
 namespace BCPWriter
 {
@@ -183,7 +184,7 @@ namespace BCPWriter
                 }
                 else if (column is SQLXML)
                 {
-                    writer.Write(((SQLXML)column).ToBCP((string)row));
+                    writer.Write(((SQLXML)column).ToBCP((XmlDocument)row));
                 }
                 else if (column is SQLFloat)
                 {
