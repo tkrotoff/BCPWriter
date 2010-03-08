@@ -150,7 +150,7 @@ namespace BCPWriter
                 column.Write(writer, row);
             }
 
-            new BCPWriterSQLServer(_columns, rows);
+            new BCPWriterSQLServer(writer, _columns, rows);
         }
 
         public void Write(BinaryWriter writer)

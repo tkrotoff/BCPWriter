@@ -12,7 +12,7 @@ namespace BCPWriter
 {
     class BCPWriterSQLServer
     {
-        public BCPWriterSQLServer(List<IBCPSerialization> columns, IEnumerable<object> rows)
+        public BCPWriterSQLServer(BinaryWriter writer, List<IBCPSerialization> columns, IEnumerable<object> rows)
         {
             if (columns.Count() == 0)
             {
@@ -23,7 +23,7 @@ namespace BCPWriter
             string insertIntoString = GetInsertIntoString(columns, rows);
 
             SendSQLRequests(createTableString, insertIntoString);
-            GenerateBCPFileFromSQLServer();
+            GenerateBCPFileFromSQLServer(writer);
         }
 
         static private string GetCreateTableString(IEnumerable<IBCPSerialization> columns)
@@ -494,12 +494,19 @@ namespace BCPWriter
             }
         }
 
-
-        static private int _bcpFileNameIterator = 0;
-
-        static private void GenerateBCPFileFromSQLServer()
+        static private void GenerateBCPFileFromSQLServer(BinaryWriter writer)
         {
-            string bcpFileName = string.Format("BCPWriter{0}.tmp", _bcpFileNameIterator++);
+            //Default file name
+            string baseFileName = "BCPTest.bcp";
+
+            Stream stream = writer.BaseStream;
+            if (stream is FileStream)
+            {
+                FileStream fileStream = (FileStream)stream;
+                baseFileName = fileStream.Name;
+            }
+
+            string bcpFileName = string.Format("{0}.{1}", baseFileName, "BCPTest");
 
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
             startInfo.UseShellExecute = false;
