@@ -4,7 +4,7 @@ GO
 IF OBJECT_ID('BCPTest','U') IS NOT NULL DROP TABLE BCPTest
 
 CREATE TABLE BCPTest (
-col0 text
+col0 ntext
 )
 
 GO

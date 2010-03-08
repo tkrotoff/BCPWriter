@@ -28,6 +28,14 @@ namespace BCPWriter
 
         public void Write(BinaryWriter writer, string text)
         {
+            if (text == null)
+            {
+                //4 bytes long
+                byte[] nullBytes = { 255, 255, 255, 255 };
+                writer.Write(nullBytes);
+                return;
+            }
+
             if (text.Length > MAX_LENGTH)
             {
                 throw new ArgumentException("text is longer than 2^31-1 (2,147,483,647)");

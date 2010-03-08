@@ -24,10 +24,26 @@ namespace BCPWriter.Tests
         }
 
         [Test]
-        public void Test()
+        public void TestNText()
         {
             string myFileName = "ntext.bcp";
             WriteNText("KIKOO éùà", myFileName);
+            BCPTests.CheckFile(myFileName);
+        }
+
+        [Test]
+        public void TestNTextEmpty()
+        {
+            string myFileName = "ntext_empty.bcp";
+            WriteNText("", myFileName);
+            BCPTests.CheckFile(myFileName);
+        }
+
+        [Test]
+        public void TestNTextNull()
+        {
+            string myFileName = "ntext_null.bcp";
+            WriteNText(null, myFileName);
             BCPTests.CheckFile(myFileName);
         }
     }
