@@ -61,7 +61,14 @@ namespace BCPWriter
 
         public void Write(BinaryWriter writer, object value)
         {
-            Write(writer, (double)value);
+            if (value is float)
+            {
+                Write(writer, (float)value);
+            }
+            else
+            {
+                Write(writer, (double)value);
+            }
         }
 
         public void Write(BinaryWriter writer, double? value)

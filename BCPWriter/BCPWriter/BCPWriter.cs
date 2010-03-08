@@ -144,6 +144,24 @@ namespace BCPWriter
                 throw new ArgumentException("No columns");
             }
 
+            for (int i = 0; i < rows.Count(); i++)
+            {
+                IBCPSerialization column = _columns[i % _columns.Count()];
+                object row = rows.ElementAt(i);
+
+                column.Write(writer, row);
+            }
+
+            CreateSQLRequest(rows);
+        }
+
+        private void CreateSQLRequest(IEnumerable<object> rows)
+        {
+            if (_columns.Count() == 0)
+            {
+                throw new ArgumentException("No columns");
+            }
+
             StringBuilder createTableString = new StringBuilder();
             createTableString.AppendLine("CREATE TABLE BCPTest (");
 
@@ -154,8 +172,6 @@ namespace BCPWriter
             {
                 IBCPSerialization column = _columns[i % _columns.Count()];
                 object row = rows.ElementAt(i);
-
-                //column.Write(writer, row);
 
                 createTableString.AppendFormat("col{0} ", i);
 
@@ -171,8 +187,6 @@ namespace BCPWriter
                     insertIntoString.AppendFormat(
                         "CAST('{0}' AS binary({1}))",
                         Encoding.Default.GetString(value), sql.Length);
-                    
-                    sql.Write(writer, value);
                 }
                 else if (column is SQLChar)
                 {
@@ -181,8 +195,6 @@ namespace BCPWriter
 
                     createTableString.AppendFormat("char({0})", sql.Length);
                     insertIntoString.AppendFormat("'{0}'", value);
-
-                    sql.Write(writer, value);
                 }
                 else if (column is SQLInt)
                 {
@@ -191,8 +203,6 @@ namespace BCPWriter
 
                     createTableString.Append("int");
                     insertIntoString.AppendFormat("{0}", value);
-
-                    sql.Write(writer, value);
                 }
                 else if (column is SQLNChar)
                 {
@@ -201,8 +211,6 @@ namespace BCPWriter
 
                     createTableString.AppendFormat("nchar({0})", sql.Length);
                     insertIntoString.AppendFormat("'{0}'", value);
-
-                    sql.Write(writer, value);
                 }
                 else if (column is SQLNVarChar)
                 {
@@ -218,8 +226,6 @@ namespace BCPWriter
                         createTableString.AppendFormat("nvarchar({0})", sql.Length);
                     }
                     insertIntoString.AppendFormat("'{0}'", value);
-                    
-                    sql.Write(writer, value);
                 }
                 else if (column is SQLVarBinary)
                 {
@@ -241,8 +247,6 @@ namespace BCPWriter
                             Encoding.Default.GetString(value), sql.Length);
 
                     }
-
-                    sql.Write(writer, value);
                 }
                 else if (column is SQLVarChar)
                 {
@@ -258,8 +262,6 @@ namespace BCPWriter
                         createTableString.AppendFormat("varchar({0})", sql.Length);
                     }
                     insertIntoString.AppendFormat("'{0}'", value);
-
-                    sql.Write(writer, value);
                 }
                 else if (column is SQLNText)
                 {
@@ -268,8 +270,6 @@ namespace BCPWriter
 
                     createTableString.Append("ntext");
                     insertIntoString.AppendFormat("'{0}'", value);
-
-                    sql.Write(writer, value);
                 }
                 else if (column is SQLText)
                 {
@@ -278,8 +278,6 @@ namespace BCPWriter
 
                     createTableString.Append("text");
                     insertIntoString.AppendFormat("'{0}'", value);
-
-                    sql.Write(writer, value);
                 }
                 else if (column is SQLXML)
                 {
@@ -288,8 +286,6 @@ namespace BCPWriter
 
                     createTableString.Append("xml");
                     insertIntoString.AppendFormat("'{0}'", value.DocumentElement.OuterXml);
-
-                    sql.Write(writer, value);
                 }
                 else if (column is SQLFloat)
                 {
@@ -302,8 +298,6 @@ namespace BCPWriter
                         float value = (float)row;
 
                         insertIntoString.AppendFormat("{0}", value);
-
-                        sql.Write(writer, value);
                     }
                     else
                     {
@@ -311,8 +305,6 @@ namespace BCPWriter
                         double value = (double)row;
 
                         insertIntoString.AppendFormat("{0}", value);
-
-                        sql.Write(writer, value);
                     }
                 }
                 else if (column is SQLReal)
@@ -322,8 +314,6 @@ namespace BCPWriter
 
                     createTableString.Append("real");
                     insertIntoString.AppendFormat("{0}", value);
-
-                    sql.Write(writer, value);
                 }
                 else if (column is SQLUniqueIdentifier)
                 {
@@ -332,8 +322,6 @@ namespace BCPWriter
 
                     createTableString.Append("uniqueidentifier");
                     insertIntoString.AppendFormat("'{0}'", value);
-
-                    sql.Write(writer, value);
                 }
                 else if (column is SQLBigInt)
                 {
@@ -342,8 +330,6 @@ namespace BCPWriter
 
                     createTableString.Append("bigint");
                     insertIntoString.AppendFormat("{0}", value);
-
-                    sql.Write(writer, value);
                 }
                 else if (column is SQLDateTime)
                 {
@@ -352,8 +338,6 @@ namespace BCPWriter
 
                     createTableString.Append("datetime");
                     insertIntoString.AppendFormat("'{0}'", value);
-
-                    sql.Write(writer, value);
                 }
                 else if (column is SQLDateTime2)
                 {
@@ -362,8 +346,6 @@ namespace BCPWriter
 
                     createTableString.Append("datetime2");
                     insertIntoString.AppendFormat("'{0}'", value);
-
-                    sql.Write(writer, value);
                 }
                 else if (column is SQLDate)
                 {
@@ -372,8 +354,6 @@ namespace BCPWriter
 
                     createTableString.Append("date");
                     insertIntoString.AppendFormat("'{0}'", value);
-
-                    sql.Write(writer, value);
                 }
                 else if (column is SQLTime)
                 {
@@ -382,8 +362,6 @@ namespace BCPWriter
 
                     createTableString.Append("time");
                     insertIntoString.AppendFormat("'{0}'", value);
-
-                    sql.Write(writer, value);
                 }
                 else
                 {
@@ -397,18 +375,13 @@ namespace BCPWriter
                 }
             }
 
-
-
             createTableString.Append(")");
             insertIntoString.Append(")");
 
-            //CreateTable(createTableString.ToString(), insertIntoString.ToString());
-
-            //Don't do that, user must do it
-            //writer.Close();
+            CreateSQLTable(createTableString.ToString(), insertIntoString.ToString());
         }
 
-        private void CreateTable(string createTable, string insertInto)
+        private void CreateSQLTable(string createTable, string insertInto)
         {
             string server = "localhost";
             string username = "sa";
@@ -448,8 +421,40 @@ namespace BCPWriter
                 connection.Close();
             }
 
-            //bcp out
-            //Compare bcp
+            CreateBCPFromSQLServer();
+        }
+
+
+        private int _bcpFileNameIterator = 0;
+
+        private void CreateBCPFromSQLServer()
+        {
+            string bcpFileName = string.Format("BCPWriter{0}.tmp", _bcpFileNameIterator++);
+
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+            startInfo.UseShellExecute = false;
+            startInfo.RedirectStandardOutput = true;
+            startInfo.RedirectStandardInput = true;
+            startInfo.RedirectStandardError = true;
+            startInfo.FileName = "bcp";
+            startInfo.Arguments = "[BCPTest].[dbo].[BCPTest] out " + bcpFileName + " -S localhost -U sa -P Password01 -n";
+
+            try
+            {
+                //Start the process with the info we specified
+                //Call WaitForExit and then the using statement will close
+                using (System.Diagnostics.Process process = System.Diagnostics.Process.Start(startInfo))
+                {
+                    string errorMessage = process.StandardError.ReadToEnd();
+                    string outputMessage = process.StandardOutput.ReadToEnd();
+
+                    process.WaitForExit();
+                }
+            }
+            catch
+            {
+                //Log error
+            }
         }
     }
 }
