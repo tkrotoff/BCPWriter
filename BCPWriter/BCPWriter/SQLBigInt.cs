@@ -18,15 +18,15 @@ namespace BCPWriter
     {
         public void Write(BinaryWriter writer, object value)
         {
-            Write(writer, (long)value);
+            Write(writer, (long?)value);
         }
 
         public void Write(BinaryWriter writer, long? value)
         {
             if (!value.HasValue)
             {
-                //9 bytes long
-                byte[] nullBytes = { 255, 255, 255, 255, 255, 255, 255, 255, 255 };
+                //1 byte long
+                byte[] nullBytes = { 255 };
                 writer.Write(nullBytes);
                 return;
             }

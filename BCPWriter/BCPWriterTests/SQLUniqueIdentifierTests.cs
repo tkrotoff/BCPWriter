@@ -13,7 +13,7 @@ namespace BCPWriter.Tests
     [TestFixture]
     class SQLUniqueIdentifierTests
     {
-        private void WriteUniqueIdentifier(Guid guid, string myFileName)
+        private void WriteUniqueIdentifier(Guid? guid, string myFileName)
         {
             BinaryWriter writer = BCPTests.CreateBinaryFile(myFileName);
 
@@ -30,6 +30,14 @@ namespace BCPWriter.Tests
 
             string myFileName = "uniqueidentifier.bcp";
             WriteUniqueIdentifier(guid, myFileName);
+            BCPTests.CheckFile(myFileName);
+        }
+
+        [Test]
+        public void TestUniqueIdentifierNull()
+        {
+            string myFileName = "uniqueidentifier_null.bcp";
+            WriteUniqueIdentifier(null, myFileName);
             BCPTests.CheckFile(myFileName);
         }
     }

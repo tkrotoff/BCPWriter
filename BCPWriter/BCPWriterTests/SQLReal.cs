@@ -13,7 +13,7 @@ namespace BCPWriter.Tests
     [TestFixture]
     class SQLRealTests
     {
-        private void WriteReal(float value, string myFileName)
+        private void WriteReal(float? value, string myFileName)
         {
             BinaryWriter writer = BCPTests.CreateBinaryFile(myFileName);
 
@@ -30,6 +30,14 @@ namespace BCPWriter.Tests
 
             string myFileName = "real.bcp";
             WriteReal(value, myFileName);
+            BCPTests.CheckFile(myFileName);
+        }
+
+        [Test]
+        public void TestRealNull()
+        {
+            string myFileName = "real_null.bcp";
+            WriteReal(null, myFileName);
             BCPTests.CheckFile(myFileName);
         }
     }

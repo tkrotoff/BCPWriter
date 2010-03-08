@@ -31,18 +31,21 @@ namespace BCPWriter
 
         public void Write(BinaryWriter writer, object value)
         {
-            Write(writer, (int)value);
+            Write(writer, (int?)value);
         }
 
         public void Write(BinaryWriter writer, int? value)
         {
-            //Can be a value from -2^31 through -2^31-1
-            //FIXME useless exception since int cannot be less/more than MIN_VALUE/MAX_VALUE
-            //here for the beauty of it...
-            if (value < MIN_VALUE || value > MAX_VALUE)
+            if (!value.HasValue)
             {
-                throw new ArgumentException("value should be between -2^31 and -2^31-1");
+                //1 byte long
+                byte[] nullBytes = { 255 };
+                writer.Write(nullBytes);
+                return;
             }
+
+            //value must be from -2^31 through -2^31-1
+            //value is an int so it is already the case
 
             //byte is 1 byte long :)
             byte size = 4;

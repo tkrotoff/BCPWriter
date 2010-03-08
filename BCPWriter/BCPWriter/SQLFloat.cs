@@ -61,18 +61,26 @@ namespace BCPWriter
 
         public void Write(BinaryWriter writer, object value)
         {
-            if (value is float)
+            if (value is float?)
             {
-                Write(writer, (float)value);
+                Write(writer, (float?)value);
             }
             else
             {
-                Write(writer, (double)value);
+                Write(writer, (double?)value);
             }
         }
 
         public void Write(BinaryWriter writer, double? value)
         {
+            if (!value.HasValue)
+            {
+                //1 byte long
+                byte[] nullBytes = { 255 };
+                writer.Write(nullBytes);
+                return;
+            }
+
             if (_nbBits < 25)
             {
                 throw new ArgumentException("nbBits should be between 25-53");
@@ -88,6 +96,14 @@ namespace BCPWriter
 
         public void Write(BinaryWriter writer, float? value)
         {
+            if (!value.HasValue)
+            {
+                //1 byte long
+                byte[] nullBytes = { 255 };
+                writer.Write(nullBytes);
+                return;
+            }
+
             if (_nbBits > 24)
             {
                 throw new ArgumentException("nbBits should be between 1-24");

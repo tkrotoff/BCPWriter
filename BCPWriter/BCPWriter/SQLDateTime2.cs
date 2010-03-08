@@ -18,11 +18,19 @@ namespace BCPWriter
     {
         public void Write(BinaryWriter writer, object value)
         {
-            Write(writer, (DateTime)value);
+            Write(writer, (DateTime?)value);
         }
 
         public void Write(BinaryWriter writer, DateTime? dateTime)
         {
+            if (!dateTime.HasValue)
+            {
+                //1 byte long
+                byte[] nullBytes = { 255 };
+                writer.Write(nullBytes);
+                return;
+            }
+
             //byte is 1 byte long :)
             byte size = 8;
             writer.Write(size);

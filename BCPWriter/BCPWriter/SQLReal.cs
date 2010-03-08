@@ -21,7 +21,7 @@ namespace BCPWriter
         {
         }
 
-        public new void Write(BinaryWriter writer, float value)
+        public new void Write(BinaryWriter writer, float? value)
         {
             base.Write(writer, value);
         }

@@ -66,6 +66,14 @@ namespace BCPWriter
         /// <returns></returns>
         public void Write(BinaryWriter writer, string text)
         {
+            if (text == null)
+            {
+                //8 bytes long
+                byte[] nullBytes = { 255, 255 };
+                writer.Write(nullBytes);
+                return;
+            }
+
             if (text.Length > _length)
             {
                 throw new ArgumentException("text is longer than the length declared inside the constructor");

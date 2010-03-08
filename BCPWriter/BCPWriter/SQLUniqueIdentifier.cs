@@ -25,7 +25,7 @@ namespace BCPWriter
     {
         public void Write(BinaryWriter writer, object value)
         {
-            Write(writer, (Guid)value);
+            Write(writer, (Guid?)value);
         }
 
         /// <summary>
@@ -36,9 +36,17 @@ namespace BCPWriter
         /// see http://en.wikipedia.org/wiki/Globally_Unique_Identifier
         /// </param>
         /// <returns></returns>
-        public void Write(BinaryWriter writer, Guid guid)
+        public void Write(BinaryWriter writer, Guid? guid)
         {
-            if (string.IsNullOrEmpty(guid.ToString()))
+            if (!guid.HasValue)
+            {
+                //1 byte long
+                byte[] nullBytes = { 255 };
+                writer.Write(nullBytes);
+                return;
+            }
+
+            if (string.IsNullOrEmpty(guid.Value.ToString()))
             {
                 throw new ArgumentNullException("Empty guid");
             }
@@ -49,7 +57,7 @@ namespace BCPWriter
             writer.Write(size);
 
             //int is 4 bytes long
-            writer.Write(guid.ToByteArray());
+            writer.Write(guid.Value.ToByteArray());
         }
     }
 }

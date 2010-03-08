@@ -33,6 +33,7 @@ namespace BCPWriter.Tests
             BCPTests.CheckFile(myFileName);
         }
 
+        [Test]
         public void TestBigIntMax()
         {
             long value = 9223372036854775807;
@@ -42,6 +43,7 @@ namespace BCPWriter.Tests
             BCPTests.CheckFile(myFileName);
         }
 
+        [Test]
         public void TestBigIntNull()
         {
             string myFileName = "bigint_null.bcp";

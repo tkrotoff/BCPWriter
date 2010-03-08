@@ -13,7 +13,7 @@ namespace BCPWriter.Tests
     [TestFixture]
     class SQLIntTests
     {
-        private void WriteInt(int value, string myFileName)
+        private void WriteInt(int? value, string myFileName)
         {
             BinaryWriter writer = BCPTests.CreateBinaryFile(myFileName);
 
@@ -70,6 +70,14 @@ namespace BCPWriter.Tests
 
             string myFileName = string.Format("int({0}).bcp", value);
             WriteInt(value, myFileName);
+            BCPTests.CheckFile(myFileName);
+        }
+
+        [Test]
+        public void TestIntNull()
+        {
+            string myFileName = "int_null.bcp";
+            WriteInt(null, myFileName);
             BCPTests.CheckFile(myFileName);
         }
     }

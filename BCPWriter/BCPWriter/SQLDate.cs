@@ -17,7 +17,7 @@ namespace BCPWriter
     {
         public void Write(BinaryWriter writer, object value)
         {
-            Write(writer, (DateTime)value);
+            Write(writer, (DateTime?)value);
         }
 
         public void Write(BinaryWriter writer, DateTime? date)

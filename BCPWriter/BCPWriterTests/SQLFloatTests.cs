@@ -13,7 +13,7 @@ namespace BCPWriter.Tests
     [TestFixture]
     class SQLFloatTests
     {
-        private void WriteFloat(uint nbBits, float value, string myFileName)
+        private void WriteFloat(uint nbBits, float? value, string myFileName)
         {
             BinaryWriter writer = BCPTests.CreateBinaryFile(myFileName);
 
@@ -23,7 +23,7 @@ namespace BCPWriter.Tests
             writer.Close();
         }
 
-        private void WriteFloat(uint nbBits, double value, string myFileName)
+        private void WriteFloat(uint nbBits, double? value, string myFileName)
         {
             BinaryWriter writer = BCPTests.CreateBinaryFile(myFileName);
 
@@ -85,6 +85,16 @@ namespace BCPWriter.Tests
 
             string myFileName = string.Format("float({0}).bcp", nbBits);
             WriteFloat(nbBits, value, myFileName);
+            BCPTests.CheckFile(myFileName);
+        }
+
+        [Test]
+        public void TestFloatNull()
+        {
+            uint nbBits = 53;
+
+            string myFileName = "float_null.bcp";
+            WriteFloat(nbBits, null, myFileName);
             BCPTests.CheckFile(myFileName);
         }
     }

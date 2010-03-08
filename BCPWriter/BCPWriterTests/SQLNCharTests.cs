@@ -52,5 +52,15 @@ namespace BCPWriter.Tests
             WriteNChar("KIKOO", length, myFileName);
             BCPTests.CheckFile(myFileName);
         }
+
+        [Test]
+        public void TestNChar4000Null()
+        {
+            ushort length = 4000;
+
+            string myFileName = string.Format("nchar({0})_null.bcp", length);
+            WriteNChar(null, length, myFileName);
+            BCPTests.CheckFile(myFileName);
+        }
     }
 }
