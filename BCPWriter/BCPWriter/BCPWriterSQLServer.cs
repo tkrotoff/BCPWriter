@@ -170,6 +170,11 @@ namespace BCPWriter
         {
             StringBuilder insertIntoString = new StringBuilder();
 
+            if (rows.Count() == 0)
+            {
+                return string.Empty;
+            }
+
             insertIntoString.AppendLine("INSERT INTO BCPTest VALUES");
 
             for (int i = 0; i < rows.Count(); i++)
@@ -471,24 +476,21 @@ namespace BCPWriter
 
                 SqlCommand command = new SqlCommand();
                 command.Connection = connection;
-                command.CommandText = "SELECT * FROM INFORMATION_SCHEMA.TABLES";
-                ArrayList result = new ArrayList();
-                IDataReader reader = command.ExecuteReader();
-                while (reader.Read())
-                {
-                    result.Add(reader.GetString(0));
-                }
-                reader.Close();
-                reader.Dispose();
 
                 command.CommandText = "IF OBJECT_ID('BCPTest','U') IS NOT NULL DROP TABLE BCPTest";
                 command.ExecuteNonQuery();
 
-                command.CommandText = createTableString;
-                command.ExecuteNonQuery();
+                if (!string.IsNullOrEmpty(createTableString))
+                {
+                    command.CommandText = createTableString;
+                    command.ExecuteNonQuery();
+                }
 
-                command.CommandText = insertIntoString;
-                command.ExecuteNonQuery();
+                if (!string.IsNullOrEmpty(insertIntoString))
+                {
+                    command.CommandText = insertIntoString;
+                    command.ExecuteNonQuery();
+                }
 
                 connection.Close();
             }

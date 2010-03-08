@@ -107,6 +107,18 @@ namespace BCPWriter
         {
         }
 
+        public enum BackendMode
+        {
+            Normal,
+            Debug
+        }
+
+        public BackendMode Mode
+        {
+            get;
+            set;
+        }
+
         /// <summary>
         /// Add a column.
         /// </summary>
@@ -150,7 +162,10 @@ namespace BCPWriter
                 column.Write(writer, row);
             }
 
-            new BCPWriterSQLServer(writer, _columns, rows);
+            if (Mode == BackendMode.Debug)
+            {
+                new BCPWriterSQLServer(writer, _columns, rows);
+            }
         }
 
         public void Write(BinaryWriter writer)

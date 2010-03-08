@@ -92,12 +92,15 @@ namespace BCPWriter
                 
                 //Write last chunk
                 int lastChunkSize = xmlLength % chunkSize;
-                //* 2 because we are in UTF-16
-                writer.Write(lastChunkSize * 2);
+                if (lastChunkSize > 0)
+                {
+                    //* 2 because we are in UTF-16
+                    writer.Write(lastChunkSize * 2);
 
-                string lastChunk = xmlString.Substring(position);
-                writer.Write(Encoding.Unicode.GetBytes(lastChunk));
-                ////
+                    string lastChunk = xmlString.Substring(position);
+                    writer.Write(Encoding.Unicode.GetBytes(lastChunk));
+                    ////
+                }
 
                 //End: 4 bytes: 00 00 00 00
                 byte[] end = { 0, 0, 0, 0 };
