@@ -60,6 +60,14 @@ namespace BCPWriter.Tests
         }
 
         [Test]
+        public void TestVarCharMaxNull()
+        {
+            string myFileName = "varchar(max)_null.bcp";
+            WriteVarChar(null, SQLVarChar.MAX, myFileName);
+            BCPTests.CheckFile(myFileName);
+        }
+
+        [Test]
         public void Test_test1_xml()
         {
             StreamReader stream = new StreamReader("../../test1.xml");

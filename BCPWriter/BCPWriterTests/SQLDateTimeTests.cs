@@ -53,6 +53,16 @@ namespace BCPWriter.Tests
         }
 
         [Test]
+        public void TestDateTimeMin()
+        {
+            DateTime dateTime = SQLDateTime.MIN_DATETIME;
+
+            string myFileName = "datetime_min.bcp";
+            WriteDateTime(dateTime, myFileName);
+            BCPTests.CheckFile(myFileName);
+        }
+
+        [Test]
         public void TestDateTimeNull()
         {
             string myFileName = "datetime_null.bcp";

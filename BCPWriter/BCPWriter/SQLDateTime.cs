@@ -24,6 +24,8 @@ namespace BCPWriter
     [Obsolete]
     public class SQLDateTime : IBCPSerialization
     {
+        public static DateTime MIN_DATETIME = new DateTime(1753, 01, 01, 00, 00, 00);
+
         public void Write(BinaryWriter writer, object value)
         {
             Write(writer, (DateTime?)value);
@@ -37,6 +39,11 @@ namespace BCPWriter
                 byte[] nullBytes = { 255, 255, 255, 255, 255, 255, 255, 255 };
                 writer.Write(nullBytes);
                 return;
+            }
+
+            if (dateTime.Value < MIN_DATETIME)
+            {
+                throw new ArgumentException("dateTime cannot be inferior than 1753-01-01T00:00:00");
             }
 
             //byte is 1 byte long :)
@@ -77,13 +84,13 @@ namespace BCPWriter
 
             //Date, 4 bytes long
             DateTime date = dateTime.Value.Date;
-            DateTime initDate = DateTime.Parse("1900-01-01", System.Globalization.CultureInfo.InvariantCulture);
+            DateTime initDate = new DateTime(1900, 01, 01, 00, 00, 00);
             TimeSpan span = date - initDate;
             writer.Write((int)span.TotalDays);
 
             //Time, 4 bytes long
             DateTime time = DateTime.Parse(dateTime.Value.ToString("HH:mm:ss.fffffff"));
-            DateTime initTime = DateTime.Parse("00:00:00", System.Globalization.CultureInfo.InvariantCulture);
+            DateTime initTime = new DateTime(time.Year, time.Month, time.Day, 00, 00, 00);
             span = time - initTime;
             int bcpTimeFormat = (int)(span.TotalMilliseconds * 0.3);
             writer.Write(bcpTimeFormat);

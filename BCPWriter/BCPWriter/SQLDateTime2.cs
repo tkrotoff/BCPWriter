@@ -16,6 +16,8 @@ namespace BCPWriter
     /// </remarks>
     public class SQLDateTime2 : IBCPSerialization
     {
+        public static DateTime MIN_DATETIME2 = new DateTime(0001, 01, 01, 00, 00, 00);
+
         public void Write(BinaryWriter writer, object value)
         {
             Write(writer, (DateTime?)value);
@@ -29,6 +31,11 @@ namespace BCPWriter
                 byte[] nullBytes = { 255 };
                 writer.Write(nullBytes);
                 return;
+            }
+
+            if (dateTime < MIN_DATETIME2)
+            {
+                throw new ArgumentException("dateTime cannot be inferior than 0001-01-01T00:00:00");
             }
 
             //byte is 1 byte long :)
