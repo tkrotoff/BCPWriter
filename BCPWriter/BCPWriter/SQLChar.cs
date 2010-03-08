@@ -27,9 +27,19 @@ namespace BCPWriter
     {
         private ushort _length;
 
+        /// <summary>
+        /// A space for SQL char.
+        /// </summary>
         public const char SPACE = ' ';
 
+        /// <summary>
+        /// Minimum length allowed for SQL char.
+        /// </summary>
         public const ushort MIN_LENGTH = 1;
+
+        /// <summary>
+        /// Maximum length allowed for SQL char.
+        /// </summary>
         public const ushort MAX_LENGTH = 8000;
 
         /// <summary>
@@ -50,6 +60,9 @@ namespace BCPWriter
             _length = length;
         }
 
+        /// <summary>
+        /// SQL char length.
+        /// </summary>
         public ushort Length
         {
             get { return _length; }

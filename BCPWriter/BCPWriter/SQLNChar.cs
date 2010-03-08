@@ -28,7 +28,14 @@ namespace BCPWriter
     {
         private ushort _length;
 
+        /// <summary>
+        /// Minimum length allowed for SQL nchar.
+        /// </summary>
         public const ushort MIN_LENGTH = 1;
+
+        /// <summary>
+        /// Maximum length allowed for SQL nchar.
+        /// </summary>
         public const ushort MAX_LENGTH = 4000;
 
         /// <summary>
@@ -49,6 +56,9 @@ namespace BCPWriter
             _length = length;
         }
 
+        /// <summary>
+        /// SQL nchar length.
+        /// </summary>
         public ushort Length
         {
             get { return _length; }

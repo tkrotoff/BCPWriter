@@ -24,6 +24,9 @@ namespace BCPWriter
     [Obsolete]
     public class SQLDateTime : IBCPSerialization
     {
+        /// <summary>
+        /// Minimum value allowed for SQL datetime.
+        /// </summary>
         public static DateTime MIN_DATETIME = new DateTime(1753, 01, 01, 00, 00, 00);
 
         public void Write(BinaryWriter writer, object value)

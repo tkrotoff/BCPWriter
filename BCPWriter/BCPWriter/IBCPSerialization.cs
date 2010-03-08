@@ -11,6 +11,11 @@ namespace BCPWriter
     /// </summary>
     public interface IBCPSerialization
     {
+        /// <summary>
+        /// Writes a SQL value to a binary stream.
+        /// </summary>
+        /// <param name="writer">BinaryWriter</param>
+        /// <param name="value">SQL value</param>
         void Write(BinaryWriter writer, object value);
     }
 }

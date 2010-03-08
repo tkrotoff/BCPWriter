@@ -18,6 +18,12 @@ namespace BCPWriter
     {
         private uint _length;
 
+        /// <summary>
+        /// Maximum length allowed for SQL varbinary
+        /// </summary>
+        /// <remarks>
+        /// Use this in order to get a SQL varbinary(max)
+        /// </remarks>
         public const uint MAX = (uint)SQLInt.MAX_VALUE;
 
         /// <summary>

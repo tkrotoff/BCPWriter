@@ -19,7 +19,10 @@ namespace BCPWriter
     [Obsolete]
     public class SQLNText : IBCPSerialization
     {
-        //2^30 - 1 (1,073,741,823)
+        /// <summary>
+        /// Maximum length allowed for SQL ntext.
+        /// 2^30 - 1 = 1,073,741,823
+        /// </summary>
         public const uint MAX_LENGTH = 1073741823;
 
         public void Write(BinaryWriter writer, object value)

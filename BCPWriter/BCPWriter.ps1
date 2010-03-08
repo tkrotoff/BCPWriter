@@ -28,8 +28,8 @@ $rows =
 $bcp.WriteRows($rows);
 
 
-$table = "[BCPTest].[dbo].[Table_1]";
-$servername = "FRDEVPC01";
+$table = "[BCPTest].[dbo].[BCPTest]";
+$servername = "localhost";
 $username = "sa";
 $password = "Password01";
 

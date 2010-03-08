@@ -18,7 +18,10 @@ namespace BCPWriter
     [Obsolete]
     public class SQLText : IBCPSerialization
     {
-        //2^31-1 (2,147,483,647)
+        /// <summary>
+        /// Maximum length allowed for SQL text.
+        /// 2^31-1 = 2,147,483,647
+        /// </summary>
         public const uint MAX_LENGTH = SQLInt.MAX_VALUE;
 
         public void Write(BinaryWriter writer, object value)

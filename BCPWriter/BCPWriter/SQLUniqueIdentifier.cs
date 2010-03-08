@@ -31,7 +31,7 @@ namespace BCPWriter
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="uuid">
+        /// <param name="guid">
         /// Globally Unique Identifier,
         /// see http://en.wikipedia.org/wiki/Globally_Unique_Identifier
         /// </param>

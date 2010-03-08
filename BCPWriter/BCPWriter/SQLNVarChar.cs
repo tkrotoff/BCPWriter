@@ -18,6 +18,12 @@ namespace BCPWriter
     {
         private uint _length;
 
+        /// <summary>
+        /// Maximum length allowed for SQL nvarchar
+        /// </summary>
+        /// <remarks>
+        /// Use this in order to get a SQL nvarchar(max)
+        /// </remarks>
         public const uint MAX = (uint)SQLInt.MAX_VALUE;
 
         /// <summary>
@@ -41,6 +47,9 @@ namespace BCPWriter
             _length = length;
         }
 
+        /// <summary>
+        /// SQL nvarchar length.
+        /// </summary>
         public uint Length
         {
             get { return _length; }

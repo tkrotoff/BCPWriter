@@ -18,6 +18,12 @@ namespace BCPWriter
     {
         private uint _length;
 
+        /// <summary>
+        /// Maximum length allowed for SQL varchar
+        /// </summary>
+        /// <remarks>
+        /// Use this in order to get a SQL varchar(max)
+        /// </remarks>
         public const uint MAX = (uint)SQLInt.MAX_VALUE;
 
         /// <summary>
@@ -40,6 +46,9 @@ namespace BCPWriter
             _length = length;
         }
 
+        /// <summary>
+        /// SQL varchar length.
+        /// </summary>
         public uint Length
         {
             get { return _length; }

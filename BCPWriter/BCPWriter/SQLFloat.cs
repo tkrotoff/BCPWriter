@@ -30,7 +30,7 @@ namespace BCPWriter
         /// </summary>
         /// <remarks>
         /// SQL Server treats n as one of two possible values.<br/>
-        /// If 1<=n<=24, n is treated as 24. If 25<=n<=53, n is treated as 53.
+        /// If <![CDATA[1<=n<=24]]>, n is treated as 24. If <![CDATA[25<=n<=53]]>, n is treated as 53.
         /// </remarks>
         /// <param name="nbBits">
         /// n is the number of bits that are used to store the mantissa of the float number
@@ -54,6 +54,9 @@ namespace BCPWriter
         {
         }
 
+        /// <summary>
+        /// SQL float number of bits.
+        /// </summary>
         public uint NbBits
         {
             get { return _nbBits; }

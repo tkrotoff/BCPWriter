@@ -30,7 +30,14 @@ namespace BCPWriter
     {
         private ushort _length;
 
+        /// <summary>
+        /// Minimum length allowed for SQL char.
+        /// </summary>
         public const ushort MIN_LENGTH = SQLChar.MIN_LENGTH;
+
+        /// <summary>
+        /// Maximum length allowed for SQL char.
+        /// </summary>
         public const ushort MAX_LENGTH = SQLChar.MAX_LENGTH;
 
         /// <summary>
@@ -51,6 +58,9 @@ namespace BCPWriter
             _length = length;
         }
 
+        /// <summary>
+        /// SQL binary length.
+        /// </summary>
         public ushort Length
         {
             get { return _length; }

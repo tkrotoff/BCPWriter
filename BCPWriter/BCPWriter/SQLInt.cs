@@ -23,10 +23,16 @@ namespace BCPWriter
     /// </remarks>
     public class SQLInt : IBCPSerialization
     {
-        //Math.Pow(-2, 31)
+        /// <summary>
+        /// Minimum value allowed for SQL int.
+        /// Math.Pow(-2, 31) = -2147483648
+        /// </summary>
         public const int MIN_VALUE = -2147483648;
 
-        //Math.Pow(2, 31) - 1
+        /// <summary>
+        /// Maximum value allowed for SQL int.
+        /// Math.Pow(2, 31) - 1 = 2147483647
+        /// </summary>
         public const int MAX_VALUE = 2147483647;
 
         public void Write(BinaryWriter writer, object value)
