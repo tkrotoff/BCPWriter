@@ -71,11 +71,6 @@ namespace BCPWriter
             Write(writer, (byte[])value);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="data">binary data</param>
-        /// <returns></returns>
         public void Write(BinaryWriter writer, byte[] data)
         {
             if (data == null)

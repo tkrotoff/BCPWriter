@@ -20,6 +20,8 @@ namespace BCPWriter
     /// * By converting from a string constant in the form xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx,
     ///   in which each x is a hexadecimal digit in the range 0-9 or a-f.
     ///   For example, 6F9619FF-8B86-D011-B42D-00C04FC964FF is a valid uniqueidentifier value.<br/>
+    /// <br/>
+    /// .Net provides a class named Guid (Globally Unique Identifier), see http://en.wikipedia.org/wiki/Globally_Unique_Identifier
     /// </remarks>
     public class SQLUniqueIdentifier : IBCPSerialization
     {
@@ -28,14 +30,6 @@ namespace BCPWriter
             Write(writer, (Guid?)value);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="guid">
-        /// Globally Unique Identifier,
-        /// see http://en.wikipedia.org/wiki/Globally_Unique_Identifier
-        /// </param>
-        /// <returns></returns>
         public void Write(BinaryWriter writer, Guid? guid)
         {
             if (!guid.HasValue)

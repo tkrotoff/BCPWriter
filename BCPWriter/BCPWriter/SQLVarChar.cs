@@ -11,7 +11,7 @@ namespace BCPWriter
     /// </summary>
     /// 
     /// <remarks>
-    /// <see>SQLChar</see>
+    /// <see cref="SQLChar"/>
     /// <a href="http://msdn.microsoft.com/en-us/library/ms176089.aspx">char and varchar (Transact-SQL)</a><br/>
     /// </remarks>
     public class SQLVarChar : IBCPSerialization

@@ -11,7 +11,7 @@ namespace BCPWriter
     /// </summary>
     /// 
     /// <remarks>
-    /// <see>SQLDateTime</see>
+    /// <see cref="SQLDateTime"/>
     /// <a href="http://msdn.microsoft.com/en-us/library/bb677335.aspx">datetime2 (Transact-SQL)</a><br/>
     /// </remarks>
     public class SQLDateTime2 : IBCPSerialization

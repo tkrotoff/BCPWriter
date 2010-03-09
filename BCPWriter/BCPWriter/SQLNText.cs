@@ -11,7 +11,7 @@ namespace BCPWriter
     /// </summary>
     /// 
     /// <remarks>
-    /// <see>SQLChar</see>
+    /// <see cref="SQLChar"/>
     /// <a href="http://msdn.microsoft.com/en-us/library/ms187993.aspx">ntext, text, and image (Transact-SQL)</a><br/>
     /// <br/>
     /// ntext, text, and image data types will be removed in a future version of Microsoft SQL Server.

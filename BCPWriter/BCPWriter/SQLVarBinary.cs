@@ -11,7 +11,7 @@ namespace BCPWriter
     /// </summary>
     /// 
     /// <remarks>
-    /// <see>SQLBinary</see>
+    /// <see cref="SQLBinary"/>
     /// <a href="http://msdn.microsoft.com/en-us/library/ms188362.aspx">binary and varbinary (Transact-SQL)</a><br/>
     /// </remarks>
     public class SQLVarBinary : IBCPSerialization
@@ -47,6 +47,9 @@ namespace BCPWriter
             _length = length;
         }
 
+        /// <summary>
+        /// SQL varbinary length.
+        /// </summary>
         public uint Length
         {
             get { return _length; }
@@ -57,11 +60,6 @@ namespace BCPWriter
             Write(writer, (byte[])value);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="data">binary data</param>
-        /// <returns></returns>
         public void Write(BinaryWriter writer, byte[] data)
         {
             if (data == null)

@@ -1,0 +1,16 @@
+<project SchemaVersion="1.3">
+    <assemblies>
+        <assembly location=".\BCPWriter\bin\Release\BCPWriter.dll" documentation=".\BCPWriter\bin\Release\BCPWriter.XML" />
+    </assemblies>
+    <documenters>
+        <documenter name="MSDN">
+            <property name="OutputDirectory" value=".\doc\ndoc\" />
+            <property name="HtmlHelpName" value="Documentation" />
+            <property name="Title" value="BCPWriter Class Library" />
+            <property name="DocumentInternals" value="True" />
+            <property name="DocumentPrivates" value="True" />
+            <property name="SdkDocVersion" value="SDK_v3_5" />
+            <property name="SdkDocVersionString" value="VS.90" />
+        </documenter>
+    </documenters>
+</project>

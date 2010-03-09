@@ -11,8 +11,9 @@ namespace BCPWriter
     /// </summary>
     /// 
     /// <remarks>
-    /// <see>SQLFloat</see>
+    /// <see cref="SQLFloat"/>
     /// <a href="http://msdn.microsoft.com/en-us/library/ms173773.aspx">float and real (Transact-SQL)</a><br/>
+    /// The ISO synonym for real is float(24).
     /// </remarks>
     public class SQLReal : SQLFloat
     {

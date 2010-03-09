@@ -11,7 +11,7 @@ namespace BCPWriter
     /// </summary>
     /// 
     /// <remarks>
-    /// <see>SQLChar</see>
+    /// <see cref="SQLChar"/>
     /// <a href="http://msdn.microsoft.com/en-us/library/ms186939.aspx">nchar and nvarchar (Transact-SQL)</a><br/>
     /// <br/>
     /// From SQL Server 2008 Books Online:<br/>
@@ -69,11 +69,6 @@ namespace BCPWriter
             Write(writer, (string)value);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="text">text</param>
-        /// <returns></returns>
         public void Write(BinaryWriter writer, string text)
         {
             if (text == null)

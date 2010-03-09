@@ -20,6 +20,8 @@ namespace BCPWriter.Tests
             string myFileName = "allsqltypes.bcp";
 
             BCPWriter writer = new BCPWriter();
+            writer.Mode = BCPWriter.BackendMode.Debug;
+
             writer.AddColumn(new SQLBigInt());
             writer.AddColumn(new SQLBinary(50));
             writer.AddColumn(new SQLChar(10));
@@ -74,6 +76,7 @@ namespace BCPWriter.Tests
             string myFileName = "4columns.bcp";
 
             BCPWriter writer = new BCPWriter();
+            writer.Mode = BCPWriter.BackendMode.Debug;
 
             //FirstName
             writer.AddColumn(new SQLNVarChar(SQLNVarChar.MAX));
@@ -111,11 +114,39 @@ namespace BCPWriter.Tests
         }
 
         [Test]
+        public void TestSQLAPI()
+        {
+            string myFileName = "sqlapi.bcp";
+            BinaryWriter writer = new BinaryWriter(new FileStream(myFileName, FileMode.Create));
+
+            SQLNVarChar firstName = new SQLNVarChar(SQLNVarChar.MAX);
+            SQLNVarChar lastName = new SQLNVarChar(SQLNVarChar.MAX);
+            SQLInt birth = new SQLInt();
+            SQLInt death = new SQLInt();
+
+            firstName.Write(writer, "Frédéric François");
+            lastName.Write(writer, "Chopin");
+            birth.Write(writer, 1810);
+            death.Write(writer, 1849);
+
+            firstName.Write(writer, "Franz");
+            lastName.Write(writer, "Liszt");
+            birth.Write(writer, 1811);
+            death.Write(writer, 1886);
+
+            firstName.Write(writer, "George");
+            lastName.Write(writer, "Sand");
+            birth.Write(writer, 1804);
+            death.Write(writer, 1876);
+        }
+
+        [Test]
         public void Test0Columns()
         {
             string myFileName = "0columns.bcp";
 
             BCPWriter writer = new BCPWriter();
+            writer.Mode = BCPWriter.BackendMode.Debug;
 
             List<object> rows = new List<object>();
             rows.Add("Frédéric François");
@@ -140,6 +171,7 @@ namespace BCPWriter.Tests
             string myFileName = "3columns.bcp";
 
             BCPWriter writer = new BCPWriter();
+            writer.Mode = BCPWriter.BackendMode.Debug;
 
             //FirstName
             writer.AddColumn(new SQLNVarChar(SQLNVarChar.MAX));
@@ -187,6 +219,7 @@ namespace BCPWriter.Tests
             string myFileName = "perf.bcp";
 
             BCPWriter writer = new BCPWriter();
+            writer.Mode = BCPWriter.BackendMode.Debug;
 
             //FirstName
             writer.AddColumn(new SQLNVarChar(SQLNVarChar.MAX));

@@ -11,7 +11,7 @@ namespace BCPWriter
     /// </summary>
     /// 
     /// <remarks>
-    /// <see>SQLInt</see>
+    /// <see cref="SQLInt"/>
     /// <a href="http://msdn.microsoft.com/en-us/library/ms187745.aspx">int, bigint, smallint, and tinyint (Transact-SQL)</a><br/>
     /// </remarks>
     public class SQLBigInt : IBCPSerialization

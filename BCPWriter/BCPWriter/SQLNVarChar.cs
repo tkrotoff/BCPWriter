@@ -11,7 +11,7 @@ namespace BCPWriter
     /// </summary>
     /// 
     /// <remarks>
-    /// <see>SQLNChar</see>
+    /// <see cref="SQLNChar"/>
     /// <a href="http://msdn.microsoft.com/en-us/library/ms176089.aspx">char and varchar (Transact-SQL)</a><br/>
     /// </remarks>
     public class SQLNVarChar : IBCPSerialization
@@ -60,11 +60,6 @@ namespace BCPWriter
             Write(writer, (string)value);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="text">text</param>
-        /// <returns></returns>
         public void Write(BinaryWriter writer, string text)
         {
             if (text == null)

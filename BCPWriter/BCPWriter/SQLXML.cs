@@ -26,6 +26,24 @@ namespace BCPWriter
     /// Restricts the xml instance to be a well-formed XML document.<br/>
     /// The XML data must have one and only one root element.<br/>
     /// Text nodes are not allowed at the top level.<br/>
+    /// <br/>
+    /// Internal (binary) representation of SQL xml is more complex than other SQL types.<br/>
+    /// If the XML is less than 1020 bytes then bcp uses the "standard" format <code>Data Length | Data</code><br/>
+    /// If the XML is more than 1020 bytes then bcp cuts the XML in chucks of 1020 bytes:
+    /// <code>
+    /// |-------------------------------------------------------------------------------------------------------------------------------------------|
+    /// | FE FF FF FF FF FF FF FF | 1020 bytes chunk | Next chunk size | 1020 bytes chunk [...] | Next chunk size | Last chunk if any | 00 00 00 00 |
+    /// |-------------------------------------------------------------------------------------------------------------------------------------------|
+    /// </code>
+    /// <code>FE FF FF FF FF FF FF FF</code> and <code>00 00 00 00</code> delimits the XML.<br/>
+    /// By cutting the XML into chunks, bcp has virtually no length limitation for the XML it takes in input.<br/>
+    /// <br/>
+    /// As you can see, bcp utility is highly optimized and saves every bytes it can for its native format.<br/>
+    /// <br/>
+    /// Keep in mind that MS SQL Server do interpret the XML before to store it: XML is not seen as just a string.
+    /// So SQLXML does the same by taking a System.Xml.XmlDocument instead of a string.
+    /// bcp format from MS SQL Server and SQLXml bcp format can differ due to the way MS SQL Server and XmlDocument converts
+    /// the XML in a string.
     /// </remarks>
     public class SQLXML : IBCPSerialization
     {
@@ -34,11 +52,6 @@ namespace BCPWriter
             Write(writer, (XmlDocument)value);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="xml">XML</param>
-        /// <returns></returns>
         public void Write(BinaryWriter writer, XmlDocument xml)
         {
             if (xml == null)
