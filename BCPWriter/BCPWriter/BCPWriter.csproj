@@ -72,7 +72,7 @@
     <Compile Include="SQLUniqueIdentifier.cs" />
     <Compile Include="SQLVarBinary.cs" />
     <Compile Include="SQLVarChar.cs" />
-    <Compile Include="SQLXML.cs" />
+    <Compile Include="SQLXml.cs" />
     <Compile Include="Util.cs" />
   </ItemGroup>
   <ItemGroup>
