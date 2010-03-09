@@ -45,7 +45,7 @@ namespace BCPWriter
     /// bcp format from MS SQL Server and SQLXml bcp format can differ due to the way MS SQL Server and XmlDocument converts
     /// the XML in a string.
     /// </remarks>
-    public class SQLXML : IBCPSerialization
+    public class SQLXml : IBCPSerialization
     {
         public void Write(BinaryWriter writer, object value)
         {

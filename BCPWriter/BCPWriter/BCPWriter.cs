@@ -432,7 +432,7 @@ namespace BCPWriter
         /// <param name="xml"></param>
         public static void WriteXML(BinaryWriter writer, XmlDocument xml)
         {
-            SQLXML sql = new SQLXML();
+            SQLXml sql = new SQLXml();
             sql.Write(writer, xml);
         }
 

@@ -39,7 +39,7 @@ namespace BCPWriter.Tests
             writer.AddColumn(new SQLUniqueIdentifier());
             writer.AddColumn(new SQLVarBinary(50));
             writer.AddColumn(new SQLVarChar(50));
-            writer.AddColumn(new SQLXML());
+            writer.AddColumn(new SQLXml());
 
             List<object> rows = new List<object>();
             rows.Add(9999999999);

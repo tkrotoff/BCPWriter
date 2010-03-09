@@ -137,9 +137,9 @@ namespace BCPWriter
                     SQLText sql = (SQLText)column;
                     createTableString.Append("text");
                 }
-                else if (column is SQLXML)
+                else if (column is SQLXml)
                 {
-                    SQLXML sql = (SQLXML)column;
+                    SQLXml sql = (SQLXml)column;
                     createTableString.Append("xml");
                 }
                 else if (column is SQLFloat)
@@ -383,7 +383,7 @@ namespace BCPWriter
                         insertIntoString.AppendFormat("'{0}'", value);
                     }
                 }
-                else if (column is SQLXML)
+                else if (column is SQLXml)
                 {
                     XmlDocument value = (XmlDocument)row;
                     if (value == null)
