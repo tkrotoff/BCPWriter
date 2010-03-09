@@ -16,7 +16,15 @@ namespace BCPWriter
     /// </remarks>
     public class SQLNVarChar : IBCPSerialization
     {
-        private uint _length;
+        /// <summary>
+        /// Minimum length allowed for SQL nvarchar.
+        /// </summary>
+        public const ushort MIN_LENGTH = SQLNChar.MIN_LENGTH;
+
+        /// <summary>
+        /// Maximum length allowed for SQL nvarchar.
+        /// </summary>
+        public const ushort MAX_LENGTH = SQLNChar.MAX_LENGTH;
 
         /// <summary>
         /// Maximum length allowed for SQL nvarchar
@@ -24,7 +32,7 @@ namespace BCPWriter
         /// <remarks>
         /// Use this in order to get a SQL nvarchar(max)
         /// </remarks>
-        public const uint MAX = (uint)SQLInt.MAX_VALUE;
+        public const uint MAX = SQLInt.MAX_VALUE;
 
         /// <summary>
         /// Constructs a SQL nvarchar.
@@ -38,13 +46,13 @@ namespace BCPWriter
         {
             if (length != MAX)
             {
-                if (length < SQLNChar.MIN_LENGTH || length > SQLNChar.MAX_LENGTH)
+                if (length < MIN_LENGTH || length > MAX_LENGTH)
                 {
                     throw new ArgumentException("length should be between 1 and 4,000");
                 }
             }
 
-            _length = length;
+            Length = length;
         }
 
         /// <summary>
@@ -52,7 +60,8 @@ namespace BCPWriter
         /// </summary>
         public uint Length
         {
-            get { return _length; }
+            get;
+            private set;
         }
 
         public void Write(BinaryWriter writer, object value)
@@ -64,7 +73,7 @@ namespace BCPWriter
         {
             if (text == null)
             {
-                if (_length == MAX)
+                if (Length == MAX)
                 {
                     //8 bytes long
                     byte[] nullBytes = { 255, 255, 255, 255, 255, 255, 255, 255 };
@@ -79,12 +88,12 @@ namespace BCPWriter
                 return;
             }
 
-            if (text.Length > _length)
+            if (text.Length > Length)
             {
                 throw new ArgumentException("text is longer than the length declared inside the constructor");
             }
 
-            if (_length == MAX)
+            if (Length == MAX)
             {
                 //ulong is 8 bytes long
                 //* 2 because we are in UTF-16, thus 1 char is 2 bytes long

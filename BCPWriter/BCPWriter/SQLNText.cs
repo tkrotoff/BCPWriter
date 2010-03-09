@@ -40,10 +40,12 @@ namespace BCPWriter
                 return;
             }
 
-            if (text.Length > MAX_LENGTH)
+            //This cannot be tested anyway since OutOfMemory exception is
+            //thrown before
+            /*if (text.Length > MAX_LENGTH)
             {
                 throw new ArgumentException("text is longer than 2^30 - 1 (1,073,741,823)");
-            }
+            }*/
 
             //uint is 4 bytes long
             //* 2 because we are in UTF-16, thus 1 char is 2 bytes long

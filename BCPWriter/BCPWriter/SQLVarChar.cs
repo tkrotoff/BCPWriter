@@ -16,7 +16,15 @@ namespace BCPWriter
     /// </remarks>
     public class SQLVarChar : IBCPSerialization
     {
-        private uint _length;
+        /// <summary>
+        /// Minimum length allowed for SQL char.
+        /// </summary>
+        public const ushort MIN_LENGTH = SQLChar.MIN_LENGTH;
+
+        /// <summary>
+        /// Maximum length allowed for SQL char.
+        /// </summary>
+        public const ushort MAX_LENGTH = SQLChar.MAX_LENGTH;
 
         /// <summary>
         /// Maximum length allowed for SQL varchar
@@ -37,13 +45,13 @@ namespace BCPWriter
         {
             if (length != MAX)
             {
-                if (length < SQLBinary.MIN_LENGTH || length > SQLBinary.MAX_LENGTH)
+                if (length < MIN_LENGTH || length > MAX_LENGTH)
                 {
                     throw new ArgumentException("length should be between 1 and 8,000");
                 }
             }
 
-            _length = length;
+            Length = length;
         }
 
         /// <summary>
@@ -51,7 +59,8 @@ namespace BCPWriter
         /// </summary>
         public uint Length
         {
-            get { return _length; }
+            get;
+            private set;
         }
 
         public void Write(BinaryWriter writer, object value)
@@ -69,12 +78,12 @@ namespace BCPWriter
                 return;
             }
 
-            if (text.Length > _length)
+            if (text.Length > Length)
             {
                 throw new ArgumentException("text is longer than the length declared inside the constructor");
             }
 
-            if (_length == MAX)
+            if (Length == MAX)
             {
                 //ulong is 8 bytes long
                 writer.Write((ulong)text.Length);

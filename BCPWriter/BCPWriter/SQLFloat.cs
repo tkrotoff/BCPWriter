@@ -23,7 +23,25 @@ namespace BCPWriter
     /// </remarks>
     public class SQLFloat : IBCPSerialization
     {
-        private uint _nbBits;
+        /// <summary>
+        /// Minimum NbBits value allowed for SQL float.
+        /// </summary>
+        public const ushort MIN_NBBITS = 1;
+
+        /// <summary>
+        /// Maximum NbBits value allowed for SQL float.
+        /// </summary>
+        public const ushort MAX_NBBITS = 53;
+
+        /// <summary>
+        /// Minimum NbBits value allowed for SQL float.
+        /// </summary>
+        public const ushort MIN_DOUBLE_NBBITS = 25;
+
+        /// <summary>
+        /// Maximum NbBits value allowed for SQL float.
+        /// </summary>
+        public const ushort MAX_FLOAT_NBBITS = 24;
 
         /// <summary>
         /// Creates a SQL float(n).
@@ -36,30 +54,31 @@ namespace BCPWriter
         /// n is the number of bits that are used to store the mantissa of the float number
         /// in scientific notation and, therefore, dictates the precision and storage size
         /// </param>
-        public SQLFloat(uint nbBits)
+        public SQLFloat(ushort nbBits)
         {
-            if (nbBits < 1 || nbBits > 53)
+            if (nbBits < MIN_NBBITS || nbBits > MAX_NBBITS)
             {
                 throw new ArgumentException("nbBits should be between 1-24 and 25-53");
             }
 
-            _nbBits = nbBits;
+            NbBits = nbBits;
         }
 
         /// <summary>
         /// Creates a float with the default value of n (53).
         /// </summary>
         public SQLFloat()
-            : this(53)
+            : this(MAX_NBBITS)
         {
         }
 
         /// <summary>
         /// SQL float number of bits.
         /// </summary>
-        public uint NbBits
+        public ushort NbBits
         {
-            get { return _nbBits; }
+            get;
+            private set;
         }
 
         public void Write(BinaryWriter writer, object value)
@@ -84,7 +103,7 @@ namespace BCPWriter
                 return;
             }
 
-            if (_nbBits < 25)
+            if (NbBits < MIN_DOUBLE_NBBITS)
             {
                 throw new ArgumentException("nbBits should be between 25-53");
             }
@@ -107,9 +126,9 @@ namespace BCPWriter
                 return;
             }
 
-            if (_nbBits > 24)
+            if (NbBits > MAX_FLOAT_NBBITS)
             {
-                throw new ArgumentException("nbBits should be between 1-24");
+                throw new ArgumentException("NbBits should be between 1-24");
             }
 
             //byte is 1 byte long :)

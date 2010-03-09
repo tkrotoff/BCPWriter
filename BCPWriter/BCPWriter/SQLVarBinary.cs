@@ -16,7 +16,15 @@ namespace BCPWriter
     /// </remarks>
     public class SQLVarBinary : IBCPSerialization
     {
-        private uint _length;
+        /// <summary>
+        /// Minimum length allowed for SQL nvarchar.
+        /// </summary>
+        public const ushort MIN_LENGTH = SQLChar.MIN_LENGTH;
+
+        /// <summary>
+        /// Maximum length allowed for SQL nvarchar.
+        /// </summary>
+        public const ushort MAX_LENGTH = SQLChar.MAX_LENGTH;
 
         /// <summary>
         /// Maximum length allowed for SQL varbinary
@@ -24,7 +32,7 @@ namespace BCPWriter
         /// <remarks>
         /// Use this in order to get a SQL varbinary(max)
         /// </remarks>
-        public const uint MAX = (uint)SQLInt.MAX_VALUE;
+        public const uint MAX = SQLInt.MAX_VALUE;
 
         /// <summary>
         /// Constructs a SQL varbinary.
@@ -38,13 +46,13 @@ namespace BCPWriter
         {
             if (length != MAX)
             {
-                if (length < SQLChar.MIN_LENGTH || length > SQLChar.MAX_LENGTH)
+                if (length < MIN_LENGTH || length > MAX_LENGTH)
                 {
                     throw new ArgumentException("length should be between 1 and 8,000");
                 }
             }
 
-            _length = length;
+            Length = length;
         }
 
         /// <summary>
@@ -52,7 +60,8 @@ namespace BCPWriter
         /// </summary>
         public uint Length
         {
-            get { return _length; }
+            get;
+            private set;
         }
 
         public void Write(BinaryWriter writer, object value)
@@ -64,7 +73,7 @@ namespace BCPWriter
         {
             if (data == null)
             {
-                if (_length == MAX)
+                if (Length == MAX)
                 {
                     //8 bytes long
                     byte[] nullBytes = { 255, 255, 255, 255, 255, 255, 255, 255 };
@@ -79,12 +88,12 @@ namespace BCPWriter
                 return;
             }
 
-            if (data.Length > _length)
+            if (data.Length > Length)
             {
                 throw new ArgumentException("data is longer than the length declared inside the constructor");
             }
 
-            if (_length == MAX)
+            if (Length == MAX)
             {
                 //ulong is 8 bytes long
                 writer.Write((ulong)data.Length);

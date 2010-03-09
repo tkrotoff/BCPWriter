@@ -40,10 +40,11 @@ namespace BCPWriter
                 return;
             }
 
-            if (string.IsNullOrEmpty(guid.Value.ToString()))
+            //This can never happen since Guid will throw an exception before
+            /*if (string.IsNullOrEmpty(guid.Value.ToString()))
             {
                 throw new ArgumentNullException("Empty guid");
-            }
+            }*/
 
             //byte is 1 byte long :)
             //Guid is always of length 16

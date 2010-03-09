@@ -13,21 +13,37 @@ namespace BCPWriter.Tests
     [TestFixture]
     class SQLFloatTests
     {
-        private void WriteFloat(uint nbBits, float? value, string myFileName)
+        private void WriteFloat(float? value, ushort nbBits, string myFileName)
         {
             BinaryWriter writer = BCPTests.CreateBinaryFile(myFileName);
 
-            SQLFloat sql = new SQLFloat(nbBits);
+            SQLFloat sql = null;
+            if (nbBits == 53)
+            {
+                sql = new SQLFloat();
+            }
+            else
+            {
+                sql = new SQLFloat(nbBits);
+            }
             sql.Write(writer, value);
 
             writer.Close();
         }
 
-        private void WriteFloat(uint nbBits, double? value, string myFileName)
+        private void WriteFloat(double? value, ushort nbBits, string myFileName)
         {
             BinaryWriter writer = BCPTests.CreateBinaryFile(myFileName);
 
-            SQLFloat sql = new SQLFloat(nbBits);
+            SQLFloat sql = null;
+            if (nbBits == 53)
+            {
+                sql = new SQLFloat();
+            }
+            else
+            {
+                sql = new SQLFloat(nbBits);
+            }
             sql.Write(writer, value);
 
             writer.Close();
@@ -36,66 +52,120 @@ namespace BCPWriter.Tests
         [Test]
         public void TestFloat1()
         {
-            uint nbBits = 1;
+            ushort nbBits = 1;
             float value = 1234.5678f;
 
             string myFileName = string.Format("float({0}).bcp", nbBits);
-            WriteFloat(nbBits, value, myFileName);
+            WriteFloat(value, nbBits, myFileName);
             BCPTests.CheckFile(myFileName);
         }
 
         [Test]
         public void TestFloat4()
         {
-            uint nbBits = 4;
+            ushort nbBits = 4;
             float value = 1234.5678f;
 
             string myFileName = string.Format("float({0}).bcp", nbBits);
-            WriteFloat(nbBits, value, myFileName);
+            WriteFloat(value, nbBits, myFileName);
             BCPTests.CheckFile(myFileName);
         }
 
         [Test]
         public void TestFloat24()
         {
-            uint nbBits = 24;
+            ushort nbBits = 24;
             float value = 1234.5678f;
 
             string myFileName = string.Format("float({0}).bcp", nbBits);
-            WriteFloat(nbBits, value, myFileName);
+            WriteFloat(value, nbBits, myFileName);
             BCPTests.CheckFile(myFileName);
         }
 
         [Test]
         public void TestFloat25()
         {
-            uint nbBits = 25;
+            ushort nbBits = 25;
             double value = 1234.5678;
 
             string myFileName = string.Format("float({0}).bcp", nbBits);
-            WriteFloat(nbBits, value, myFileName);
+            WriteFloat(value, nbBits, myFileName);
             BCPTests.CheckFile(myFileName);
         }
 
         [Test]
         public void TestFloat53()
         {
-            uint nbBits = 53;
+            ushort nbBits = 53;
             double value = 1234.5678;
 
             string myFileName = string.Format("float({0}).bcp", nbBits);
-            WriteFloat(nbBits, value, myFileName);
+            WriteFloat(value, nbBits, myFileName);
             BCPTests.CheckFile(myFileName);
         }
 
         [Test]
         public void TestFloatNull()
         {
-            uint nbBits = 53;
+            ushort nbBits = 53;
 
             string myFileName = "float_null.bcp";
-            WriteFloat(nbBits, null, myFileName);
+            WriteFloat((float?)null, nbBits, myFileName);
             BCPTests.CheckFile(myFileName);
+
+            myFileName = "float_null.bcp";
+            WriteFloat((double?)null, nbBits, myFileName);
+            BCPTests.CheckFile(myFileName);
+        }
+
+        [Test]
+        public void TestFloatArgumentException()
+        {
+            double value = 1234.5678;
+
+            ushort nbBits = SQLFloat.MIN_NBBITS - 1;
+            string myFileName = string.Format("float({0})_argumentexception.bcp", nbBits);
+            try
+            {
+                WriteFloat(value, nbBits, myFileName);
+                Assert.Fail("Expected an exception, but none was thrown");
+            }
+            catch (ArgumentException)
+            {
+            }
+
+            nbBits = SQLFloat.MAX_NBBITS + 1;
+            myFileName = string.Format("float({0})_argumentexception.bcp", nbBits);
+            try
+            {
+                WriteFloat(value, nbBits, myFileName);
+                Assert.Fail("Expected an exception, but none was thrown");
+            }
+            catch (ArgumentException)
+            {
+            }
+
+            nbBits = SQLFloat.MIN_DOUBLE_NBBITS - 1;
+            myFileName = string.Format("float({0})_argumentexception.bcp", nbBits);
+            try
+            {
+                WriteFloat(value, nbBits, myFileName);
+                Assert.Fail("Expected an exception, but none was thrown");
+            }
+            catch (ArgumentException)
+            {
+            }
+
+            nbBits = SQLFloat.MAX_FLOAT_NBBITS + 1;
+            myFileName = string.Format("float({0})_argumentexception.bcp", nbBits);
+            try
+            {
+                WriteFloat((float)value, nbBits, myFileName);
+                Assert.Fail("Expected an exception, but none was thrown");
+            }
+            catch (ArgumentException)
+            {
+            }
         }
     }
 }

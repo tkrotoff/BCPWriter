@@ -69,5 +69,21 @@ namespace BCPWriter.Tests
             WriteDateTime(null, myFileName);
             BCPTests.CheckFile(myFileName);
         }
+
+        [Test]
+        public void TestDateTimeArgumentException()
+        {
+            DateTime dateTime = new DateTime(1752, 01, 01, 00, 00, 00);
+
+            string myFileName = "datetime_argumentexception.bcp";
+            try
+            {
+                WriteDateTime(dateTime, myFileName);
+                Assert.Fail("Expected an exception, but none was thrown");
+            }
+            catch (ArgumentException)
+            {
+            }
+        }
     }
 }

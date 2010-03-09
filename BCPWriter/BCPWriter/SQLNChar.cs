@@ -26,8 +26,6 @@ namespace BCPWriter
     /// </remarks>
     public class SQLNChar : IBCPSerialization
     {
-        private ushort _length;
-
         /// <summary>
         /// Minimum length allowed for SQL nchar.
         /// </summary>
@@ -53,7 +51,7 @@ namespace BCPWriter
                 throw new ArgumentException("length should be between 1 and 4,000");
             }
 
-            _length = length;
+            Length = length;
         }
 
         /// <summary>
@@ -61,7 +59,8 @@ namespace BCPWriter
         /// </summary>
         public ushort Length
         {
-            get { return _length; }
+            get;
+            private set;
         }
 
         public void Write(BinaryWriter writer, object value)
@@ -79,19 +78,19 @@ namespace BCPWriter
                 return;
             }
 
-            if (text.Length > _length)
+            if (text.Length > Length)
             {
                 throw new ArgumentException("text is longer than the length declared inside the constructor");
             }
 
             //ushort is 2 bytes long
             //* 2 because we are in UTF-16, thus 1 char is 2 bytes long
-            short length = (short) (_length * 2);
+            short length = (short) (Length * 2);
             writer.Write(length);
 
             //Append spaces if needed
             StringBuilder tmp = new StringBuilder(text);
-            while (tmp.Length < _length)
+            while (tmp.Length < Length)
             {
                 tmp.Append(SQLChar.SPACE);
             }

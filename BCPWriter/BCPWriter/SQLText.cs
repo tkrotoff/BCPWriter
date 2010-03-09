@@ -38,11 +38,12 @@ namespace BCPWriter
                 writer.Write(nullBytes);
                 return;
             }
-
-            if (text.Length > MAX_LENGTH)
+            //This cannot be tested anyway since OutOfMemory exception is
+            //thrown before
+            /*if (text.Length > MAX_LENGTH)
             {
                 throw new ArgumentException("text is longer than 2^31-1 (2,147,483,647)");
-            }
+            }*/
 
             //uint is 4 bytes long
             writer.Write((uint)(text.Length));

@@ -110,5 +110,44 @@ namespace BCPWriter.Tests
             WriteVarChar(text, SQLVarChar.MAX, myFileName);
             BCPTests.CheckFile(myFileName);
         }
+
+        [Test]
+        public void TestNVarCharArgumentException()
+        {
+            string text = "KIKOO";
+
+            uint length = SQLVarChar.MIN_LENGTH - 1;
+            string myFileName = string.Format("varchar({0})_argumentexception.bcp", length);
+            try
+            {
+                WriteVarChar(text, length, myFileName);
+                Assert.Fail("Expected an exception, but none was thrown");
+            }
+            catch (ArgumentException)
+            {
+            }
+
+            length = SQLVarChar.MAX_LENGTH + 1;
+            myFileName = string.Format("varchar({0})_argumentexception.bcp", length);
+            try
+            {
+                WriteVarChar(text, length, myFileName);
+                Assert.Fail("Expected an exception, but none was thrown");
+            }
+            catch (ArgumentException)
+            {
+            }
+
+            length = (uint)text.Length - 1;
+            myFileName = string.Format("varchar({0})_argumentexception.bcp", length);
+            try
+            {
+                WriteVarChar(text, length, myFileName);
+                Assert.Fail("Expected an exception, but none was thrown");
+            }
+            catch (ArgumentException)
+            {
+            }
+        }
     }
 }

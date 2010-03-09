@@ -52,7 +52,7 @@ namespace BCPWriter.Tests
         [Test]
         public void TestDateTime2Min()
         {
-            DateTime dateTime = SQLDateTime2.MIN_DATETIME2;
+            DateTime dateTime = new DateTime(0001, 01, 01, 00, 00, 00);
 
             string myFileName = "datetime2_min.bcp";
             WriteDateTime2(dateTime, myFileName);

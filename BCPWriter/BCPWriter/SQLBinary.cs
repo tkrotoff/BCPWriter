@@ -28,8 +28,6 @@ namespace BCPWriter
     /// </remarks>
     public class SQLBinary : IBCPSerialization
     {
-        private ushort _length;
-
         /// <summary>
         /// Minimum length allowed for SQL char.
         /// </summary>
@@ -55,7 +53,7 @@ namespace BCPWriter
                 throw new ArgumentException("length should be between 1 and 8,000");
             }
 
-            _length = length;
+            Length = length;
         }
 
         /// <summary>
@@ -63,7 +61,8 @@ namespace BCPWriter
         /// </summary>
         public ushort Length
         {
-            get { return _length; }
+            get;
+            private set;
         }
 
         public void Write(BinaryWriter writer, object value)
@@ -81,20 +80,20 @@ namespace BCPWriter
                 return;
             }
 
-            if (data.Length > _length)
+            if (data.Length > Length)
             {
                 throw new ArgumentException("data is longer than the length declared inside the constructor");
             }
 
             //ushort is 2 bytes long
-            writer.Write(_length);
+            writer.Write(Length);
 
             string hex = Util.ToHexString(data);
             byte[] hexBytes = Util.HexToByteArray(hex);
 
             //Append 0s if needed
             List<byte> bytes = new List<byte>(hexBytes);
-            while (bytes.Count < _length)
+            while (bytes.Count < Length)
             {
                 bytes.Add(0);
             }

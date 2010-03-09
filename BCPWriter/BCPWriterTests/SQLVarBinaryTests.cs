@@ -71,5 +71,44 @@ namespace BCPWriter.Tests
             WriteVarBinary(data, 50, myFileName);
             BCPTests.CheckFile(myFileName);
         }
+
+        [Test]
+        public void TestBinaryArgumentException()
+        {
+            byte[] data = Util.StringToByteArray("KIKOO");
+
+            uint length = SQLVarBinary.MIN_LENGTH - 1;
+            string myFileName = string.Format("varbinary({0})_argumentexception.bcp", length);
+            try
+            {
+                WriteVarBinary(data, length, myFileName);
+                Assert.Fail("Expected an exception, but none was thrown");
+            }
+            catch (ArgumentException)
+            {
+            }
+
+            length = SQLVarBinary.MAX_LENGTH + 1;
+            myFileName = string.Format("varbinary({0})_argumentexception.bcp", length);
+            try
+            {
+                WriteVarBinary(data, length, myFileName);
+                Assert.Fail("Expected an exception, but none was thrown");
+            }
+            catch (ArgumentException)
+            {
+            }
+
+            length = (uint)data.Length - 1;
+            myFileName = string.Format("varbinary({0})_argumentexception.bcp", length);
+            try
+            {
+                WriteVarBinary(data, length, myFileName);
+                Assert.Fail("Expected an exception, but none was thrown");
+            }
+            catch (ArgumentException)
+            {
+            }
+        }
     }
 }
