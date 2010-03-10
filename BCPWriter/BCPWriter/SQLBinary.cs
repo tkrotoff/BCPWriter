@@ -47,12 +47,6 @@ namespace BCPWriter
         /// </param>
         public SQLBinary(ushort length)
         {
-            //Can be a value from 1 through 8,000
-            if (length < MIN_LENGTH || length > MAX_LENGTH)
-            {
-                throw new ArgumentException("length should be between 1 and 8,000");
-            }
-
             Length = length;
         }
 
@@ -67,11 +61,17 @@ namespace BCPWriter
 
         public void Write(BinaryWriter writer, object value)
         {
-            Write(writer, (byte[])value);
+            Write(writer, (byte[])value, Length);
         }
 
-        public void Write(BinaryWriter writer, byte[] data)
+        public static void Write(BinaryWriter writer, byte[] data, ushort length)
         {
+            //Can be a value from 1 through 8,000
+            if (length < MIN_LENGTH || length > MAX_LENGTH)
+            {
+                throw new ArgumentException("length should be between 1 and 8,000");
+            }
+
             if (data == null)
             {
                 //2 bytes long
@@ -80,20 +80,20 @@ namespace BCPWriter
                 return;
             }
 
-            if (data.Length > Length)
+            if (data.Length > length)
             {
                 throw new ArgumentException("data is longer than the length declared inside the constructor");
             }
 
             //ushort is 2 bytes long
-            writer.Write(Length);
+            writer.Write(length);
 
             string hex = Util.ToHexString(data);
             byte[] hexBytes = Util.HexToByteArray(hex);
 
             //Append 0s if needed
             List<byte> bytes = new List<byte>(hexBytes);
-            while (bytes.Count < Length)
+            while (bytes.Count < length)
             {
                 bytes.Add(0);
             }

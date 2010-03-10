@@ -17,8 +17,7 @@ namespace BCPWriter.Tests
         {
             BinaryWriter writer = BCPTests.CreateBinaryFile(myFileName);
 
-            SQLDateTime2 sql = new SQLDateTime2();
-            sql.Write(writer, dateTime);
+            SQLDateTime2.Write(writer, dateTime);
 
             writer.Close();
         }

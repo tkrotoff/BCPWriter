@@ -30,7 +30,7 @@ namespace BCPWriter
             Write(writer, (Guid?)value);
         }
 
-        public void Write(BinaryWriter writer, Guid? guid)
+        public static void Write(BinaryWriter writer, Guid? guid)
         {
             if (!guid.HasValue)
             {

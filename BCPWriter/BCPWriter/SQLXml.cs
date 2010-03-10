@@ -52,7 +52,7 @@ namespace BCPWriter
             Write(writer, (XmlDocument)value);
         }
 
-        public void Write(BinaryWriter writer, XmlDocument xml)
+        public static void Write(BinaryWriter writer, XmlDocument xml)
         {
             if (xml == null)
             {

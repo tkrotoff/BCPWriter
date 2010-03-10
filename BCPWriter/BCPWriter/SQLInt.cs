@@ -40,7 +40,7 @@ namespace BCPWriter
             Write(writer, (int?)value);
         }
 
-        public void Write(BinaryWriter writer, int? value)
+        public static void Write(BinaryWriter writer, int? value)
         {
             if (!value.HasValue)
             {

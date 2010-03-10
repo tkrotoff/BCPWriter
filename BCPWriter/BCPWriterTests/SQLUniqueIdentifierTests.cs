@@ -17,8 +17,7 @@ namespace BCPWriter.Tests
         {
             BinaryWriter writer = BCPTests.CreateBinaryFile(myFileName);
 
-            SQLUniqueIdentifier sql = new SQLUniqueIdentifier();
-            sql.Write(writer, guid);
+            SQLUniqueIdentifier.Write(writer, guid);
 
             writer.Close();
         }

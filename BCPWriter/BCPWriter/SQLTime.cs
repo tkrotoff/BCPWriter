@@ -20,7 +20,7 @@ namespace BCPWriter
             Write(writer, (DateTime?)value);
         }
 
-        public void Write(BinaryWriter writer, DateTime? time)
+        public static void Write(BinaryWriter writer, DateTime? time)
         {
             if (!time.HasValue)
             {

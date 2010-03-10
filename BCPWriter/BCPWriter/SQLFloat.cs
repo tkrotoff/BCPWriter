@@ -56,11 +56,6 @@ namespace BCPWriter
         /// </param>
         public SQLFloat(ushort nbBits)
         {
-            if (nbBits < MIN_NBBITS || nbBits > MAX_NBBITS)
-            {
-                throw new ArgumentException("nbBits should be between 1-24 and 25-53");
-            }
-
             NbBits = nbBits;
         }
 
@@ -85,27 +80,27 @@ namespace BCPWriter
         {
             if (value is float?)
             {
-                Write(writer, (float?)value);
+                Write(writer, (float?)value, NbBits);
             }
             else
             {
-                Write(writer, (double?)value);
+                Write(writer, (double?)value, NbBits);
             }
         }
 
-        public void Write(BinaryWriter writer, double? value)
+        public static void Write(BinaryWriter writer, double? value, ushort nbBits)
         {
+            if (nbBits < MIN_DOUBLE_NBBITS || nbBits > MAX_NBBITS)
+            {
+                throw new ArgumentException("nbBits should be between 25-53");
+            }
+
             if (!value.HasValue)
             {
                 //1 byte long
                 byte[] nullBytes = { 255 };
                 writer.Write(nullBytes);
                 return;
-            }
-
-            if (NbBits < MIN_DOUBLE_NBBITS)
-            {
-                throw new ArgumentException("nbBits should be between 25-53");
             }
 
             //byte is 1 byte long :)
@@ -116,19 +111,19 @@ namespace BCPWriter
             writer.Write(value.Value);
         }
 
-        public void Write(BinaryWriter writer, float? value)
+        public static void Write(BinaryWriter writer, float? value, ushort nbBits)
         {
+            if (nbBits < MIN_NBBITS || nbBits > MAX_FLOAT_NBBITS)
+            {
+                throw new ArgumentException("NbBits should be between 1-24");
+            }
+
             if (!value.HasValue)
             {
                 //1 byte long
                 byte[] nullBytes = { 255 };
                 writer.Write(nullBytes);
                 return;
-            }
-
-            if (NbBits > MAX_FLOAT_NBBITS)
-            {
-                throw new ArgumentException("NbBits should be between 1-24");
             }
 
             //byte is 1 byte long :)

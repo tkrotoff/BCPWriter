@@ -43,14 +43,6 @@ namespace BCPWriter
         /// </param>
         public SQLVarChar(uint length)
         {
-            if (length != MAX)
-            {
-                if (length < MIN_LENGTH || length > MAX_LENGTH)
-                {
-                    throw new ArgumentException("length should be between 1 and 8,000");
-                }
-            }
-
             Length = length;
         }
 
@@ -65,11 +57,19 @@ namespace BCPWriter
 
         public void Write(BinaryWriter writer, object value)
         {
-            Write(writer, (string)value);
+            Write(writer, (string)value, Length);
         }
 
-        public void Write(BinaryWriter writer, string text)
+        public static void Write(BinaryWriter writer, string text, uint length)
         {
+            if (length != MAX)
+            {
+                if (length < MIN_LENGTH || length > MAX_LENGTH)
+                {
+                    throw new ArgumentException("length should be between 1 and 8,000");
+                }
+            }
+
             if (text == null)
             {
                 //8 bytes long
@@ -78,12 +78,12 @@ namespace BCPWriter
                 return;
             }
 
-            if (text.Length > Length)
+            if (text.Length > length)
             {
                 throw new ArgumentException("text is longer than the length declared inside the constructor");
             }
 
-            if (Length == MAX)
+            if (length == MAX)
             {
                 //ulong is 8 bytes long
                 writer.Write((ulong)text.Length);

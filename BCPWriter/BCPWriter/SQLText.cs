@@ -29,7 +29,7 @@ namespace BCPWriter
             Write(writer, (string)value);
         }
 
-        public void Write(BinaryWriter writer, string text)
+        public static void Write(BinaryWriter writer, string text)
         {
             if (text == null)
             {

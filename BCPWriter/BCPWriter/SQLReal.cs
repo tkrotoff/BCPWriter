@@ -17,14 +17,16 @@ namespace BCPWriter
     /// </remarks>
     public class SQLReal : SQLFloat
     {
+        private const ushort REAL_NBBITS = 24;
+
         public SQLReal()
-            : base(24)
+            : base(REAL_NBBITS)
         {
         }
 
-        public new void Write(BinaryWriter writer, float? value)
+        public static void Write(BinaryWriter writer, float? value)
         {
-            base.Write(writer, value);
+            Write(writer, value, REAL_NBBITS);
         }
     }
 }

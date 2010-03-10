@@ -34,7 +34,7 @@ namespace BCPWriter
             Write(writer, (DateTime?)value);
         }
 
-        public void Write(BinaryWriter writer, DateTime? dateTime)
+        public static void Write(BinaryWriter writer, DateTime? dateTime)
         {
             if (!dateTime.HasValue)
             {

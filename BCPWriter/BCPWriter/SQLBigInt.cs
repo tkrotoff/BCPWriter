@@ -21,7 +21,7 @@ namespace BCPWriter
             Write(writer, (long?)value);
         }
 
-        public void Write(BinaryWriter writer, long? value)
+        public static void Write(BinaryWriter writer, long? value)
         {
             if (!value.HasValue)
             {

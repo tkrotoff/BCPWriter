@@ -116,33 +116,6 @@ namespace BCPWriter.Tests
         }
 
         [Test]
-        public void TestSQLAPI()
-        {
-            string myFileName = "sqlapi.bcp";
-            BinaryWriter writer = new BinaryWriter(new FileStream(myFileName, FileMode.Create));
-
-            SQLNVarChar firstName = new SQLNVarChar(SQLNVarChar.MAX);
-            SQLNVarChar lastName = new SQLNVarChar(SQLNVarChar.MAX);
-            SQLInt birth = new SQLInt();
-            SQLInt death = new SQLInt();
-
-            firstName.Write(writer, "Frédéric François");
-            lastName.Write(writer, "Chopin");
-            birth.Write(writer, 1810);
-            death.Write(writer, 1849);
-
-            firstName.Write(writer, "Franz");
-            lastName.Write(writer, "Liszt");
-            birth.Write(writer, 1811);
-            death.Write(writer, 1886);
-
-            firstName.Write(writer, "George");
-            lastName.Write(writer, "Sand");
-            birth.Write(writer, 1804);
-            death.Write(writer, 1876);
-        }
-
-        [Test]
         public void Test0Columns()
         {
             string myFileName = "0columns.bcp";
