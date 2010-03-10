@@ -52,8 +52,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BCPWriter.cs" />
+    <Compile Include="BCPWriterSimple.cs" />
     <Compile Include="BCPWriterSQLServer.cs" />
-    <Compile Include="BCPWriterStatic.cs" />
     <Compile Include="SQLBigInt.cs" />
     <Compile Include="SQLBinary.cs" />
     <Compile Include="SQLChar.cs" />

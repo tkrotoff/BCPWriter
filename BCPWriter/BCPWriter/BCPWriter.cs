@@ -107,9 +107,9 @@ namespace BCPWriter
     /// </code>
     /// </example>
     /// 
-    /// You can also use the "static" functions (almost) with class BCPWriterStatic.
-    /// By using BCPWriterStatic you will have to be consistent since there is no fishnet.
-    /// The MS SQL Server backend won't work with BCPWriterStatic so there won't be any way
+    /// You can also use the "simple" functions with class BCPWriterSimple.
+    /// By using BCPWriterSimple you will have to be consistent since there is no fishnet.
+    /// The MS SQL Server backend won't work with BCPWriterSimple so there won't be any way
     /// to find bugs inside BCPWriter.<br/>
     /// <br/>
     /// To view hexadecimal representation of a .bcp file, I use

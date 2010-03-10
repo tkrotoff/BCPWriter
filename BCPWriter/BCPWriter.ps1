@@ -3,7 +3,7 @@
 [Reflection.Assembly]::LoadFrom("BCPWriter\bin\Release\BCPWriter.dll");
 
 $bcpFileName = "data.bcp";
-$bcp = new-object BCPWriter.BCPWriterStatic($bcpFileName);
+$bcp = new-object BCPWriter.BCPWriterSimple($bcpFileName);
 
 $bcp.WriteNVarChar("Frédéric François", [BCPWriter.SQLNVarChar]::MAX);
 $bcp.WriteNVarChar("Chopin", [BCPWriter.SQLNVarChar]::MAX);

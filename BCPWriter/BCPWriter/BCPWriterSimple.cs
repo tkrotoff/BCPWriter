@@ -9,14 +9,14 @@ using System.Xml;
 namespace BCPWriter
 {
     /// <summary>
-    /// Static API for BCPWriter.
+    /// Simple API for BCPWriter.
     /// </summary>
     /// <remarks>
     /// This API is not recommended for C# application (use BCPWriter instead).
     /// This API was designed for easy integration with scripts (PowerShell for instance).
     /// </remarks>
     /// <see cref="BCPWriter"/>
-    public class BCPWriterStatic
+    public class BCPWriterSimple
     {
         private BinaryWriter _writer = null;
 
@@ -24,7 +24,7 @@ namespace BCPWriter
         /// Constructs a BCPWriterStatic given a bcp file name.
         /// </summary>
         /// <param name="bcpFileName">the new bcp file to create</param>
-        public BCPWriterStatic(string bcpFileName)
+        public BCPWriterSimple(string bcpFileName)
             : this(new BinaryWriter(new FileStream(bcpFileName, FileMode.Create)))
         {
         }
@@ -33,7 +33,7 @@ namespace BCPWriter
         /// Constructs a BCPWriterStatic given a BinaryWriter.
         /// </summary>
         /// <param name="writer">BinaryWriter</param>
-        public BCPWriterStatic(BinaryWriter writer)
+        public BCPWriterSimple(BinaryWriter writer)
         {
             _writer = writer;
         }

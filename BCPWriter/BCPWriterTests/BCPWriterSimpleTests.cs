@@ -12,14 +12,14 @@ using BCPWriter;
 namespace BCPWriter.Tests
 {
     /// <summary>
-    /// Tests for BCPWriterStatic.
+    /// Tests for BCPWriterSimple.
     /// </summary>
     /// <see cref="BCPWriterStatic"/>
     [TestFixture]
-    class BCPWriterStaticTests
+    class BCPWriterSimpleTests
     {
         [Test]
-        public void TestStaticApi()
+        public void TestSimpleApi()
         {
             BCPWriter writer2 = new BCPWriter();
             writer2.Mode = BCPWriter.BackendMode.Debug;
@@ -52,9 +52,9 @@ namespace BCPWriter.Tests
             columns.Add(new SQLXml());
             writer2.AddColumns(columns);
 
-            string myFileName1 = "staticapi1.bcp";
+            string myFileName1 = "simpleapi1.bcp";
             BinaryWriter stream1 = BCPTests.CreateBinaryFile(myFileName1);
-            BCPWriterStatic writer1 = new BCPWriterStatic(stream1);
+            BCPWriterSimple writer1 = new BCPWriterSimple(stream1);
 
             List<object> rows = new List<object>();
             const int nbRows = 10;
@@ -135,7 +135,7 @@ namespace BCPWriter.Tests
 
             stream1.Close();
 
-            string myFileName2 = "staticapi2.bcp";
+            string myFileName2 = "simpleapi2.bcp";
             BinaryWriter stream2 = BCPTests.CreateBinaryFile(myFileName2);
             writer2.WriteRows(stream2, rows);
             stream2.Close();
@@ -146,4 +146,4 @@ namespace BCPWriter.Tests
             Assert.AreEqual(bcpFile1, bcpFile2);
         }
     }
-}
+}

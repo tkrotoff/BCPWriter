@@ -50,7 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BCPTests.cs" />
-    <Compile Include="BCPWriterStaticTests.cs" />
+    <Compile Include="BCPWriterSimpleTests.cs" />
     <Compile Include="BCPWriterTests.cs" />
     <Compile Include="SQLBigIntTests.cs" />
     <Compile Include="SQLBinaryTests.cs" />
