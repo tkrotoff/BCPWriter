@@ -9,7 +9,19 @@ using System.Xml;
 namespace BCPWriter
 {
     /// <summary>
-    /// Writes a table (contains columns and rows) to a .bcp (Bulk-copy Data) file.
+    /// Write a SQL table to a .bcp (Bulk-copy Data) file.
+    /// </summary>
+    /// <see cref="BCPWriter"/>
+    /// 
+    /// @mainpage
+    public static class NamespaceDoc
+    {
+        //Special trick to document the namespace
+        //See http://stackoverflow.com/questions/793210/c-xml-documentation-for-a-namespace
+    }
+
+    /// <summary>
+    /// Writes a SQL table (contains columns and rows) to a .bcp (Bulk-copy Data) file.
     /// </summary>
     /// 
     /// <remarks>
@@ -22,6 +34,8 @@ namespace BCPWriter
     /// and a data file in a user-specified format.
     /// The bcp utility can be used to import large numbers of new rows into SQL Server
     /// tables or to export data out of tables into data files.<br/>
+    /// <br/>
+    /// Why bcp? because bcp is *very* fast for inserting data into MS SQL Server.<br/>
     /// <br/>
     /// bcp native (binary) format (-n option) is simple:<br/>
     /// <br/>
@@ -103,7 +117,6 @@ namespace BCPWriter
     /// a GNU GPL (open source) application that highlights the differences between
     /// 2 files in hexadecimal.
     /// </remarks>
-    /// @mainpage
     public class BCPWriter
     {
         /// <summary>
