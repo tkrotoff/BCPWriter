@@ -10,6 +10,10 @@ using BCPWriter;
 
 namespace BCPWriter.Tests
 {
+    /// <summary>
+    /// Tests for SQLUniqueIdentifier.
+    /// </summary>
+    /// <see cref="SQLUniqueIdentifier"/>
     [TestFixture]
     class SQLUniqueIdentifierTests
     {

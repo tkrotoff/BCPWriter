@@ -8,6 +8,9 @@ using NUnit.Framework;
 
 namespace BCPWriter.Tests
 {
+    /// <summary>
+    /// Internal utility functions for unit tests.
+    /// </summary>
     class BCPTests
     {
         public static BinaryWriter CreateBinaryFile(string fileName)

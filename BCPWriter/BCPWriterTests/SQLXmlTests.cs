@@ -11,6 +11,10 @@ using BCPWriter;
 
 namespace BCPWriter.Tests
 {
+    /// <summary>
+    /// Tests for SQLXml.
+    /// </summary>
+    /// <see cref="SQLXml"/>
     [TestFixture]
     class SQLXmlTests
     {

@@ -10,6 +10,10 @@ using BCPWriter;
 
 namespace BCPWriter.Tests
 {
+    /// <summary>
+    /// Tests for SQLReal.
+    /// </summary>
+    /// <see cref="SQLReal"/>
     [TestFixture]
     class SQLRealTests
     {

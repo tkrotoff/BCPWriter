@@ -35,10 +35,8 @@ namespace BCPWriter
     /// | FE FF FF FF FF FF FF FF | Next chunk size | 1020 bytes chunk [...] | Next chunk size | Last chunk if any | 00 00 00 00 |
     /// |------------------------------------------------------------------------------------------------------------------------|
     /// </code>
-    /// <code>FE FF FF FF FF FF FF FF</code> and <code>00 00 00 00</code> delimits the XML string.<br/>
+    /// FE FF FF FF FF FF FF FF and 00 00 00 00 delimits the XML string.<br/>
     /// By cutting the XML string into chunks, bcp has virtually no length limitation for the XML it takes as input.<br/>
-    /// <br/>
-    /// As you can see, bcp utility is highly optimized and saves every bytes it can for its native format.<br/>
     /// <br/>
     /// Keep in mind that MS SQL Server do interpret the XML before to store it: SQL xml is not seen as just a string.
     /// So SQLXml does the same by taking a System.Xml.XmlDocument instead of a string.

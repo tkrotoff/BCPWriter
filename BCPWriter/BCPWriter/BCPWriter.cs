@@ -103,6 +103,7 @@ namespace BCPWriter
     /// a GNU GPL (open source) application that highlights the differences between
     /// 2 files in hexadecimal.
     /// </remarks>
+    /// @mainpage
     public class BCPWriter
     {
         /// <summary>

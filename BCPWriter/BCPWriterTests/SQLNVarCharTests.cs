@@ -10,6 +10,10 @@ using BCPWriter;
 
 namespace BCPWriter.Tests
 {
+    /// <summary>
+    /// Tests for SQLNVarChar.
+    /// </summary>
+    /// <see cref="SQLNVarChar"/>
     [TestFixture]
     class SQLNVarCharTests
     {

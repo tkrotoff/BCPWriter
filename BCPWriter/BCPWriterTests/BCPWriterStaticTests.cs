@@ -11,6 +11,11 @@ using BCPWriter;
 
 namespace BCPWriter.Tests
 {
+    /// <summary>
+    /// Tests for BCPWriterStatic.
+    /// </summary>
+    /// <see cref="BCPWriterStatic"/>
+    [TestFixture]
     class BCPWriterStaticTests
     {
         [Test]

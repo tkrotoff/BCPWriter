@@ -10,6 +10,10 @@ using BCPWriter;
 
 namespace BCPWriter.Tests
 {
+    /// <summary>
+    /// Tests for SQLDate.
+    /// </summary>
+    /// <see cref="SQLDate"/>
     [TestFixture]
     class SQLDateTests
     {

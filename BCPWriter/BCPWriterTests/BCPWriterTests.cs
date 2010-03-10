@@ -11,6 +11,10 @@ using BCPWriter;
 
 namespace BCPWriter.Tests
 {
+    /// <summary>
+    /// Tests for BCPWriter.
+    /// </summary>
+    /// <see cref="BCPWriter"/>
     [TestFixture]
     class BCPWriterTests
     {
@@ -278,8 +282,6 @@ namespace BCPWriter.Tests
         [Test]
         public void TestPerformance()
         {
-            string myFileName = "perf.bcp";
-
             BCPWriter writer = new BCPWriter();
             writer.Mode = BCPWriter.BackendMode.Debug;
 
@@ -316,6 +318,7 @@ namespace BCPWriter.Tests
                 rows.Add(1876);
             }
 
+            //string myFileName = "perf.bcp";
             //BinaryWriter stream = BCPTests.CreateBinaryFile(myFileName);
             //writer.WriteRows(stream, rows);
             //stream.Close();

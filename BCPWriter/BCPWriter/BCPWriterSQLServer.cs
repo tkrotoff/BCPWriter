@@ -25,6 +25,12 @@ namespace BCPWriter
     /// </remarks>
     class BCPWriterSQLServer
     {
+        /// <summary>
+        /// Initializes the MS SQL Server backend.
+        /// </summary>
+        /// <param name="writer">BinaryWriter</param>
+        /// <param name="columns">columns</param>
+        /// <param name="rows">rows</param>
         public BCPWriterSQLServer(BinaryWriter writer, List<IBCPSerialization> columns, IEnumerable<object> rows)
         {
             if (columns.Count() == 0)
