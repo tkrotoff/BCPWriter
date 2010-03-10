@@ -531,32 +531,39 @@ namespace BCPWriter
                 server, username, password, database
             );
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            try
             {
-                connection.Open();
-
-                SqlCommand command = new SqlCommand();
-                command.Connection = connection;
-
-                //Drop table if any
-                command.CommandText = "IF OBJECT_ID('BCPTest','U') IS NOT NULL DROP TABLE BCPTest";
-                command.ExecuteNonQuery();
-
-                //Create table
-                if (!string.IsNullOrEmpty(createTableString))
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    command.CommandText = createTableString;
-                    command.ExecuteNonQuery();
-                }
+                    connection.Open();
 
-                //Insert values
-                if (!string.IsNullOrEmpty(insertIntoString))
-                {
-                    command.CommandText = insertIntoString;
-                    command.ExecuteNonQuery();
-                }
+                    SqlCommand command = new SqlCommand();
+                    command.Connection = connection;
 
-                connection.Close();
+                    //Drop table if any
+                    command.CommandText = "IF OBJECT_ID('BCPTest','U') IS NOT NULL DROP TABLE BCPTest";
+                    command.ExecuteNonQuery();
+
+                    //Create table
+                    if (!string.IsNullOrEmpty(createTableString))
+                    {
+                        command.CommandText = createTableString;
+                        command.ExecuteNonQuery();
+                    }
+
+                    //Insert values
+                    if (!string.IsNullOrEmpty(insertIntoString))
+                    {
+                        command.CommandText = insertIntoString;
+                        command.ExecuteNonQuery();
+                    }
+
+                    connection.Close();
+                }
+            }
+            catch
+            {
+                //Could not connect
             }
         }
 
@@ -600,7 +607,7 @@ namespace BCPWriter
             }
             catch
             {
-                //Log error
+                //Couldn't sent the request
             }
         }
     }
