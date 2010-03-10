@@ -7,6 +7,7 @@
             <property name="OutputDirectory" value=".\doc\ndoc\" />
             <property name="HtmlHelpName" value="Documentation" />
             <property name="Title" value="BCPWriter Class Library" />
+            <property name="OutputTarget" value="Web" />
             <property name="DocumentInternals" value="True" />
             <property name="DocumentPrivates" value="True" />
             <property name="SdkDocVersion" value="SDK_v3_5" />
