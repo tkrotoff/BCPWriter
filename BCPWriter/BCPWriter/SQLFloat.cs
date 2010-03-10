@@ -76,7 +76,7 @@ namespace BCPWriter
             private set;
         }
 
-        public void Write(BinaryWriter writer, object value)
+        public virtual void Write(BinaryWriter writer, object value)
         {
             if (value is float?)
             {
@@ -84,7 +84,22 @@ namespace BCPWriter
             }
             else
             {
-                Write(writer, (double?)value, NbBits);
+                //This fix a bug:
+                //SQLFloat sql = new SQLFloat(SQLFloat.MAX_FLOAT_NBBITS);
+                //float? valueFloat = null;
+                //sql.Writer(writer, valueFloat);
+                //Is this case one might think value is of type float?
+                //It is not, C# confuses float? and double? when the value == null
+                //Thus we have to check NbBits and determine if value is float? or double?
+                double? valueDouble = (double?)value;
+                if (!valueDouble.HasValue && NbBits <= MAX_FLOAT_NBBITS)
+                {
+                    Write(writer, (float?)value, NbBits);
+                }
+                else
+                {
+                    Write(writer, valueDouble, NbBits);
+                }
             }
         }
 

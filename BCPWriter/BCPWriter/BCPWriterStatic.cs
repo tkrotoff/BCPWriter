@@ -29,7 +29,6 @@ namespace BCPWriter
         /// <summary>
         /// Writes a SQL binary.
         /// </summary>
-        /// <param name="_writer"></param>
         /// <param name="value"></param>
         /// <param name="length"></param>
         public void WriteBinary(byte[] value, ushort length)
@@ -78,6 +77,7 @@ namespace BCPWriter
         /// Writes a SQL float.
         /// </summary>
         /// <param name="value"></param>
+        /// <param name="nbBits"></param>
         public void WriteFloat(float? value, ushort nbBits)
         {
             SQLFloat.Write(_writer, value, nbBits);
@@ -87,6 +87,7 @@ namespace BCPWriter
         /// Writes a SQL float.
         /// </summary>
         /// <param name="value"></param>
+        /// <param name="nbBits"></param>
         public void WriteFloat(double? value, ushort nbBits)
         {
             SQLFloat.Write(_writer, value, nbBits);

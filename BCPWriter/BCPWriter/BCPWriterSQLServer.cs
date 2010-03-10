@@ -142,15 +142,15 @@ namespace BCPWriter
                     SQLXml sql = (SQLXml)column;
                     createTableString.Append("xml");
                 }
-                else if (column is SQLFloat)
-                {
-                    SQLFloat sql = (SQLFloat)column;
-                    createTableString.Append("float");
-                }
                 else if (column is SQLReal)
                 {
                     SQLReal sql = (SQLReal)column;
                     createTableString.Append("real");
+                }
+                else if (column is SQLFloat)
+                {
+                    SQLFloat sql = (SQLFloat)column;
+                    createTableString.Append("float");
                 }
                 else if (column is SQLUniqueIdentifier)
                 {
@@ -395,34 +395,6 @@ namespace BCPWriter
                         insertIntoString.AppendFormat("'{0}'", value.DocumentElement.OuterXml);
                     }
                 }
-                else if (column is SQLFloat)
-                {
-                    if (row is float)
-                    {
-                        float? value = (float?)row;
-                        if (!value.HasValue)
-                        {
-                            insertIntoString.Append("NULL");
-                        }
-                        else
-                        {
-                            insertIntoString.AppendFormat("{0}", value.Value);
-                        }
-                    }
-                    else
-                    {
-                        //If we don't know, let's cast it to double
-                        double? value = (double?)row;
-                        if (!value.HasValue)
-                        {
-                            insertIntoString.Append("NULL");
-                        }
-                        else
-                        {
-                            insertIntoString.AppendFormat("{0}", value.Value);
-                        }
-                    }
-                }
                 else if (column is SQLReal)
                 {
                     float? value = (float?)row;
@@ -433,6 +405,30 @@ namespace BCPWriter
                     else
                     {
                         insertIntoString.AppendFormat("{0}", value.Value);
+                    }
+                }
+                else if (column is SQLFloat)
+                {
+                    if (row is float)
+                    {
+                        //Don't treat null case here
+                        float? value = (float?)row;
+                        insertIntoString.AppendFormat("{0}", value.Value);
+                    }
+                    else
+                    {
+                        //If we don't know, let's cast it to double
+                        //if value is null then double? will work, not float?
+                        //More explanations inside SQLFloat
+                        double? value = (double?)row;
+                        if (!value.HasValue)
+                        {
+                            insertIntoString.Append("NULL");
+                        }
+                        else
+                        {
+                            insertIntoString.AppendFormat("{0}", value.Value);
+                        }
                     }
                 }
                 else if (column is SQLUniqueIdentifier)

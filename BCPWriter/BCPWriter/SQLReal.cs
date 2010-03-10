@@ -24,6 +24,11 @@ namespace BCPWriter
         {
         }
 
+        public override void Write(BinaryWriter writer, object value)
+        {
+            Write(writer, (float?)value);
+        }
+
         public static void Write(BinaryWriter writer, float? value)
         {
             Write(writer, value, REAL_NBBITS);

@@ -93,33 +93,15 @@ namespace BCPWriter
     /// </code>
     /// </example>
     /// 
-    /// <example>
-    /// You can also use the SQL classes directly (then you will have to be consistent, no fishnet):
-    /// <code>
-    /// string myFileName = "sqlapi.bcp";
-    /// BinaryWriter writer = new BinaryWriter(new FileStream(myFileName, FileMode.Create));
-    /// 
-    /// SQLNVarChar firstName = new SQLNVarChar(SQLNVarChar.MAX);
-    /// SQLNVarChar lastName = new SQLNVarChar(SQLNVarChar.MAX);
-    /// SQLInt birth = new SQLInt();
-    /// SQLInt death = new SQLInt();
-    /// 
-    /// firstName.Write(writer, "Frédéric François");
-    /// lastName.Write(writer, "Chopin");
-    /// birth.Write(writer, 1810);
-    /// death.Write(writer, 1849);
-    /// 
-    /// firstName.Write(writer, "Franz");
-    /// lastName.Write(writer, "Liszt");
-    /// birth.Write(writer, 1811);
-    /// death.Write(writer, 1886);
-    /// 
-    /// firstName.Write(writer, "George");
-    /// lastName.Write(writer, "Sand");
-    /// birth.Write(writer, 1804);
-    /// death.Write(writer, 1876);
-    /// </code>
-    /// </example>
+    /// You can also use the "static" functions (almost) with class BCPWriterStatic.
+    /// By using BCPWriterStatic you will have to be consistent since there is no fishnet.
+    /// The MS SQL Server backend won't work with BCPWriterStatic so there won't be any way
+    /// to find bugs inside BCPWriter.<br/>
+    /// <br/>
+    /// In order to compare .bcp files together and find differences, I have used
+    /// <a href="http://www.cjmweb.net/vbindiff/">VBinDiff - Visual Binary Diff</a>,
+    /// a GNU GPL (open source) application that highlights the differences between
+    /// 2 files in hexadecimal.
     /// </remarks>
     public class BCPWriter
     {
@@ -204,9 +186,20 @@ namespace BCPWriter
                 throw new ArgumentException("No columns");
             }
 
-            for (int i = 0; i < rows.Count(); i++)
+            int nbRows = rows.Count();
+            int nbColumns = _columns.Count();
+
+            int modulo = nbRows % nbColumns;
+            if (modulo != 0)
             {
-                IBCPSerialization column = _columns[i % _columns.Count()];
+                throw new ArgumentException(
+                    string.Format("The number of rows ({0}) should match the number of columns ({1})", nbRows, nbColumns)
+                );
+            }
+
+            for (int i = 0; i < nbRows; i++)
+            {
+                IBCPSerialization column = _columns[i % nbColumns];
                 object row = rows.ElementAt(i);
 
                 column.Write(writer, row);
