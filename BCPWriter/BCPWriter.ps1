@@ -3,35 +3,29 @@
 [Reflection.Assembly]::LoadFrom("BCPWriter\bin\Release\BCPWriter.dll");
 
 $bcpFileName = "data.bcp";
-$bcp = new-object BCPWriter.BCPWriter($bcpFileName);
+$bcp = new-object BCPWriter.BCPWriterStatic($bcpFileName);
 
-$firstName = new-object BCPWriter.SQLNVarChar([BCPWriter.SQLNVarChar]::MAX);
-$bcp.AddColumn($firstName);
+$bcp.WriteNVarChar("Frédéric François", [BCPWriter.SQLNVarChar]::MAX);
+$bcp.WriteNVarChar("Chopin", [BCPWriter.SQLNVarChar]::MAX);
+$bcp.WriteInt(1810);
+$bcp.WriteInt(1849);
 
-$lastName = new-object BCPWriter.SQLNVarChar([BCPWriter.SQLNVarChar]::MAX);
-$bcp.AddColumn($lastName);
+$bcp.WriteNVarChar("Franz Liszt", [BCPWriter.SQLNVarChar]::MAX);
+$bcp.WriteNVarChar("Chopin", [BCPWriter.SQLNVarChar]::MAX);
+$bcp.WriteInt(1811);
+$bcp.WriteInt(1886);
 
-$birth = new-object BCPWriter.SQLInt;
-$bcp.AddColumn($birth);
+$bcp.WriteNVarChar("George", [BCPWriter.SQLNVarChar]::MAX);
+$bcp.WriteNVarChar("Sand", [BCPWriter.SQLNVarChar]::MAX);
+$bcp.WriteInt(1804);
+$bcp.WriteInt(1876);
 
-$death = new-object BCPWriter.SQLInt;
-$bcp.AddColumn($death);
+$bcp.Close();
 
-$gender = new-object BCPWriter.SQLInt;
-$bcp.AddColumn($gender);
+#$table = "[BCPTest].[dbo].[BCPTest]";
+#$servername = "localhost";
+#$username = "sa";
+#$password = "Password01";
 
-$rows =
-    "Frédéric François", "Chopin", 1810, 1849, 1,
-    "Franz", "Liszt", 1811, 1886, 1,
-    "George", "Sand", 1804, 1876, 0;
-
-$bcp.WriteRows($rows);
-
-
-$table = "[BCPTest].[dbo].[BCPTest]";
-$servername = "localhost";
-$username = "sa";
-$password = "Password01";
-
-# Calls bcp and load the data inside the table
-bcp $table in $bcpFileName -n -S $servername -U $username -P $password
+# Calls bcp and loads the data inside the table
+#bcp $table in $bcpFileName -n -S $servername -U $username -P $password

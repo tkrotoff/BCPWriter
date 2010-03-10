@@ -112,9 +112,13 @@ namespace BCPWriter
     /// The MS SQL Server backend won't work with BCPWriterStatic so there won't be any way
     /// to find bugs inside BCPWriter.<br/>
     /// <br/>
-    /// In order to compare .bcp files together and find differences, I have used
+    /// To view hexadecimal representation of a .bcp file, I use
+    /// <a href="http://frhed.sourceforge.net/">Frhed - Free hex editor</a>, a GNU GPL
+    /// (open source) application.<br/>
+    /// <br/>
+    /// In order to compare .bcp files together, I use
     /// <a href="http://www.cjmweb.net/vbindiff/">VBinDiff - Visual Binary Diff</a>,
-    /// a GNU GPL (open source) application that highlights the differences between
+    /// a GNU GPL application that highlights the differences between
     /// 2 files in hexadecimal.
     /// </remarks>
     public class BCPWriter

@@ -21,12 +21,29 @@ namespace BCPWriter
         private BinaryWriter _writer = null;
 
         /// <summary>
+        /// Constructs a BCPWriterStatic given a bcp file name.
+        /// </summary>
+        /// <param name="bcpFileName">the new bcp file to create</param>
+        public BCPWriterStatic(string bcpFileName)
+            : this(new BinaryWriter(new FileStream(bcpFileName, FileMode.Create)))
+        {
+        }
+
+        /// <summary>
         /// Constructs a BCPWriterStatic given a BinaryWriter.
         /// </summary>
         /// <param name="writer">BinaryWriter</param>
         public BCPWriterStatic(BinaryWriter writer)
         {
             _writer = writer;
+        }
+
+        /// <summary>
+        /// Closes the BinaryWriter.
+        /// </summary>
+        public void Close()
+        {
+            _writer.Close();
         }
 
         /// <summary>
