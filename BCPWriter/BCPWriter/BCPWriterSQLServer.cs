@@ -537,18 +537,31 @@ namespace BCPWriter
                 server, username, password
             );
 
+            SqlCommand command = new SqlCommand();
+
             try
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
-
-                    SqlCommand command = new SqlCommand();
                     command.Connection = connection;
 
                     //Create database if needed
                     command.CommandText = "IF DB_ID('BCPTest') IS NULL CREATE DATABASE BCPTest";
                     command.ExecuteNonQuery();
+
+                    connection.Close();
+                }
+
+                connectionString = string.Format(
+                    "Data Source={0};User ID={1};Password={2};Initial Catalog={3}",
+                    server, username, password, database
+                );
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    command.Connection = connection;
 
                     //Drop table if any
                     command.CommandText = "IF OBJECT_ID('BCPTest', 'U') IS NOT NULL DROP TABLE BCPTest";
