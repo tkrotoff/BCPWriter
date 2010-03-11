@@ -27,5 +27,5 @@ $bcp.Close();
 #$username = "sa";
 #$password = "Password01";
 
-# Calls bcp and loads the data inside the table
+# Calls bcp and inserts rows inside the table
 #bcp $table in $bcpFileName -n -S $servername -U $username -P $password

@@ -14,10 +14,10 @@ namespace BCPWriter
     /// 
     /// <remarks>
     /// This API is not recommended for C# application (use BCPWriter instead).
-    /// This API was designed for easy integration with scripts (PowerShell for instance).
+    /// This API was designed for easy integration with scripts (PowerShell).
     ///
     /// <example>
-    /// PowerShell script using BCPWriterSimple:
+    /// PowerShell script using BCPWriterSimple API:
     /// <code>
     /// [Reflection.Assembly]::LoadFrom("BCPWriter\bin\Release\BCPWriter.dll");
     ///
@@ -46,7 +46,7 @@ namespace BCPWriter
     /// $username = "sa";
     /// $password = "Password01";
     ///
-    /// # Calls bcp and loads the data inside the table
+    /// # Calls bcp and inserts rows inside the table
     /// bcp $table in $bcpFileName -n -S $servername -U $username -P $password
     /// </code>
     /// </example>

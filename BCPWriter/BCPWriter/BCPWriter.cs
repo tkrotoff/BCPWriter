@@ -9,7 +9,7 @@ using System.Xml;
 namespace BCPWriter
 {
     /// <summary>
-    /// Write a SQL table to a .bcp (Bulk-copy Data) file.
+    /// BCP writer library: writes a SQL table to a .bcp (Bulk-copy Data) file, see BCPWriter for more documentation.
     /// </summary>
     /// <see cref="BCPWriter"/>
     /// 
@@ -36,31 +36,6 @@ namespace BCPWriter
     /// tables or to export data out of tables into data files.<br/>
     /// <br/>
     /// Why bcp? because bcp is *very* fast for inserting data into MS SQL Server.<br/>
-    /// <br/>
-    /// bcp native (binary) format (-n option) is simple:<br/>
-    /// <br/>
-    /// <code>
-    /// |--------------------|
-    /// | Data Length | Data |
-    /// |--------------------|
-    /// </code>
-    /// <br/>
-    /// Example for a char SQL data type with length 10 (char(10)) and text KIKOO:<br/>
-    /// <code>
-    /// 0A 00 4B 49 4B 4F 4F 20
-    /// 
-    /// |-----------------------------------------------|
-    /// | Data Length = 10 | Data = KIKOO               |
-    /// | 0A 00            | 4B 49 4B 4F 4F 20 20 20 20 |
-    /// |-----------------------------------------------|
-    /// 
-    /// 4B = K
-    /// 49 = I
-    /// 4B = K
-    /// 4F = O
-    /// 4F = O
-    /// 20 * 4 = 4 * Space, KIKOO is of length 4 so bcp append spaces until to reach length = 10
-    /// </code>
     /// <br/>
     /// SQL types are prefixed with 'SQL' in order to avoid clash name with C# types,
     /// i.e SQLInt and Int, SQLChar and Char...<br/>
@@ -107,16 +82,44 @@ namespace BCPWriter
     /// </code>
     /// </example>
     /// 
-    /// You can also use the "simple" functions with class BCPWriterSimple.
-    /// By using BCPWriterSimple you will have to be consistent since there is no fishnet.
-    /// The MS SQL Server backend won't work with BCPWriterSimple so there won't be any way
-    /// to find bugs inside BCPWriter.<br/>
+    /// You can also use the "simple" functions provided by BCPWriterSimple.
+    /// By using BCPWriterSimple you will have to be consistent since there is no fishnet:
+    /// the rows you insert won't be checked against the columns so you can easily end up
+    /// with a "corrupted" .bcp file.<br/>
+    /// Also the MS SQL Server backend (see BCPWriterSQLServer) is not available with BCPWriterSimple
+    /// so there won't be any easy way to debug BCPWriter if you encounter bugs.<br/>
     /// <br/>
-    /// To view hexadecimal representation of a .bcp file, I use
+    /// <br/>
+    /// bcp native (binary) format (-n option) is simple:<br/>
+    /// <br/>
+    /// <code>
+    /// |--------------------|
+    /// | Data Length | Data |
+    /// |--------------------|
+    /// </code>
+    /// <br/>
+    /// Example for a char SQL data type with length 10 (char(10)) and text KIKOO:<br/>
+    /// <code>
+    /// 0A 00 4B 49 4B 4F 4F 20
+    /// 
+    /// |-----------------------------------------------|
+    /// | Data Length = 10 | Data = KIKOO               |
+    /// | 0A 00            | 4B 49 4B 4F 4F 20 20 20 20 |
+    /// |-----------------------------------------------|
+    /// 
+    /// 4B = K
+    /// 49 = I
+    /// 4B = K
+    /// 4F = O
+    /// 4F = O
+    /// 20 * 4 = 4 * Space, KIKOO is of length 4 so bcp append spaces until to reach length = 10
+    /// </code>
+    ///
+    /// To view hexadecimal representation of a .bcp file, use
     /// <a href="http://frhed.sourceforge.net/">Frhed - Free hex editor</a>, a GNU GPL
     /// (open source) application.<br/>
     /// <br/>
-    /// In order to compare .bcp files together, I use
+    /// In order to compare .bcp files together, use
     /// <a href="http://www.cjmweb.net/vbindiff/">VBinDiff - Visual Binary Diff</a>,
     /// a GNU GPL application that highlights the differences between
     /// 2 files in hexadecimal.
