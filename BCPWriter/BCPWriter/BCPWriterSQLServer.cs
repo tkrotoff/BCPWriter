@@ -11,7 +11,7 @@ using System.Data.SqlClient;
 namespace BCPWriter
 {
     /// <summary>
-    /// MS SQL Server backend for BCPWriter.
+    /// MS SQL Server backend for BCPWriter, allows to easily debug BCPWriter.
     /// </summary>
     /// <remarks>
     /// Instead of just writing .bcp files, BCPWriter will also send all datas
@@ -533,8 +533,8 @@ namespace BCPWriter
             string database = "BCPTest";
 
             string connectionString = string.Format(
-                "Data Source={0};User ID={1};Password={2};Initial Catalog={3}",
-                server, username, password, database
+                "Data Source={0};User ID={1};Password={2}",
+                server, username, password
             );
 
             try
@@ -546,8 +546,12 @@ namespace BCPWriter
                     SqlCommand command = new SqlCommand();
                     command.Connection = connection;
 
+                    //Create database if needed
+                    command.CommandText = "IF DB_ID('BCPTest') IS NULL CREATE DATABASE BCPTest";
+                    command.ExecuteNonQuery();
+
                     //Drop table if any
-                    command.CommandText = "IF OBJECT_ID('BCPTest','U') IS NOT NULL DROP TABLE BCPTest";
+                    command.CommandText = "IF OBJECT_ID('BCPTest', 'U') IS NOT NULL DROP TABLE BCPTest";
                     command.ExecuteNonQuery();
 
                     //Create table
@@ -567,9 +571,10 @@ namespace BCPWriter
                     connection.Close();
                 }
             }
-            catch
+            catch (Exception e)
             {
                 //Could not connect
+                string msg = e.Message;
             }
         }
 
@@ -611,9 +616,10 @@ namespace BCPWriter
                     process.WaitForExit();
                 }
             }
-            catch
+            catch (Exception e)
             {
                 //Couldn't sent the request
+                string msg = e.Message;
             }
         }
     }

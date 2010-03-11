@@ -11,9 +11,45 @@ namespace BCPWriter
     /// <summary>
     /// Simple API for BCPWriter.
     /// </summary>
+    /// 
     /// <remarks>
     /// This API is not recommended for C# application (use BCPWriter instead).
     /// This API was designed for easy integration with scripts (PowerShell for instance).
+    ///
+    /// <example>
+    /// PowerShell script using BCPWriterSimple:
+    /// <code>
+    /// [Reflection.Assembly]::LoadFrom("BCPWriter\bin\Release\BCPWriter.dll");
+    ///
+    /// $bcpFileName = "data.bcp";
+    /// $bcp = new-object BCPWriter.BCPWriterSimple($bcpFileName);
+    ///
+    /// $bcp.WriteNVarChar("Frédéric François", [BCPWriter.SQLNVarChar]::MAX);
+    /// $bcp.WriteNVarChar("Chopin", [BCPWriter.SQLNVarChar]::MAX);
+    /// $bcp.WriteInt(1810);
+    /// $bcp.WriteInt(1849);
+    ///
+    /// $bcp.WriteNVarChar("Franz Liszt", [BCPWriter.SQLNVarChar]::MAX);
+    /// $bcp.WriteNVarChar("Chopin", [BCPWriter.SQLNVarChar]::MAX);
+    /// $bcp.WriteInt(1811);
+    /// $bcp.WriteInt(1886);
+    ///
+    /// $bcp.WriteNVarChar("George", [BCPWriter.SQLNVarChar]::MAX);
+    /// $bcp.WriteNVarChar("Sand", [BCPWriter.SQLNVarChar]::MAX);
+    /// $bcp.WriteInt(1804);
+    /// $bcp.WriteInt(1876);
+    ///
+    /// $bcp.Close();
+    ///
+    /// $table = "[BCPTest].[dbo].[BCPTest]";
+    /// $servername = "localhost";
+    /// $username = "sa";
+    /// $password = "Password01";
+    ///
+    /// # Calls bcp and loads the data inside the table
+    /// bcp $table in $bcpFileName -n -S $servername -U $username -P $password
+    /// </code>
+    /// </example>
     /// </remarks>
     /// <see cref="BCPWriter"/>
     public class BCPWriterSimple
