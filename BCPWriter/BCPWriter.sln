@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BCPWriterTests", "BCPWriter
 EndProject
 Project("{4F174C21-8C12-11D0-8340-0000F80270F8}") = "Database", "Database\Database.dbp", "{96FBF0DD-5AAB-468C-9698-BA8136EFFA74}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BCPWriterSnapIn", "BCPWriterSnapIn\BCPWriterSnapIn.csproj", "{2D7ADBCA-B8AA-493D-A818-DCD3E92B2BB0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{5A7647A7-574F-4514-BC93-C10E04CCD5D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A7647A7-574F-4514-BC93-C10E04CCD5D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A7647A7-574F-4514-BC93-C10E04CCD5D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D7ADBCA-B8AA-493D-A818-DCD3E92B2BB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D7ADBCA-B8AA-493D-A818-DCD3E92B2BB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D7ADBCA-B8AA-493D-A818-DCD3E92B2BB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D7ADBCA-B8AA-493D-A818-DCD3E92B2BB0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

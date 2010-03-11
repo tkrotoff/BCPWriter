@@ -15,6 +15,7 @@ namespace BCPWriter
     /// <remarks>
     /// This API is not recommended for C# application (use BCPWriter instead).
     /// This API was designed for easy integration with scripts (PowerShell).
+    /// See BCPWriterSnapIn for the BCPWriterSimple PowerShell snap-in.
     ///
     /// <example>
     /// PowerShell script using BCPWriterSimple API:

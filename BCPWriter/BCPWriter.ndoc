@@ -1,6 +1,7 @@
 <project SchemaVersion="1.3">
     <assemblies>
         <assembly location=".\BCPWriter\bin\Release\BCPWriter.dll" documentation=".\BCPWriter\bin\Release\BCPWriter.XML" />
+        <assembly location=".\BCPWriterSnapIn\bin\Release\BCPWriterSnapIn.dll" documentation=".\BCPWriterSnapIn\bin\Release\BCPWriterSnapIn.xml" />
     </assemblies>
     <documenters>
         <documenter name="MSDN">
