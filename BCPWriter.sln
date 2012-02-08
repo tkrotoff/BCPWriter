@@ -1,11 +1,11 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BCPWriter", "BCPWriter\BCPWriter.csproj", "{566431EB-5EC3-4E1E-B0CD-BD58ED45B4A5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BCPWriterTests", "BCPWriterTests\BCPWriterTests.csproj", "{5A7647A7-574F-4514-BC93-C10E04CCD5D0}"
 EndProject
-Project("{4F174C21-8C12-11D0-8340-0000F80270F8}") = "Database", "Database\Database.dbp", "{96FBF0DD-5AAB-468C-9698-BA8136EFFA74}"
+Project("{C8D11400-126E-41CD-887F-60BD40844F9E}") = "Database", "Database\Database.dbproj", "{67CBC824-A49E-4E9B-A947-360F3DFE65C3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BCPWriterSnapIn", "BCPWriterSnapIn\BCPWriterSnapIn.csproj", "{2D7ADBCA-B8AA-493D-A818-DCD3E92B2BB0}"
 EndProject
@@ -23,6 +23,8 @@ Global
 		{5A7647A7-574F-4514-BC93-C10E04CCD5D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A7647A7-574F-4514-BC93-C10E04CCD5D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A7647A7-574F-4514-BC93-C10E04CCD5D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67CBC824-A49E-4E9B-A947-360F3DFE65C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67CBC824-A49E-4E9B-A947-360F3DFE65C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D7ADBCA-B8AA-493D-A818-DCD3E92B2BB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2D7ADBCA-B8AA-493D-A818-DCD3E92B2BB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D7ADBCA-B8AA-493D-A818-DCD3E92B2BB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
