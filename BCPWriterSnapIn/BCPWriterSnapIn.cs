@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Management.Automation;
-using System.Configuration.Install;
+﻿using System.Management.Automation;
 using System.ComponentModel;
 
 namespace BCPWriter

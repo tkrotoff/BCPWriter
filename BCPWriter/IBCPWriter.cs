@@ -1,5 +1,4 @@
-﻿using System;
-namespace BCPWriter
+﻿namespace BCPWriter
 {
     interface IBCPWriter
     {

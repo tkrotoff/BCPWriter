@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
 using System.Xml;
-using System.Data;
 using System.Data.SqlClient;
 
 namespace BCPWriter
@@ -527,10 +525,10 @@ namespace BCPWriter
         /// <param name="insertIntoString">SQL insert into table string</param>
         static private void SendSQLRequests(string createTableString, string insertIntoString)
         {
-            string server = "localhost";
-            string username = "sa";
-            string password = "Password01";
-            string database = "BCPTest";
+            const string server = "localhost";
+            const string username = "sa";
+            const string password = "Password01";
+            const string database = "BCPTest";
 
             string connectionString = string.Format(
                 "Data Source={0};User ID={1};Password={2}",
@@ -609,13 +607,17 @@ namespace BCPWriter
 
             string bcpFileName = string.Format("{0}.{1}", baseFileName, "BCPTest");
 
-            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
-            startInfo.UseShellExecute = false;
-            startInfo.RedirectStandardOutput = true;
-            startInfo.RedirectStandardInput = true;
-            startInfo.RedirectStandardError = true;
-            startInfo.FileName = "bcp";
-            startInfo.Arguments = "[BCPTest].[dbo].[BCPTest] out " + bcpFileName + " -S localhost -U sa -P Password01 -n";
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo
+                                                                {
+                                                                    UseShellExecute = false,
+                                                                    RedirectStandardOutput = true,
+                                                                    RedirectStandardInput = true,
+                                                                    RedirectStandardError = true,
+                                                                    FileName = "bcp",
+                                                                    Arguments =
+                                                                        "[BCPTest].[dbo].[BCPTest] out " + bcpFileName +
+                                                                        " -S localhost -U sa -P Password01 -n"
+                                                                };
 
             try
             {

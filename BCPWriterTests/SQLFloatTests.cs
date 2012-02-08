@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
 
 using NUnit.Framework;
-
-using BCPWriter;
 
 namespace BCPWriter.Tests
 {
@@ -17,7 +12,7 @@ namespace BCPWriter.Tests
     [TestFixture]
     class SQLFloatTests
     {
-        private void WriteFloat(float? value, ushort nbBits, string myFileName)
+        private static void WriteFloat(float? value, ushort nbBits, string myFileName)
         {
             BinaryWriter writer = BCPTests.CreateBinaryFile(myFileName);
 
@@ -35,7 +30,7 @@ namespace BCPWriter.Tests
             writer.Close();
         }
 
-        private void WriteFloat(double? value, ushort nbBits, string myFileName)
+        private static void WriteFloat(double? value, ushort nbBits, string myFileName)
         {
             BinaryWriter writer = BCPTests.CreateBinaryFile(myFileName);
 
@@ -56,8 +51,8 @@ namespace BCPWriter.Tests
         [Test]
         public void TestFloat1()
         {
-            ushort nbBits = 1;
-            float value = 1234.5678f;
+            const ushort nbBits = 1;
+            const float value = 1234.5678f;
 
             string myFileName = string.Format("float({0}).bcp", nbBits);
             WriteFloat(value, nbBits, myFileName);
@@ -67,8 +62,8 @@ namespace BCPWriter.Tests
         [Test]
         public void TestFloat4()
         {
-            ushort nbBits = 4;
-            float value = 1234.5678f;
+            const ushort nbBits = 4;
+            const float value = 1234.5678f;
 
             string myFileName = string.Format("float({0}).bcp", nbBits);
             WriteFloat(value, nbBits, myFileName);
@@ -78,8 +73,8 @@ namespace BCPWriter.Tests
         [Test]
         public void TestFloat24()
         {
-            ushort nbBits = 24;
-            float value = 1234.5678f;
+            const ushort nbBits = 24;
+            const float value = 1234.5678f;
 
             string myFileName = string.Format("float({0}).bcp", nbBits);
             WriteFloat(value, nbBits, myFileName);
@@ -89,8 +84,8 @@ namespace BCPWriter.Tests
         [Test]
         public void TestFloat25()
         {
-            ushort nbBits = 25;
-            double value = 1234.5678;
+            const ushort nbBits = 25;
+            const double value = 1234.5678;
 
             string myFileName = string.Format("float({0}).bcp", nbBits);
             WriteFloat(value, nbBits, myFileName);
@@ -100,8 +95,8 @@ namespace BCPWriter.Tests
         [Test]
         public void TestFloat53()
         {
-            ushort nbBits = 53;
-            double value = 1234.5678;
+            const ushort nbBits = 53;
+            const double value = 1234.5678;
 
             string myFileName = string.Format("float({0}).bcp", nbBits);
             WriteFloat(value, nbBits, myFileName);
@@ -111,7 +106,7 @@ namespace BCPWriter.Tests
         [Test]
         public void TestFloatNull()
         {
-            ushort nbBits = 53;
+            const ushort nbBits = 53;
 
             string myFileName = "float_null.bcp";
             WriteFloat((float?)null, nbBits, myFileName);
@@ -125,7 +120,7 @@ namespace BCPWriter.Tests
         [Test]
         public void TestFloatArgumentException()
         {
-            double value = 1234.5678;
+            const double value = 1234.5678;
 
             ushort nbBits = SQLFloat.MIN_NBBITS - 1;
             string myFileName = string.Format("float({0})_argumentexception.bcp", nbBits);
@@ -172,4 +167,4 @@ namespace BCPWriter.Tests
             }
         }
     }
-}
+}

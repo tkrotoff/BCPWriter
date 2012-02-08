@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
+﻿using System.IO;
 
 using NUnit.Framework;
-
-using BCPWriter;
 
 namespace BCPWriter.Tests
 {
@@ -17,7 +11,7 @@ namespace BCPWriter.Tests
     [TestFixture]
     class SQLRealTests
     {
-        private void WriteReal(float? value, string myFileName)
+        private static void WriteReal(float? value, string myFileName)
         {
             BinaryWriter writer = BCPTests.CreateBinaryFile(myFileName);
 
@@ -29,9 +23,9 @@ namespace BCPWriter.Tests
         [Test]
         public void TestReal()
         {
-            float value = 1234.5678f;
+            const float value = 1234.5678f;
 
-            string myFileName = "real.bcp";
+            const string myFileName = "real.bcp";
             WriteReal(value, myFileName);
             BCPTests.CheckFile(myFileName);
         }
@@ -39,7 +33,7 @@ namespace BCPWriter.Tests
         [Test]
         public void TestRealNull()
         {
-            string myFileName = "real_null.bcp";
+            const string myFileName = "real_null.bcp";
             WriteReal(null, myFileName);
             BCPTests.CheckFile(myFileName);
         }

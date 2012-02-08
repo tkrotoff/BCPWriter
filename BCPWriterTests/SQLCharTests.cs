@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
 
 using NUnit.Framework;
-
-using BCPWriter;
 
 namespace BCPWriter.Tests
 {
@@ -17,7 +12,7 @@ namespace BCPWriter.Tests
     [TestFixture]
     class SQLCharTests
     {
-        private void WriteChar(string text, ushort length, string myFileName)
+        private static void WriteChar(string text, ushort length, string myFileName)
         {
             BinaryWriter writer = BCPTests.CreateBinaryFile(myFileName);
 
@@ -30,7 +25,7 @@ namespace BCPWriter.Tests
         [Test]
         public void TestChar2()
         {
-            ushort length = 2;
+            const ushort length = 2;
 
             string myFileName = string.Format("char({0}).bcp", length);
             WriteChar("KI", length, myFileName);
@@ -40,7 +35,7 @@ namespace BCPWriter.Tests
         [Test]
         public void TestChar10()
         {
-            ushort length = 10;
+            const ushort length = 10;
 
             string myFileName = string.Format("char({0}).bcp", length);
             WriteChar("KIKOO", length, myFileName);
@@ -50,7 +45,7 @@ namespace BCPWriter.Tests
         [Test]
         public void TestChar10OEMCodePage()
         {
-            ushort length = 10;
+            const ushort length = 10;
 
             string myFileName = string.Format("char({0})_oemcodepage.bcp", length);
             WriteChar("KIKOO éùà", length, myFileName);
@@ -60,7 +55,7 @@ namespace BCPWriter.Tests
         [Test]
         public void TestChar1000()
         {
-            ushort length = 1000;
+            const ushort length = 1000;
 
             string myFileName = string.Format("char({0}).bcp", length);
             WriteChar("KIKOO", length, myFileName);
@@ -70,7 +65,7 @@ namespace BCPWriter.Tests
         [Test]
         public void TestCharMin()
         {
-            ushort length = SQLChar.MIN_LENGTH;
+            const ushort length = SQLChar.MIN_LENGTH;
 
             string myFileName = string.Format("char({0}).bcp", length);
             WriteChar("", length, myFileName);
@@ -80,7 +75,7 @@ namespace BCPWriter.Tests
         [Test]
         public void TestCharMax()
         {
-            ushort length = SQLChar.MAX_LENGTH;
+            const ushort length = SQLChar.MAX_LENGTH;
 
             string myFileName = string.Format("char({0}).bcp", length);
             WriteChar("", length, myFileName);
@@ -90,7 +85,7 @@ namespace BCPWriter.Tests
         [Test]
         public void TestCharMinNull()
         {
-            ushort length = SQLChar.MIN_LENGTH;
+            const ushort length = SQLChar.MIN_LENGTH;
 
             string myFileName = string.Format("char({0})_null.bcp", length);
             WriteChar(null, length, myFileName);
@@ -100,7 +95,7 @@ namespace BCPWriter.Tests
         [Test]
         public void TestCharMaxNull()
         {
-            ushort length = SQLChar.MAX_LENGTH;
+            const ushort length = SQLChar.MAX_LENGTH;
 
             string myFileName = string.Format("char({0})_null.bcp", length);
             WriteChar(null, length, myFileName);
@@ -110,7 +105,7 @@ namespace BCPWriter.Tests
         [Test]
         public void TestCharArgumentException()
         {
-            string text = "KIKOO";
+            const string text = "KIKOO";
 
             ushort length = (ushort)SQLChar.MIN_LENGTH - 1;
             string myFileName = string.Format("char({0})_argumentexception.bcp", length);
@@ -146,4 +141,4 @@ namespace BCPWriter.Tests
             }
         }
     }
-}
+}

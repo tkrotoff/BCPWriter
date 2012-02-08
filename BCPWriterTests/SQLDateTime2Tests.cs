@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
 
 using NUnit.Framework;
-
-using BCPWriter;
 
 namespace BCPWriter.Tests
 {
@@ -34,7 +29,7 @@ namespace BCPWriter.Tests
                                     System.Globalization.CultureInfo.InvariantCulture
                                 );
 
-            string myFileName = "datetime2_seconds.bcp";
+            const string myFileName = "datetime2_seconds.bcp";
             WriteDateTime2(dateTime, myFileName);
             BCPTests.CheckFile(myFileName);
         }
@@ -47,7 +42,7 @@ namespace BCPWriter.Tests
                                     System.Globalization.CultureInfo.InvariantCulture
                                 );
 
-            string myFileName = "datetime2_milliseconds.bcp";
+            const string myFileName = "datetime2_milliseconds.bcp";
             WriteDateTime2(dateTime, myFileName);
             BCPTests.CheckFile(myFileName);
         }
@@ -57,7 +52,7 @@ namespace BCPWriter.Tests
         {
             DateTime dateTime = new DateTime(0001, 01, 01, 00, 00, 00);
 
-            string myFileName = "datetime2_min.bcp";
+            const string myFileName = "datetime2_min.bcp";
             WriteDateTime2(dateTime, myFileName);
             BCPTests.CheckFile(myFileName);
         }
@@ -65,9 +60,9 @@ namespace BCPWriter.Tests
         [Test]
         public void TestDateTime2Null()
         {
-            string myFileName = "datetime2_null.bcp";
+            const string myFileName = "datetime2_null.bcp";
             WriteDateTime2(null, myFileName);
             BCPTests.CheckFile(myFileName);
         }
     }
-}
+}

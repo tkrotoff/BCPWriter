@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.IO;
-using System.Xml;
 
 namespace BCPWriter
 {
@@ -124,12 +121,12 @@ namespace BCPWriter
     /// a GNU GPL application that highlights the differences between
     /// 2 files in hexadecimal.
     /// </remarks>
-    public class BCPWriter : BCPWriter.IBCPWriter
+    public class BCPWriter : IBCPWriter
     {
         /// <summary>
         /// List of SQL types = columns.
         /// </summary>
-        private List<IBCPSerialization> _columns = new List<IBCPSerialization>();
+        private readonly List<IBCPSerialization> _columns = new List<IBCPSerialization>();
 
         /// <summary>
         /// Creates a bcp file format writer.

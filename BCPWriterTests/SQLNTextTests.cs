@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
+﻿using System.IO;
 
 using NUnit.Framework;
-
-using BCPWriter;
 
 namespace BCPWriter.Tests
 {
@@ -17,7 +11,7 @@ namespace BCPWriter.Tests
     [TestFixture]
     class SQLNTextTests
     {
-        private void WriteNText(string text, string myFileName)
+        private static void WriteNText(string text, string myFileName)
         {
             BinaryWriter writer = BCPTests.CreateBinaryFile(myFileName);
 
@@ -29,7 +23,7 @@ namespace BCPWriter.Tests
         [Test]
         public void TestNText()
         {
-            string myFileName = "ntext.bcp";
+            const string myFileName = "ntext.bcp";
             WriteNText("KIKOO éùà", myFileName);
             BCPTests.CheckFile(myFileName);
         }
@@ -37,7 +31,7 @@ namespace BCPWriter.Tests
         [Test]
         public void TestNTextEmpty()
         {
-            string myFileName = "ntext_empty.bcp";
+            const string myFileName = "ntext_empty.bcp";
             WriteNText("", myFileName);
             BCPTests.CheckFile(myFileName);
         }
@@ -45,9 +39,9 @@ namespace BCPWriter.Tests
         [Test]
         public void TestNTextNull()
         {
-            string myFileName = "ntext_null.bcp";
+            const string myFileName = "ntext_null.bcp";
             WriteNText(null, myFileName);
             BCPTests.CheckFile(myFileName);
         }
     }
-}
+}

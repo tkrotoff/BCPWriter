@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
 using System.Xml;
 
@@ -53,9 +49,9 @@ namespace BCPWriter
     /// </example>
     /// </remarks>
     /// <see cref="BCPWriter"/>
-    public class BCPWriterSimple : BCPWriter.IBCPWriterSimple
+    public class BCPWriterSimple : IBCPWriterSimple
     {
-        private BinaryWriter _writer = null;
+        private readonly BinaryWriter _writer = null;
 
         /// <summary>
         /// Constructs a BCPWriterStatic given a bcp file name.

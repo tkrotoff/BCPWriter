@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
+﻿using System.IO;
 
 using NUnit.Framework;
 
@@ -49,4 +45,4 @@ namespace BCPWriter.Tests
             Assert.AreEqual(bcpFile, myFile);
         }
     }
-}
+}

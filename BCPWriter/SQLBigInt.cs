@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
+﻿using System.IO;
 
 namespace BCPWriter
 {
@@ -32,7 +28,7 @@ namespace BCPWriter
             }
 
             //byte is 1 byte long :)
-            byte size = 8;
+            const byte size = 8;
             writer.Write(size);
 
             //long is 8 bytes long

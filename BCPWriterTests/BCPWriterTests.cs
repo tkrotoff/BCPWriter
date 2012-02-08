@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
 using System.Xml;
 
 using NUnit.Framework;
-
-using BCPWriter;
 
 namespace BCPWriter.Tests
 {
@@ -21,10 +17,9 @@ namespace BCPWriter.Tests
         [Test]
         public void TestAllSQLTypes()
         {
-            string myFileName = "allsqltypes.bcp";
+            const string myFileName = "allsqltypes.bcp";
 
-            BCPWriter writer = new BCPWriter();
-            writer.Mode = BCPWriter.BackendMode.Debug;
+            BCPWriter writer = new BCPWriter { Mode = BCPWriter.BackendMode.Debug };
 
             List<IBCPSerialization> columns = new List<IBCPSerialization>();
             columns.Add(new SQLBigInt());
@@ -93,10 +88,9 @@ namespace BCPWriter.Tests
         [Test]
         public void TestAllSQLTypesNull()
         {
-            string myFileName = "allsqltypes_null.bcp";
+            const string myFileName = "allsqltypes_null.bcp";
 
-            BCPWriter writer = new BCPWriter();
-            writer.Mode = BCPWriter.BackendMode.Debug;
+            BCPWriter writer = new BCPWriter { Mode = BCPWriter.BackendMode.Debug };
 
             List<IBCPSerialization> columns = new List<IBCPSerialization>();
             columns.Add(new SQLBigInt());
@@ -166,10 +160,9 @@ namespace BCPWriter.Tests
         [Test]
         public void Test4Columns()
         {
-            string myFileName = "4columns.bcp";
+            const string myFileName = "4columns.bcp";
 
-            BCPWriter writer = new BCPWriter();
-            writer.Mode = BCPWriter.BackendMode.Debug;
+            BCPWriter writer = new BCPWriter { Mode = BCPWriter.BackendMode.Debug };
 
             //FirstName
             writer.AddColumn(new SQLNVarChar(SQLNVarChar.MAX));
@@ -209,10 +202,9 @@ namespace BCPWriter.Tests
         [Test]
         public void Test0Columns()
         {
-            string myFileName = "0columns.bcp";
+            const string myFileName = "0columns.bcp";
 
-            BCPWriter writer = new BCPWriter();
-            writer.Mode = BCPWriter.BackendMode.Debug;
+            BCPWriter writer = new BCPWriter { Mode = BCPWriter.BackendMode.Debug };
 
             List<object> rows = new List<object>();
             rows.Add("Frédéric François");
@@ -234,10 +226,9 @@ namespace BCPWriter.Tests
         [Test]
         public void Test3Columns()
         {
-            string myFileName = "3columns.bcp";
+            const string myFileName = "3columns.bcp";
 
-            BCPWriter writer = new BCPWriter();
-            writer.Mode = BCPWriter.BackendMode.Debug;
+            BCPWriter writer = new BCPWriter { Mode = BCPWriter.BackendMode.Debug };
 
             //FirstName
             writer.AddColumn(new SQLNVarChar(SQLNVarChar.MAX));
@@ -282,8 +273,7 @@ namespace BCPWriter.Tests
         [Test]
         public void TestPerformance()
         {
-            BCPWriter writer = new BCPWriter();
-            writer.Mode = BCPWriter.BackendMode.Debug;
+            BCPWriter writer = new BCPWriter { Mode = BCPWriter.BackendMode.Debug };
 
             //FirstName
             writer.AddColumn(new SQLNVarChar(SQLNVarChar.MAX));
@@ -326,4 +316,4 @@ namespace BCPWriter.Tests
             //BCPTests.CheckFile(myFileName);
         }
     }
-}
+}

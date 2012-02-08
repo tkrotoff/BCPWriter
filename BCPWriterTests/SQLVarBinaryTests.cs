@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
 
 using NUnit.Framework;
-
-using BCPWriter;
 
 namespace BCPWriter.Tests
 {
@@ -17,7 +12,7 @@ namespace BCPWriter.Tests
     [TestFixture]
     class SQLVarBinaryTests
     {
-        private void WriteVarBinary(byte[] data, uint length, string myFileName)
+        private static void WriteVarBinary(byte[] data, uint length, string myFileName)
         {
             BinaryWriter writer = BCPTests.CreateBinaryFile(myFileName);
 
@@ -32,7 +27,7 @@ namespace BCPWriter.Tests
         {
             byte[] data = Util.StringToByteArray("KIKOO");
 
-            string myFileName = "varbinary(50).bcp";
+            const string myFileName = "varbinary(50).bcp";
             WriteVarBinary(data, 50, myFileName);
             BCPTests.CheckFile(myFileName);
         }
@@ -42,7 +37,7 @@ namespace BCPWriter.Tests
         {
             byte[] data = Util.StringToByteArray("KIKOO");
 
-            string myFileName = "varbinary(max).bcp";
+            const string myFileName = "varbinary(max).bcp";
             WriteVarBinary(data, SQLVarBinary.MAX, myFileName);
             BCPTests.CheckFile(myFileName);
         }
@@ -51,7 +46,7 @@ namespace BCPWriter.Tests
         public void TestVarBinaryMaxEmpty()
         {
             byte[] data = {};
-            string myFileName = "varbinary(max)_empty.bcp";
+            const string myFileName = "varbinary(max)_empty.bcp";
             WriteVarBinary(data, SQLVarBinary.MAX, myFileName);
             BCPTests.CheckFile(myFileName);
         }
@@ -61,7 +56,7 @@ namespace BCPWriter.Tests
         {
             byte[] data = null;
 
-            string myFileName = "varbinary(max)_null.bcp";
+            const string myFileName = "varbinary(max)_null.bcp";
             WriteVarBinary(data, SQLVarBinary.MAX, myFileName);
             BCPTests.CheckFile(myFileName);
         }
@@ -71,7 +66,7 @@ namespace BCPWriter.Tests
         {
             byte[] data = null;
 
-            string myFileName = "varbinary(50)_null.bcp";
+            const string myFileName = "varbinary(50)_null.bcp";
             WriteVarBinary(data, 50, myFileName);
             BCPTests.CheckFile(myFileName);
         }
@@ -115,4 +110,4 @@ namespace BCPWriter.Tests
             }
         }
     }
-}
+}

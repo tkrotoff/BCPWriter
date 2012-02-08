@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
 using System.Xml;
 
 using NUnit.Framework;
-
-using BCPWriter;
 
 namespace BCPWriter.Tests
 {
@@ -21,8 +17,7 @@ namespace BCPWriter.Tests
         [Test]
         public void TestSimpleApi()
         {
-            BCPWriter writer2 = new BCPWriter();
-            writer2.Mode = BCPWriter.BackendMode.Debug;
+            BCPWriter writer2 = new BCPWriter { Mode = BCPWriter.BackendMode.Debug };
 
             List<IBCPSerialization> columns = new List<IBCPSerialization>();
             columns.Add(new SQLBigInt());
@@ -52,7 +47,7 @@ namespace BCPWriter.Tests
             columns.Add(new SQLXml());
             writer2.AddColumns(columns);
 
-            string myFileName1 = "simpleapi1.bcp";
+            const string myFileName1 = "simpleapi1.bcp";
             BinaryWriter stream1 = BCPTests.CreateBinaryFile(myFileName1);
             BCPWriterSimple writer1 = new BCPWriterSimple(stream1);
 
@@ -135,7 +130,7 @@ namespace BCPWriter.Tests
 
             stream1.Close();
 
-            string myFileName2 = "simpleapi2.bcp";
+            const string myFileName2 = "simpleapi2.bcp";
             BinaryWriter stream2 = BCPTests.CreateBinaryFile(myFileName2);
             writer2.WriteRows(stream2, rows);
             stream2.Close();

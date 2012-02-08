@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
 
 using NUnit.Framework;
-
-using BCPWriter;
 
 namespace BCPWriter.Tests
 {
@@ -17,7 +12,7 @@ namespace BCPWriter.Tests
     [TestFixture]
     class SQLNCharTests
     {
-        private void WriteNChar(string text, ushort length, string myFileName)
+        private static void WriteNChar(string text, ushort length, string myFileName)
         {
             BinaryWriter writer = BCPTests.CreateBinaryFile(myFileName);
 
@@ -30,7 +25,7 @@ namespace BCPWriter.Tests
         [Test]
         public void TestNChar2()
         {
-            ushort length = 2;
+            const ushort length = 2;
 
             string myFileName = string.Format("nchar({0}).bcp", length);
             WriteNChar("KI", length, myFileName);
@@ -40,7 +35,7 @@ namespace BCPWriter.Tests
         [Test]
         public void TestNChar10()
         {
-            ushort length = 10;
+            const ushort length = 10;
 
             string myFileName = string.Format("nchar({0}).bcp", length);
             WriteNChar("KIKOO", length, myFileName);
@@ -50,7 +45,7 @@ namespace BCPWriter.Tests
         [Test]
         public void TestNChar1000()
         {
-            ushort length = 1000;
+            const ushort length = 1000;
 
             string myFileName = string.Format("nchar({0}).bcp", length);
             WriteNChar("KIKOO", length, myFileName);
@@ -60,7 +55,7 @@ namespace BCPWriter.Tests
         [Test]
         public void TestNChar4000Null()
         {
-            ushort length = 4000;
+            const ushort length = 4000;
 
             string myFileName = string.Format("nchar({0})_null.bcp", length);
             WriteNChar(null, length, myFileName);
@@ -70,9 +65,9 @@ namespace BCPWriter.Tests
         [Test]
         public void TestNCharArgumentException()
         {
-            string text = "KIKOO";
+            const string text = "KIKOO";
 
-            ushort length = (ushort)SQLNChar.MIN_LENGTH - 1;
+            ushort length = SQLNChar.MIN_LENGTH - 1;
             string myFileName = string.Format("nchar({0})_argumentexception.bcp", length);
             try
             {

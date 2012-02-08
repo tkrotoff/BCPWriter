@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
 
 namespace BCPWriter
@@ -31,7 +29,7 @@ namespace BCPWriter
             }
 
             //byte is 1 byte long :)
-            byte size = 3;
+            const byte size = 3;
             writer.Write(size);
 
             //Format is the number of days since 0001-01-01

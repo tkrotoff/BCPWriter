@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
 
 using NUnit.Framework;
-
-using BCPWriter;
 
 namespace BCPWriter.Tests
 {
@@ -17,7 +12,7 @@ namespace BCPWriter.Tests
     [TestFixture]
     class SQLBinaryTests
     {
-        private void WriteBinary(byte[] data, ushort length, string myFileName)
+        private static void WriteBinary(byte[] data, ushort length, string myFileName)
         {
             BinaryWriter writer = BCPTests.CreateBinaryFile(myFileName);
 
@@ -32,7 +27,7 @@ namespace BCPWriter.Tests
         {
             byte[] data = Util.StringToByteArray("KI");
 
-            ushort length = 2;
+            const ushort length = 2;
 
             string myFileName = string.Format("binary({0}).bcp", length);
             WriteBinary(data, length, myFileName);
@@ -44,7 +39,7 @@ namespace BCPWriter.Tests
         {
             byte[] data = Util.StringToByteArray("KIKOO");
 
-            ushort length = 50;
+            const ushort length = 50;
 
             string myFileName = string.Format("binary({0}).bcp", length);
             WriteBinary(data, length, myFileName);
@@ -56,7 +51,7 @@ namespace BCPWriter.Tests
         {
             byte[] data = Util.StringToByteArray("KIKOO");
 
-            ushort length = 1000;
+            const ushort length = 1000;
 
             string myFileName = string.Format("binary({0}).bcp", length);
             WriteBinary(data, length, myFileName);
@@ -66,7 +61,7 @@ namespace BCPWriter.Tests
         [Test]
         public void TestBinary2Null()
         {
-            ushort length = 2;
+            const ushort length = 2;
 
             string myFileName = string.Format("binary({0})_null.bcp", length);
             WriteBinary(null, length, myFileName);
@@ -76,7 +71,7 @@ namespace BCPWriter.Tests
         [Test]
         public void TestBinary50Null()
         {
-            ushort length = 50;
+            const ushort length = 50;
 
             string myFileName = string.Format("binary({0})_null.bcp", length);
             WriteBinary(null, length, myFileName);
@@ -86,7 +81,7 @@ namespace BCPWriter.Tests
         [Test]
         public void TestBinaryMinNull()
         {
-            ushort length = SQLBinary.MIN_LENGTH;
+            const ushort length = SQLBinary.MIN_LENGTH;
 
             string myFileName = string.Format("binary({0})_null.bcp", length);
             WriteBinary(null, length, myFileName);
@@ -96,7 +91,7 @@ namespace BCPWriter.Tests
         [Test]
         public void TestBinaryMaxNull()
         {
-            ushort length = SQLBinary.MAX_LENGTH;
+            const ushort length = SQLBinary.MAX_LENGTH;
 
             string myFileName = string.Format("binary({0})_null.bcp", length);
             WriteBinary(null, length, myFileName);
@@ -108,7 +103,7 @@ namespace BCPWriter.Tests
         {
             byte[] data = Util.StringToByteArray("KIKOO");
 
-            ushort length = (ushort)SQLBinary.MIN_LENGTH - 1;
+            ushort length = SQLBinary.MIN_LENGTH - 1;
             string myFileName = string.Format("binary({0})_argumentexception.bcp", length);
             try
             {
@@ -142,4 +137,4 @@ namespace BCPWriter.Tests
             }
         }
     }
-}
+}

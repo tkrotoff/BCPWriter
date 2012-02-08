@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
 
 using NUnit.Framework;
-
-using BCPWriter;
 
 namespace BCPWriter.Tests
 {
@@ -34,7 +29,7 @@ namespace BCPWriter.Tests
                                     System.Globalization.CultureInfo.InvariantCulture
                                 );
 
-            string myFileName = "date.bcp";
+            const string myFileName = "date.bcp";
             WriteDate(date, myFileName);
             BCPTests.CheckFile(myFileName);
         }
@@ -42,9 +37,9 @@ namespace BCPWriter.Tests
         [Test]
         public void TestDateNull()
         {
-            string myFileName = "date_null.bcp";
+            const string myFileName = "date_null.bcp";
             WriteDate(null, myFileName);
             BCPTests.CheckFile(myFileName);
         }
     }
-}
+}

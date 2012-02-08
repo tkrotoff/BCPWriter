@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
 
 namespace BCPWriter
@@ -119,7 +116,7 @@ namespace BCPWriter
             }
 
             //byte is 1 byte long :)
-            byte size = 4 * 2;
+            const byte size = 4 * 2;
             writer.Write(size);
 
             //double is 8 bytes long
@@ -142,7 +139,7 @@ namespace BCPWriter
             }
 
             //byte is 1 byte long :)
-            byte size = 4;
+            const byte size = 4;
             writer.Write(size);
 
             //float is 4 bytes long

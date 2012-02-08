@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
 
 namespace BCPWriter
@@ -48,7 +45,7 @@ namespace BCPWriter
 
             //byte is 1 byte long :)
             //Guid is always of length 16
-            byte size = 16;
+            const byte size = 16;
             writer.Write(size);
 
             //int is 4 bytes long
