@@ -63,7 +63,7 @@
     <Compile Include="SQLNCharTests.cs" />
     <Compile Include="SQLNTextTests.cs" />
     <Compile Include="SQLNVarCharTests.cs" />
-    <Compile Include="SQLReal.cs" />
+    <Compile Include="SQLRealTests.cs" />
     <Compile Include="SQLTextTests.cs" />
     <Compile Include="SQLTimeTests.cs" />
     <Compile Include="SQLUniqueIdentifierTests.cs" />

@@ -30,8 +30,8 @@ namespace BCPWriter
     /// $bcp.WriteInt(1810);
     /// $bcp.WriteInt(1849);
     ///
-    /// $bcp.WriteNVarChar("Franz Liszt", [BCPWriter.SQLNVarChar]::MAX);
-    /// $bcp.WriteNVarChar("Chopin", [BCPWriter.SQLNVarChar]::MAX);
+    /// $bcp.WriteNVarChar("Franz", [BCPWriter.SQLNVarChar]::MAX);
+    /// $bcp.WriteNVarChar("Liszt", [BCPWriter.SQLNVarChar]::MAX);
     /// $bcp.WriteInt(1811);
     /// $bcp.WriteInt(1886);
     ///
@@ -53,7 +53,7 @@ namespace BCPWriter
     /// </example>
     /// </remarks>
     /// <see cref="BCPWriter"/>
-    public class BCPWriterSimple
+    public class BCPWriterSimple : BCPWriter.IBCPWriterSimple
     {
         private BinaryWriter _writer = null;
 

@@ -31,9 +31,9 @@ namespace BCPWriter
     /// If the XML is less than 1020 bytes then bcp uses the "standard" format <code>Data Length | Data</code><br/>
     /// If the XML is more than 1020 bytes then bcp cuts the XML in chucks of 1020 bytes:
     /// <code>
-    /// |------------------------------------------------------------------------------------------------------------------------|
-    /// | FE FF FF FF FF FF FF FF | Next chunk size | 1020 bytes chunk [...] | Next chunk size | Last chunk if any | 00 00 00 00 |
-    /// |------------------------------------------------------------------------------------------------------------------------|
+    /// |-------------------------------------------------------------------------------------------------------------------------------|
+    /// | FE FF FF FF FF FF FF FF | First chunk size | 1020 bytes first chunk [...] | Next chunk size | Last chunk if any | 00 00 00 00 |
+    /// |-------------------------------------------------------------------------------------------------------------------------------|
     /// </code>
     /// FE FF FF FF FF FF FF FF and 00 00 00 00 delimits the XML string.<br/>
     /// By cutting the XML string into chunks, bcp has virtually no length limitation for the XML it takes as input.<br/>

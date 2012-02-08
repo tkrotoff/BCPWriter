@@ -124,7 +124,7 @@ namespace BCPWriter
     /// a GNU GPL application that highlights the differences between
     /// 2 files in hexadecimal.
     /// </remarks>
-    public class BCPWriter
+    public class BCPWriter : BCPWriter.IBCPWriter
     {
         /// <summary>
         /// List of SQL types = columns.

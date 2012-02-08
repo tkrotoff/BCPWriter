@@ -11,7 +11,7 @@ namespace BCPWriter
     /// <summary>
     /// Creates a PowerShell snap-in for BCPWriterSimple.
     /// </summary>
-    /// 
+    ///
     /// <remarks>
     /// How to install the snap-in:<br/>
     /// Run this command inside a command prompt:
@@ -22,21 +22,21 @@ namespace BCPWriter
     /// <code>
     /// # Install BCPWriterSnapIn inside current PowerShell session
     /// Add-PSSnapin -Name BCPWriterSnapIn
-    /// 
+    ///
     /// # Gets all PowerShell commands that contains the word "bcp"
     /// Get-Command *bcp* -CommandType cmdlet
-    /// 
+    ///
     /// # Let's instanciate our object BCPWriterSimple
     /// $bcp = Get-BCPWriter -BCPFileName "test.bcp"
-    /// 
+    ///
     /// # Now we can use BCPWriterSimple API
     /// $bcp.WriteNVarChar("Frédéric François", [BCPWriter.SQLNVarChar]::MAX);
     /// $bcp.WriteNVarChar("Chopin", [BCPWriter.SQLNVarChar]::MAX);
     /// $bcp.WriteInt(1810);
     /// $bcp.WriteInt(1849);
     ///
-    /// $bcp.WriteNVarChar("Franz Liszt", [BCPWriter.SQLNVarChar]::MAX);
-    /// $bcp.WriteNVarChar("Chopin", [BCPWriter.SQLNVarChar]::MAX);
+    /// $bcp.WriteNVarChar("Franz", [BCPWriter.SQLNVarChar]::MAX);
+    /// $bcp.WriteNVarChar("Liszt", [BCPWriter.SQLNVarChar]::MAX);
     /// $bcp.WriteInt(1811);
     /// $bcp.WriteInt(1886);
     ///
