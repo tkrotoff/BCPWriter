@@ -32,7 +32,7 @@ Example
     writer.AddColumn(new SQLInt());
 
     List<object> rows = new List<object>();
-    rows.Add("Frédéric François");
+    rows.Add("Frederic Francois");
     rows.Add("Chopin");
     rows.Add(1810);
     rows.Add(1849);
