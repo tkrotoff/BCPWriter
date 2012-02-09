@@ -12,7 +12,7 @@ namespace BCPWriter.Tests
     [TestFixture]
     class SQLDateTests
     {
-        private void WriteDate(DateTime? date, string myFileName)
+        private static void WriteDate(DateTime? date, string myFileName)
         {
             BinaryWriter writer = BCPTests.CreateBinaryFile(myFileName);
 
