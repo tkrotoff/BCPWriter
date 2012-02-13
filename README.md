@@ -12,7 +12,7 @@ From [Microsoft bcp documentation](http://msdn.microsoft.com/en-us/library/ms162
 
 Why use bcp?
 -------------
-Because bcp is *very* fast for inserting data into MS SQL Server.
+Because bcp is the *fastest* way for inserting data into MS SQL Server.
 
 Example
 -------
@@ -51,6 +51,10 @@ Example
     writer.WriteRows(stream, rows);
     stream.Close();
 
+Implementation
+--------------
+To achieve this I have reverse-engineered bcp binary format, see documentation inside
+BCPWriter.cs file (use [Doxygen](http://www.doxygen.org/) to generate it).
 
-To achieve this I have reverse-engineered bcp binary format, see documentation inside BCPWriter.cs
-(use Doxygen to generate it).
+The source code is clean, documented, heavily tested and should be stable.
+A large amount of unit tests come with the source code.
