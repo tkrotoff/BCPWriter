@@ -1,4 +1,4 @@
-# C# Library to manipulate Microsoft SQL Server bcp binary format
+# C# library to manipulate Microsoft SQL Server bcp binary format
 
 ## What is bcp (Bulk Copy Program)?
 
