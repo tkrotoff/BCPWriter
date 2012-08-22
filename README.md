@@ -51,7 +51,7 @@ writer.WriteRows(stream, rows);
 stream.Close();
 ```
 
-# Implementation
+## Implementation
 
 To achieve this I have reverse-engineered bcp binary format, see documentation inside
 BCPWriter.cs file (use [Doxygen](http://www.doxygen.org/) to generate it).
