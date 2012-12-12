@@ -1,9 +1,9 @@
-﻿using System.IO;
-
-using NUnit.Framework;
-
-namespace BCPWriter.Tests
+﻿namespace BCPWriter.Tests
 {
+    using System.IO;
+
+    using NUnit.Framework;
+
     /// <summary>
     /// Internal utility functions for unit tests.
     /// </summary>

@@ -1,8 +1,8 @@
-﻿using System;
-using System.IO;
-
-namespace BCPWriter
+﻿namespace BCPWriter
 {
+    using System;
+    using System.IO;
+
     /// <summary>
     /// SQL varbinary.
     /// </summary>
@@ -72,13 +72,13 @@ namespace BCPWriter
             {
                 if (length == MAX)
                 {
-                    //8 bytes long
+                    // 8 bytes long
                     byte[] nullBytes = { 255, 255, 255, 255, 255, 255, 255, 255 };
                     writer.Write(nullBytes);
                 }
                 else
                 {
-                    //2 bytes long
+                    // 2 bytes long
                     byte[] nullBytes = { 255, 255 };
                     writer.Write(nullBytes);
                 }
@@ -92,12 +92,12 @@ namespace BCPWriter
 
             if (length == MAX)
             {
-                //ulong is 8 bytes long
+                // ulong is 8 bytes long
                 writer.Write((ulong)data.Length);
             }
             else
             {
-                //ushort is 2 bytes long
+                // ushort is 2 bytes long
                 writer.Write((ushort)data.Length);
             }
 

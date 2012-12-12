@@ -1,9 +1,9 @@
-﻿using System;
-using System.Text;
-using System.IO;
-
-namespace BCPWriter
+﻿namespace BCPWriter
 {
+    using System;
+    using System.IO;
+    using System.Text;
+
     /// <summary>
     /// SQL nchar.
     /// </summary>
@@ -62,7 +62,7 @@ namespace BCPWriter
 
         public static void Write(BinaryWriter writer, string text, ushort length)
         {
-            //Can be a value from 1 through 4,000
+            // Can be a value from 1 through 4,000
             if (length < MIN_LENGTH || length > MAX_LENGTH)
             {
                 throw new ArgumentException("length should be between 1 and 4,000");
@@ -70,7 +70,7 @@ namespace BCPWriter
 
             if (text == null)
             {
-                //8 bytes long
+                // 8 bytes long
                 byte[] nullBytes = { 255, 255 };
                 writer.Write(nullBytes);
                 return;
@@ -81,12 +81,12 @@ namespace BCPWriter
                 throw new ArgumentException("text is longer than the length declared inside the constructor");
             }
 
-            //ushort is 2 bytes long
-            //* 2 because we are in UTF-16, thus 1 char is 2 bytes long
+            // ushort is 2 bytes long
+            // * 2 because we are in UTF-16, thus 1 char is 2 bytes long
             short size = (short)(length * 2);
             writer.Write(size);
 
-            //Append spaces if needed
+            // Append spaces if needed
             StringBuilder tmp = new StringBuilder(text);
             while (tmp.Length < length)
             {
@@ -94,7 +94,7 @@ namespace BCPWriter
             }
             ////
 
-            //Text should be in unicode UTF-16
+            // Text should be in unicode UTF-16
             writer.Write(Encoding.Unicode.GetBytes(tmp.ToString()));
         }
     }

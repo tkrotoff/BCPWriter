@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Xml;
-
-using NUnit.Framework;
-
-namespace BCPWriter.Tests
+﻿namespace BCPWriter.Tests
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Xml;
+
+    using NUnit.Framework;
+
     /// <summary>
     /// Tests for BCPWriter.
     /// </summary>
@@ -164,16 +164,16 @@ namespace BCPWriter.Tests
 
             BCPWriter writer = new BCPWriter { Mode = BCPWriter.BackendMode.Debug };
 
-            //FirstName
+            // FirstName
             writer.AddColumn(new SQLNVarChar(SQLNVarChar.MAX));
 
-            //LastName
+            // LastName
             writer.AddColumn(new SQLNVarChar(SQLNVarChar.MAX));
 
-            //Birth
+            // Birth
             writer.AddColumn(new SQLInt());
 
-            //Death
+            // Death
             writer.AddColumn(new SQLInt());
 
             List<object> rows = new List<object>();
@@ -230,17 +230,17 @@ namespace BCPWriter.Tests
 
             BCPWriter writer = new BCPWriter { Mode = BCPWriter.BackendMode.Debug };
 
-            //FirstName
+            // FirstName
             writer.AddColumn(new SQLNVarChar(SQLNVarChar.MAX));
 
-            //LastName
+            // LastName
             writer.AddColumn(new SQLNVarChar(SQLNVarChar.MAX));
 
-            //Birth
+            // Birth
             writer.AddColumn(new SQLInt());
 
-            //Try with the wrong number of columns
-            //Death
+            // Try with the wrong number of columns
+            // Death
             //writer.AddColumn(new SQLInt());
 
             List<object> rows = new List<object>();
@@ -275,16 +275,16 @@ namespace BCPWriter.Tests
         {
             BCPWriter writer = new BCPWriter { Mode = BCPWriter.BackendMode.Debug };
 
-            //FirstName
+            // FirstName
             writer.AddColumn(new SQLNVarChar(SQLNVarChar.MAX));
 
-            //LastName
+            // LastName
             writer.AddColumn(new SQLNVarChar(SQLNVarChar.MAX));
 
-            //Birth
+            // Birth
             writer.AddColumn(new SQLInt());
 
-            //Death
+            // Death
             writer.AddColumn(new SQLInt());
 
             const int nbRows = 100000;

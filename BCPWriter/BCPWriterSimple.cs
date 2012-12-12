@@ -1,9 +1,9 @@
-﻿using System;
-using System.IO;
-using System.Xml;
-
-namespace BCPWriter
+﻿namespace BCPWriter
 {
+    using System;
+    using System.IO;
+    using System.Xml;
+
     /// <summary>
     /// Simple API for BCPWriter.
     /// </summary>

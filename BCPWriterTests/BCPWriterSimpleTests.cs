@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Xml;
-
-using NUnit.Framework;
-
-namespace BCPWriter.Tests
+﻿namespace BCPWriter.Tests
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Xml;
+
+    using NUnit.Framework;
+
     /// <summary>
     /// Tests for BCPWriterSimple.
     /// </summary>

@@ -1,7 +1,7 @@
-﻿using System.IO;
-
-namespace BCPWriter
+﻿namespace BCPWriter
 {
+    using System.IO;
+
     /// <summary>
     /// SQL int.
     /// </summary>
@@ -11,7 +11,7 @@ namespace BCPWriter
     /// <br/>
     /// From SQL Server 2008 Books Online:<br/>
     /// <br/>
-    /// Data type | Range 	                                                                 | Storage<br/>
+    /// Data type | Range                                                                    | Storage<br/>
     /// bigint    | -2^63 (-9,223,372,036,854,775,808) to 2^63-1 (9,223,372,036,854,775,807) | 8 Bytes<br/>
     /// int       | -2^31 (-2,147,483,648) to 2^31-1 (2,147,483,647)                         | 4 Bytes<br/>
     /// smallint  | -2^15 (-32,768) to 2^15-1 (32,767)                                       | 2 Bytes<br/>
@@ -40,20 +40,20 @@ namespace BCPWriter
         {
             if (!value.HasValue)
             {
-                //1 byte long
+                // 1 byte long
                 byte[] nullBytes = { 255 };
                 writer.Write(nullBytes);
                 return;
             }
 
-            //value must be from -2^31 through -2^31-1
-            //value is an int so it is already the case
+            // value must be from -2^31 through -2^31-1
+            // value is an int so it is already the case
 
-            //byte is 1 byte long :)
+            // byte is 1 byte long :)
             const byte size = 4;
             writer.Write(size);
 
-            //int is 4 bytes long
+            // int is 4 bytes long
             writer.Write(value.Value);
         }
     }

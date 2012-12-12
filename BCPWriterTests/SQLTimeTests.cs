@@ -1,10 +1,10 @@
-﻿using System;
-using System.IO;
-
-using NUnit.Framework;
-
-namespace BCPWriter.Tests
+﻿namespace BCPWriter.Tests
 {
+    using System;
+    using System.IO;
+
+    using NUnit.Framework;
+
     /// <summary>
     /// Tests for SQLTime.
     /// </summary>
@@ -26,8 +26,7 @@ namespace BCPWriter.Tests
         {
             DateTime time = DateTime.Parse(
                                     "12:35:29.1234567",
-                                    System.Globalization.CultureInfo.InvariantCulture
-                                );
+                                    System.Globalization.CultureInfo.InvariantCulture);
 
             const string myFileName = "time.bcp";
             WriteTime(time, myFileName);

@@ -1,10 +1,10 @@
-﻿using System;
-using System.IO;
-
-using NUnit.Framework;
-
-namespace BCPWriter.Tests
+﻿namespace BCPWriter.Tests
 {
+    using System;
+    using System.IO;
+
+    using NUnit.Framework;
+
     /// <summary>
     /// Tests for SQLVarBinary.
     /// </summary>
@@ -45,7 +45,7 @@ namespace BCPWriter.Tests
         [Test]
         public void TestVarBinaryMaxEmpty()
         {
-            byte[] data = {};
+            byte[] data = { };
             const string myFileName = "varbinary(max)_empty.bcp";
             WriteVarBinary(data, SQLVarBinary.MAX, myFileName);
             BCPTests.CheckFile(myFileName);

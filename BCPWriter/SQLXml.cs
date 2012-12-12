@@ -1,9 +1,9 @@
-﻿using System.Text;
-using System.IO;
-using System.Xml;
-
-namespace BCPWriter
+﻿namespace BCPWriter
 {
+    using System.IO;
+    using System.Text;
+    using System.Xml;
+
     /// <summary>
     /// SQL xml.
     /// </summary>
@@ -51,26 +51,26 @@ namespace BCPWriter
         {
             if (xml == null)
             {
-                //8 bytes long
+                // 8 bytes long
                 byte[] nullBytes = { 255, 255, 255, 255, 255, 255, 255, 255 };
                 writer.Write(nullBytes);
                 return;
             }
 
             string xmlString = xml.DocumentElement.OuterXml;
-            //System.Xml.XmlDocument does not give the same string as MS SQL Server :/
+            // System.Xml.XmlDocument does not give the same string as MS SQL Server :/
             xmlString = xmlString.Replace(" />", "/>");
             int xmlLength = xmlString.Length;
 
-            //4 bytes: position of the next bytes to read
-            //00 00 03 FC = 1020
+            // 4 bytes: position of the next bytes to read
+            // 00 00 03 FC = 1020
             const int chunkValue = 1020;
             const int chunkSize = chunkValue / 2;
 
             if (xmlLength <= chunkSize)
             {
-                //ulong is 8 bytes long
-                //* 2 because we are in UTF-16, thus 1 char is 2 bytes long
+                // ulong is 8 bytes long
+                // * 2 because we are in UTF-16, thus 1 char is 2 bytes long
                 ulong length = (ulong)(xmlLength * 2);
                 writer.Write(length);
 
@@ -78,15 +78,15 @@ namespace BCPWriter
             }
             else
             {
-                //Start: 8 bytes: FE FF FF FF FF FF FF FF
+                // Start: 8 bytes: FE FF FF FF FF FF FF FF
                 byte[] start = { 254, 255, 255, 255, 255, 255, 255, 255 };
                 writer.Write(start);
                 ////
 
-                //Cut in chunks and write them
+                // Cut in chunks and write them
                 int nbAnchors = xmlLength / chunkSize;
                 int position = 0;
-                for (int i = 0; i < nbAnchors; )
+                for (int i = 0; i < nbAnchors;)
                 {
                     writer.Write(chunkValue);
 
@@ -98,11 +98,11 @@ namespace BCPWriter
                 }
                 ////
                 
-                //Write last chunk
+                // Write last chunk
                 int lastChunkSize = xmlLength % chunkSize;
                 if (lastChunkSize > 0)
                 {
-                    //* 2 because we are in UTF-16
+                    // * 2 because we are in UTF-16
                     writer.Write(lastChunkSize * 2);
 
                     string lastChunk = xmlString.Substring(position);
@@ -110,7 +110,7 @@ namespace BCPWriter
                     ////
                 }
 
-                //End: 4 bytes: 00 00 00 00
+                // End: 4 bytes: 00 00 00 00
                 byte[] end = { 0, 0, 0, 0 };
                 writer.Write(end);
                 ////

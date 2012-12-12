@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-
-namespace BCPWriter
+﻿namespace BCPWriter
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+
     /// <summary>
     /// SQL binary.
     /// </summary>
@@ -64,7 +64,7 @@ namespace BCPWriter
 
         public static void Write(BinaryWriter writer, byte[] data, ushort length)
         {
-            //Can be a value from 1 through 8,000
+            // Can be a value from 1 through 8,000
             if (length < MIN_LENGTH || length > MAX_LENGTH)
             {
                 throw new ArgumentException("length should be between 1 and 8,000");
@@ -72,7 +72,7 @@ namespace BCPWriter
 
             if (data == null)
             {
-                //2 bytes long
+                // 2 bytes long
                 byte[] nullBytes = { 255, 255 };
                 writer.Write(nullBytes);
                 return;
@@ -83,13 +83,13 @@ namespace BCPWriter
                 throw new ArgumentException("data is longer than the length declared inside the constructor");
             }
 
-            //ushort is 2 bytes long
+            // ushort is 2 bytes long
             writer.Write(length);
 
             string hex = Util.ToHexString(data);
             byte[] hexBytes = Util.HexToByteArray(hex);
 
-            //Append 0s if needed
+            // Append 0s if needed
             List<byte> bytes = new List<byte>(hexBytes);
             while (bytes.Count < length)
             {

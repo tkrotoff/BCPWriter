@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace BCPWriter
+﻿namespace BCPWriter
 {
+    using System;
+
     interface IBCPWriterSimple
     {
         void Close();

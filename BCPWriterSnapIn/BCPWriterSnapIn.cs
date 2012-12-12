@@ -1,8 +1,8 @@
-﻿using System.Management.Automation;
-using System.ComponentModel;
-
-namespace BCPWriter
+﻿namespace BCPWriter
 {
+    using System.ComponentModel;
+    using System.Management.Automation;
+
     /// <summary>
     /// Creates a PowerShell snap-in for BCPWriterSimple.
     /// </summary>

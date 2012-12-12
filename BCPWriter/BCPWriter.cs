@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.IO;
-
-namespace BCPWriter
+﻿namespace BCPWriter
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+
     /// <summary>
     /// BCP writer library: writes a SQL table to a .bcp (Bulk-copy Data) file, see BCPWriter for more documentation.
     /// </summary>
@@ -13,8 +13,8 @@ namespace BCPWriter
     /// @mainpage
     public static class NamespaceDoc
     {
-        //Special trick to document the namespace
-        //See http://stackoverflow.com/questions/793210/c-xml-documentation-for-a-namespace
+        // Special trick to document the namespace
+        // See http://stackoverflow.com/questions/793210/c-xml-documentation-for-a-namespace
     }
 
     /// <summary>
@@ -165,7 +165,7 @@ namespace BCPWriter
         /// </summary>
         public BackendMode Mode
         {
-            get;
+            private get;
             set;
         }
 
@@ -211,8 +211,8 @@ namespace BCPWriter
             if (modulo != 0)
             {
                 throw new ArgumentException(
-                    string.Format("The number of rows ({0}) should match the number of columns ({1})", nbRows, nbColumns)
-                );
+                    string.Format("The number of rows ({0}) should match the number of columns ({1})",
+                    nbRows, nbColumns));
             }
 
             for (int i = 0; i < nbRows; i++)

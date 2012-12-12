@@ -1,9 +1,9 @@
-﻿using System.IO;
-
-using NUnit.Framework;
-
-namespace BCPWriter.Tests
+﻿namespace BCPWriter.Tests
 {
+    using System.IO;
+
+    using NUnit.Framework;
+
     /// <summary>
     /// Tests for SQLText.
     /// </summary>

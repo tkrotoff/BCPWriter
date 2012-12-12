@@ -1,10 +1,10 @@
-﻿using System;
-using System.IO;
-
-using NUnit.Framework;
-
-namespace BCPWriter.Tests
+﻿namespace BCPWriter.Tests
 {
+    using System;
+    using System.IO;
+
+    using NUnit.Framework;
+
     /// <summary>
     /// Tests for SQLDate.
     /// </summary>
@@ -26,8 +26,7 @@ namespace BCPWriter.Tests
         {
             DateTime date = DateTime.Parse(
                                     "1753-01-01",
-                                    System.Globalization.CultureInfo.InvariantCulture
-                                );
+                                    System.Globalization.CultureInfo.InvariantCulture);
 
             const string myFileName = "date.bcp";
             WriteDate(date, myFileName);

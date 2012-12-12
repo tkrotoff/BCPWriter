@@ -1,10 +1,10 @@
-﻿using System.IO;
-using System.Xml;
-
-using NUnit.Framework;
-
-namespace BCPWriter.Tests
+﻿namespace BCPWriter.Tests
 {
+    using System.IO;
+    using System.Xml;
+
+    using NUnit.Framework;
+
     /// <summary>
     /// Tests for SQLXml.
     /// </summary>
@@ -35,8 +35,7 @@ namespace BCPWriter.Tests
         [Test]
         public void TestXmlEmpty()
         {
-            //Will throw an XmlException : Root element is missing
-            //so no need to test
+            // Will throw an XmlException : Root element is missing so no need to test
 
             /*
             string myFileName = "xml_empty.bcp";

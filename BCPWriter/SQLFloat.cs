@@ -1,8 +1,8 @@
-﻿using System;
-using System.IO;
-
-namespace BCPWriter
+﻿namespace BCPWriter
 {
+    using System;
+    using System.IO;
+
     /// <summary>
     /// SQL float.
     /// </summary>
@@ -12,7 +12,7 @@ namespace BCPWriter
     /// <br/>
     /// From SQL Server 2008 Books Online:<br/>
     /// <br/>
-    /// Data type      | Range 	                                                     | Storage<br/>
+    /// Data type      | Range                                                       | Storage<br/>
     /// float          | - 1.79E+308 to -2.23E-308, 0 and 2.23E-308 to 1.79E+308     | Depends on the value of n<br/>
     /// float n: 1-24  | Precision: 7 digits                                         | 4 bytes
     /// float n: 25-53 | Precision: 15 digits                                        | 8 bytes
@@ -81,13 +81,13 @@ namespace BCPWriter
             }
             else
             {
-                //This fix a bug:
-                //SQLFloat sql = new SQLFloat(SQLFloat.MAX_FLOAT_NBBITS);
-                //float? valueFloat = null;
-                //sql.Writer(writer, valueFloat);
-                //Is this case one might think value is of type float?
-                //It is not, C# confuses float? and double? when the value == null
-                //Thus we have to check NbBits and determine if value is float? or double?
+                // This fix a bug:
+                // SQLFloat sql = new SQLFloat(SQLFloat.MAX_FLOAT_NBBITS);
+                // float? valueFloat = null;
+                // sql.Writer(writer, valueFloat);
+                // Is this case one might think value is of type float?
+                // It is not, C# confuses float? and double? when the value == null
+                // Thus we have to check NbBits and determine if value is float? or double?
                 double? valueDouble = (double?)value;
                 if (!valueDouble.HasValue && NbBits <= MAX_FLOAT_NBBITS)
                 {
@@ -109,17 +109,17 @@ namespace BCPWriter
 
             if (!value.HasValue)
             {
-                //1 byte long
+                // 1 byte long
                 byte[] nullBytes = { 255 };
                 writer.Write(nullBytes);
                 return;
             }
 
-            //byte is 1 byte long :)
+            // byte is 1 byte long :)
             const byte size = 4 * 2;
             writer.Write(size);
 
-            //double is 8 bytes long
+            // double is 8 bytes long
             writer.Write(value.Value);
         }
 
@@ -132,17 +132,17 @@ namespace BCPWriter
 
             if (!value.HasValue)
             {
-                //1 byte long
+                // 1 byte long
                 byte[] nullBytes = { 255 };
                 writer.Write(nullBytes);
                 return;
             }
 
-            //byte is 1 byte long :)
+            // byte is 1 byte long :)
             const byte size = 4;
             writer.Write(size);
 
-            //float is 4 bytes long
+            // float is 4 bytes long
             writer.Write(value.Value);
         }
     }

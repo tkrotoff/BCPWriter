@@ -1,7 +1,7 @@
-﻿using System.IO;
-
-namespace BCPWriter
+﻿namespace BCPWriter
 {
+    using System.IO;
+
     /// <summary>
     /// Interface to serialize SQL data types to the bcp format.
     /// </summary>

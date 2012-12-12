@@ -1,10 +1,10 @@
-﻿using System;
-using System.IO;
-
-using NUnit.Framework;
-
-namespace BCPWriter.Tests
+﻿namespace BCPWriter.Tests
 {
+    using System;
+    using System.IO;
+
+    using NUnit.Framework;
+
     /// <summary>
     /// Tests for SQLUniqueIdentifier.
     /// </summary>

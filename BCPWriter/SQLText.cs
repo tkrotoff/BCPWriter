@@ -1,8 +1,8 @@
-﻿using System;
-using System.IO;
-
-namespace BCPWriter
+﻿namespace BCPWriter
 {
+    using System;
+    using System.IO;
+
     /// <summary>
     /// Obsolete! SQL text.
     /// </summary>
@@ -30,19 +30,20 @@ namespace BCPWriter
         {
             if (text == null)
             {
-                //4 bytes long
+                // 4 bytes long
                 byte[] nullBytes = { 255, 255, 255, 255 };
                 writer.Write(nullBytes);
                 return;
             }
-            //This cannot be tested anyway since OutOfMemory exception is
-            //thrown before
+
+            // This cannot be tested anyway since OutOfMemory exception is
+            // thrown before
             /*if (text.Length > MAX_LENGTH)
             {
                 throw new ArgumentException("text is longer than 2^31-1 (2,147,483,647)");
             }*/
 
-            //uint is 4 bytes long
+            // uint is 4 bytes long
             writer.Write((uint)(text.Length));
 
             writer.Write(Util.EncodeToOEMCodePage(text));

@@ -1,7 +1,7 @@
-﻿using System.IO;
-
-namespace BCPWriter
+﻿namespace BCPWriter
 {
+    using System.IO;
+
     /// <summary>
     /// SQL bigint.
     /// </summary>
@@ -21,17 +21,17 @@ namespace BCPWriter
         {
             if (!value.HasValue)
             {
-                //1 byte long
+                // 1 byte long
                 byte[] nullBytes = { 255 };
                 writer.Write(nullBytes);
                 return;
             }
 
-            //byte is 1 byte long :)
+            // byte is 1 byte long :)
             const byte size = 8;
             writer.Write(size);
 
-            //long is 8 bytes long
+            // long is 8 bytes long
             writer.Write(value.Value);
         }
     }

@@ -1,8 +1,8 @@
-﻿using System;
-using System.IO;
-
-namespace BCPWriter
+﻿namespace BCPWriter
 {
+    using System;
+    using System.IO;
+
     /// <summary>
     /// SQL uniqueidentifier.
     /// </summary>
@@ -31,24 +31,24 @@ namespace BCPWriter
         {
             if (!guid.HasValue)
             {
-                //1 byte long
+                // 1 byte long
                 byte[] nullBytes = { 255 };
                 writer.Write(nullBytes);
                 return;
             }
 
-            //This can never happen since Guid will throw an exception before
+            // This can never happen since Guid will throw an exception before
             /*if (string.IsNullOrEmpty(guid.Value.ToString()))
             {
                 throw new ArgumentNullException("Empty guid");
             }*/
 
-            //byte is 1 byte long :)
-            //Guid is always of length 16
+            // byte is 1 byte long :)
+            // Guid is always of length 16
             const byte size = 16;
             writer.Write(size);
 
-            //int is 4 bytes long
+            // int is 4 bytes long
             writer.Write(guid.Value.ToByteArray());
         }
     }

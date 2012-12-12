@@ -1,10 +1,10 @@
-﻿using System;
-using System.IO;
-
-using NUnit.Framework;
-
-namespace BCPWriter.Tests
+﻿namespace BCPWriter.Tests
 {
+    using System;
+    using System.IO;
+
+    using NUnit.Framework;
+
     /// <summary>
     /// Tests for SQLDateTime.
     /// </summary>
@@ -26,8 +26,7 @@ namespace BCPWriter.Tests
         {
             DateTime dateTime = DateTime.Parse(
                                     "2004-05-23T14:25:10",
-                                    System.Globalization.CultureInfo.InvariantCulture
-                                );
+                                    System.Globalization.CultureInfo.InvariantCulture);
 
             const string myFileName = "datetime_seconds.bcp";
             WriteDateTime(dateTime, myFileName);
@@ -39,14 +38,13 @@ namespace BCPWriter.Tests
         {
             DateTime dateTime = DateTime.Parse(
                                     "2004-05-23T14:25:10.123",
-                                    System.Globalization.CultureInfo.InvariantCulture
-                                );
+                                    System.Globalization.CultureInfo.InvariantCulture);
 
             const string myFileName = "datetime_milliseconds.bcp";
             WriteDateTime(dateTime, myFileName);
-            //Comparison can be 1 millisecond different due to cast double to long
-            //and the way bcp rounds
-            //Nothing to be worry about
+            // Comparison can be 1 millisecond different due to cast double to long
+            // and the way bcp rounds
+            // Nothing to be worry about
             //BCPTests.CheckFile(myFileName);
         }
 

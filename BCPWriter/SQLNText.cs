@@ -1,9 +1,9 @@
-﻿using System;
-using System.Text;
-using System.IO;
-
-namespace BCPWriter
+﻿namespace BCPWriter
 {
+    using System;
+    using System.IO;
+    using System.Text;
+
     /// <summary>
     /// Obsolete! SQL ntext.
     /// </summary>
@@ -32,25 +32,25 @@ namespace BCPWriter
         {
             if (text == null)
             {
-                //4 bytes long
+                // 4 bytes long
                 byte[] nullBytes = { 255, 255, 255, 255 };
                 writer.Write(nullBytes);
                 return;
             }
 
-            //This cannot be tested anyway since OutOfMemory exception is
-            //thrown before
+            // This cannot be tested anyway since OutOfMemory exception is
+            // thrown before
             /*if (text.Length > MAX_LENGTH)
             {
                 throw new ArgumentException("text is longer than 2^30 - 1 (1,073,741,823)");
             }*/
 
-            //uint is 4 bytes long
-            //* 2 because we are in UTF-16, thus 1 char is 2 bytes long
+            // uint is 4 bytes long
+            // * 2 because we are in UTF-16, thus 1 char is 2 bytes long
             uint length = (uint)(text.Length * 2);
             writer.Write(length);
 
-            //Text should be in unicode UTF-16
+            // Text should be in unicode UTF-16
             writer.Write(Encoding.Unicode.GetBytes(text));
         }
     }

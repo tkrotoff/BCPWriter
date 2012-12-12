@@ -1,15 +1,15 @@
-﻿using System;
-using System.Text;
-
-namespace BCPWriter
+﻿namespace BCPWriter
 {
+    using System;
+    using System.Text;
+
     /// <summary>
     /// Internal utility class.
     /// </summary>
-    public class Util
+    public static class Util
     {
         /// <summary>
-        /// Encode text using OEM code page, see http://en.wikipedia.org/wiki/Windows_code_page
+        /// Encode text using OEM code page, see <a href="http://en.wikipedia.org/wiki/Windows_code_page">Windows code page</a>.
         /// </summary>
         /// <remarks>
         /// When we use SQLChar and SQLVarChar unicode is not used and text is encoded using OEM code page.
@@ -26,7 +26,7 @@ namespace BCPWriter
         /// Converts a byte[] to hexadecimal.
         /// </summary>
         /// <remarks>
-        /// See http://stackoverflow.com/questions/623104/c-byte-to-hex-string
+        /// See <a href="http://stackoverflow.com/questions/623104/c-byte-to-hex-string">byte[] to hex string</a>
         /// </remarks>
         /// <param name="data">data to convert</param>
         /// <returns>string containing hexadecimal</returns>
@@ -43,7 +43,7 @@ namespace BCPWriter
         }
 
         /// <summary>
-        /// Converts a string to a byte[]
+        /// Converts a string to a byte[].
         /// </summary>
         /// <param name="text">text to convert</param>
         /// <returns>byte[]</returns>

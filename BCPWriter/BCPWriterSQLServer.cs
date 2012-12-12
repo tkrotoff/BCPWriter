@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
-using System.Xml;
-using System.Data.SqlClient;
-
-namespace BCPWriter
+﻿namespace BCPWriter
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Data.SqlClient;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Xml;
+
     /// <summary>
     /// MS SQL Server backend for BCPWriter, allows to easily debug BCPWriter.
     /// </summary>
@@ -72,9 +72,8 @@ namespace BCPWriter
             {
                 createTableString.AppendFormat("col{0} ", columnNumber++);
 
-                //FIXME Is there a better way than casting every type?
-                //Don't forget to add new SQL types here
-                //and to modify the unit tests accordingly
+                // FIXME Is there a better way than casting every type?
+                // Don't forget to add new SQL types here and to modify the unit tests accordingly
                 if (column is SQLBinary)
                 {
                     SQLBinary sql = (SQLBinary)column;
@@ -202,7 +201,6 @@ namespace BCPWriter
             return createTableString.ToString();
         }
 
-
         /// <summary>
         /// Gets the string to insert values into the SQL table.
         /// </summary>
@@ -260,9 +258,8 @@ namespace BCPWriter
                 IBCPSerialization column = columns[modulo];
                 object row = rows.ElementAt(i);
 
-                //FIXME Is there a better way than casting every type?
-                //Don't forget to add new SQL types here
-                //and to modify the unit tests accordingly
+                // FIXME Is there a better way than casting every type?
+                // Don't forget to add new SQL types here and to modify the unit tests accordingly
                 if (column is SQLBinary)
                 {
                     SQLBinary sql = (SQLBinary)column;
@@ -415,15 +412,15 @@ namespace BCPWriter
                 {
                     if (row is float)
                     {
-                        //Don't treat null case here
+                        // Don't treat null case here
                         float? value = (float?)row;
                         insertIntoString.AppendFormat("{0}", value.Value);
                     }
                     else
                     {
-                        //If we don't know, let's cast it to double
-                        //if value is null then double? will work, not float?
-                        //More explanations inside SQLFloat
+                        // If we don't know, let's cast it to double
+                        // if value is null then double? will work, not float?
+                        // More explanations inside SQLFloat
                         double? value = (double?)row;
                         if (!value.HasValue)
                         {
@@ -532,8 +529,7 @@ namespace BCPWriter
 
             string connectionString = string.Format(
                 "Data Source={0};User ID={1};Password={2}",
-                server, username, password
-            );
+                server, username, password);
 
             SqlCommand command = new SqlCommand();
 
@@ -544,7 +540,7 @@ namespace BCPWriter
                     connection.Open();
                     command.Connection = connection;
 
-                    //Create database if needed
+                    // Create database if needed
                     command.CommandText = "IF DB_ID('BCPTest') IS NULL CREATE DATABASE BCPTest";
                     command.ExecuteNonQuery();
 
@@ -553,26 +549,25 @@ namespace BCPWriter
 
                 connectionString = string.Format(
                     "Data Source={0};User ID={1};Password={2};Initial Catalog={3}",
-                    server, username, password, database
-                );
+                    server, username, password, database);
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
                     command.Connection = connection;
 
-                    //Drop table if any
+                    // Drop table if any
                     command.CommandText = "IF OBJECT_ID('BCPTest', 'U') IS NOT NULL DROP TABLE BCPTest";
                     command.ExecuteNonQuery();
 
-                    //Create table
+                    // Create table
                     if (!string.IsNullOrEmpty(createTableString))
                     {
                         command.CommandText = createTableString;
                         command.ExecuteNonQuery();
                     }
 
-                    //Insert values
+                    // Insert values
                     if (!string.IsNullOrEmpty(insertIntoString))
                     {
                         command.CommandText = insertIntoString;
@@ -584,7 +579,7 @@ namespace BCPWriter
             }
             catch (Exception e)
             {
-                //Could not connect
+                // Could not connect
                 string msg = e.Message;
             }
         }
@@ -595,7 +590,7 @@ namespace BCPWriter
         /// <param name="writer">BinaryWriter</param>
         static private void GenerateBCPFileFromSQLServer(BinaryWriter writer)
         {
-            //Default file name
+            // Default file name
             string baseFileName = "BCPTest.bcp";
 
             Stream stream = writer.BaseStream;
@@ -621,8 +616,8 @@ namespace BCPWriter
 
             try
             {
-                //Start the process with the info we specified
-                //Call WaitForExit and then the using statement will close
+                // Start the process with the info we specified
+                // Call WaitForExit and then the using statement will close
                 using (System.Diagnostics.Process process = System.Diagnostics.Process.Start(startInfo))
                 {
                     string errorMessage = process.StandardError.ReadToEnd();
@@ -633,7 +628,7 @@ namespace BCPWriter
             }
             catch (Exception e)
             {
-                //Couldn't sent the request
+                // Couldn't sent the request
                 string msg = e.Message;
             }
         }

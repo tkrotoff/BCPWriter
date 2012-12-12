@@ -1,9 +1,9 @@
-﻿using System;
-using System.Text;
-using System.IO;
-
-namespace BCPWriter
+﻿namespace BCPWriter
 {
+    using System;
+    using System.IO;
+    using System.Text;
+
     /// <summary>
     /// SQL nvarchar.
     /// </summary>
@@ -73,13 +73,13 @@ namespace BCPWriter
             {
                 if (length == MAX)
                 {
-                    //8 bytes long
+                    // 8 bytes long
                     byte[] nullBytes = { 255, 255, 255, 255, 255, 255, 255, 255 };
                     writer.Write(nullBytes);
                 }
                 else
                 {
-                    //2 bytes long
+                    // 2 bytes long
                     byte[] nullBytes = { 255, 255 };
                     writer.Write(nullBytes);
                 }
@@ -93,18 +93,18 @@ namespace BCPWriter
 
             if (length == MAX)
             {
-                //ulong is 8 bytes long
-                //* 2 because we are in UTF-16, thus 1 char is 2 bytes long
+                // ulong is 8 bytes long
+                // * 2 because we are in UTF-16, thus 1 char is 2 bytes long
                 writer.Write((ulong)(text.Length * 2));
             }
             else
             {
-                //ushort is 2 bytes long
-                //* 2 because we are in UTF-16, thus 1 char is 2 bytes long
+                // ushort is 2 bytes long
+                // * 2 because we are in UTF-16, thus 1 char is 2 bytes long
                 writer.Write((ushort)(text.Length * 2));
             }
 
-            //Text should be in unicode UTF-16
+            // Text should be in unicode UTF-16
             writer.Write(Encoding.Unicode.GetBytes(text));
         }
     }
