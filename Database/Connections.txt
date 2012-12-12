@@ -1,0 +1,4 @@
+DBRefFolders found in your dbp file
+Connect String: Data Source=localhost;Initial Catalog=BCPTest;Integrated Security=True
+Provider: Microsoft SQL Server
+
