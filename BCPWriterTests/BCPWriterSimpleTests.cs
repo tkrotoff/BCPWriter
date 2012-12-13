@@ -12,7 +12,7 @@
     /// </summary>
     /// <see cref="BCPWriterStatic"/>
     [TestFixture]
-    class BCPWriterSimpleTests
+    internal class BCPWriterSimpleTests
     {
         [Test]
         public void TestSimpleApi()

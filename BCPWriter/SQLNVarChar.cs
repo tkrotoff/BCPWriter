@@ -25,10 +25,10 @@
         public const ushort MAX_LENGTH = SQLNChar.MAX_LENGTH;
 
         /// <summary>
-        /// Maximum length allowed for SQL nvarchar
+        /// Maximum length allowed for SQL nvarchar.
         /// </summary>
         /// <remarks>
-        /// Use this in order to get a SQL nvarchar(max)
+        /// Use this in order to get a SQL nvarchar(max).
         /// </remarks>
         public const uint MAX = SQLInt.MAX_VALUE;
 

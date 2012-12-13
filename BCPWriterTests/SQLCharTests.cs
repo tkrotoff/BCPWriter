@@ -10,7 +10,7 @@
     /// </summary>
     /// <see cref="SQLChar"/>
     [TestFixture]
-    class SQLCharTests
+    internal class SQLCharTests
     {
         private static void WriteChar(string text, ushort length, string myFileName)
         {

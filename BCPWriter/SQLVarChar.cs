@@ -27,7 +27,7 @@
         /// Maximum length allowed for SQL varchar
         /// </summary>
         /// <remarks>
-        /// Use this in order to get a SQL varchar(max)
+        /// Use this in order to get a SQL varchar(max).
         /// </remarks>
         public const uint MAX = (uint)SQLInt.MAX_VALUE;
 
@@ -35,7 +35,7 @@
         /// Constructs a SQL varchar.
         /// </summary>
         /// <param name="length">
-        /// length of n bytes, where n is a value from 1 through 8,000.
+        /// Length of n bytes, where n is a value from 1 through 8,000.
         /// The storage size is n bytes.
         /// </param>
         public SQLVarChar(uint length)

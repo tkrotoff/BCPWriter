@@ -7,7 +7,7 @@
     /// <summary>
     /// Internal utility functions for unit tests.
     /// </summary>
-    class BCPTests
+    internal class BCPTests
     {
         public static BinaryWriter CreateBinaryFile(string fileName)
         {

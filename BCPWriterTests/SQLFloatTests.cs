@@ -10,7 +10,7 @@
     /// </summary>
     /// <see cref="SQLFloat"/>
     [TestFixture]
-    class SQLFloatTests
+    internal class SQLFloatTests
     {
         private static void WriteFloat(float? value, ushort nbBits, string myFileName)
         {

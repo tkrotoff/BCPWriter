@@ -10,7 +10,7 @@
     /// </summary>
     /// <see cref="SQLVarBinary"/>
     [TestFixture]
-    class SQLVarBinaryTests
+    internal class SQLVarBinaryTests
     {
         private static void WriteVarBinary(byte[] data, uint length, string myFileName)
         {

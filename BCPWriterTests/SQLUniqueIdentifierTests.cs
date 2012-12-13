@@ -10,7 +10,7 @@
     /// </summary>
     /// <see cref="SQLUniqueIdentifier"/>
     [TestFixture]
-    class SQLUniqueIdentifierTests
+    internal class SQLUniqueIdentifierTests
     {
         private static void WriteUniqueIdentifier(Guid? guid, string myFileName)
         {

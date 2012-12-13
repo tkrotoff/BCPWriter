@@ -172,7 +172,7 @@
         /// <summary>
         /// Add a column (SQL type).
         /// </summary>
-        /// <param name="column">SQL type of the column</param>
+        /// <param name="column">SQL type of the column.</param>
         public void AddColumn(IBCPSerialization column)
         {
             _columns.Add(column);
@@ -181,7 +181,7 @@
         /// <summary>
         /// Add a range of columns (SQL types).
         /// </summary>
-        /// <param name="columns">list of SQL types</param>
+        /// <param name="columns">List of SQL types.</param>
         public void AddColumns(IEnumerable<IBCPSerialization> columns)
         {
             _columns.AddRange(columns);
@@ -195,8 +195,8 @@
         /// The rows given to this method should match the SQL types (the columns).<br/>
         /// Don't forget to close your BinaryWriter after using this method.
         /// </remarks>
-        /// <param name="writer">BinaryWriter to use to write the .bcp file</param>
-        /// <param name="rows">the values to write to the .bcp file</param>
+        /// <param name="writer">BinaryWriter to use to write the .bcp file.</param>
+        /// <param name="rows">The values to write to the .bcp file.</param>
         public void WriteRows(BinaryWriter writer, IEnumerable<object> rows)
         {
             if (_columns.Count() == 0)

@@ -49,7 +49,7 @@
         /// </remarks>
         /// <param name="nbBits">
         /// n is the number of bits that are used to store the mantissa of the float number
-        /// in scientific notation and, therefore, dictates the precision and storage size
+        /// in scientific notation and, therefore, dictates the precision and storage size.
         /// </param>
         public SQLFloat(ushort nbBits)
         {

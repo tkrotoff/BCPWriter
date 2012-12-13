@@ -10,7 +10,7 @@
     /// </summary>
     /// <see cref="SQLDateTime2"/>
     [TestFixture]
-    class SQLDateTime2Tests
+    internal class SQLDateTime2Tests
     {
         private static void WriteDateTime2(DateTime? dateTime, string myFileName)
         {
@@ -26,8 +26,7 @@
         {
             DateTime dateTime = DateTime.Parse(
                                     "2004-05-23T14:25:10",
-                                    System.Globalization.CultureInfo.InvariantCulture
-                                );
+                                    System.Globalization.CultureInfo.InvariantCulture);
 
             const string myFileName = "datetime2_seconds.bcp";
             WriteDateTime2(dateTime, myFileName);
@@ -39,8 +38,7 @@
         {
             DateTime dateTime = DateTime.Parse(
                                     "2004-05-23T14:25:10.123456789",
-                                    System.Globalization.CultureInfo.InvariantCulture
-                                );
+                                    System.Globalization.CultureInfo.InvariantCulture);
 
             const string myFileName = "datetime2_milliseconds.bcp";
             WriteDateTime2(dateTime, myFileName);

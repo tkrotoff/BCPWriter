@@ -14,8 +14,8 @@
         /// <remarks>
         /// When we use SQLChar and SQLVarChar unicode is not used and text is encoded using OEM code page.
         /// </remarks>
-        /// <param name="text">text to encode</param>
-        /// <returns>text encoded using OEM code page</returns>
+        /// <param name="text">Text to encode.</param>
+        /// <returns>Text encoded using OEM code page.</returns>
         public static byte[] EncodeToOEMCodePage(string text)
         {
             Encoding enc = Encoding.GetEncoding(System.Globalization.CultureInfo.CurrentCulture.TextInfo.OEMCodePage);
@@ -28,8 +28,8 @@
         /// <remarks>
         /// See <a href="http://stackoverflow.com/questions/623104/c-byte-to-hex-string">byte[] to hex string</a>
         /// </remarks>
-        /// <param name="data">data to convert</param>
-        /// <returns>string containing hexadecimal</returns>
+        /// <param name="data">Data to convert.</param>
+        /// <returns>String containing hexadecimal.</returns>
         public static string ToHexString(byte[] data)
         {
             /*StringBuilder hex = new StringBuilder();
@@ -45,8 +45,7 @@
         /// <summary>
         /// Converts a string to a byte[].
         /// </summary>
-        /// <param name="text">text to convert</param>
-        /// <returns>byte[]</returns>
+        /// <param name="text">Text to convert.</param>
         public static byte[] StringToByteArray(string text)
         {
             return Encoding.Default.GetBytes(text);
@@ -55,8 +54,6 @@
         /// <summary>
         /// See <a href="http://stackoverflow.com/questions/311165/how-do-you-convert-byte-array-to-hexadecimal-string-and-vice-versa-in-c">How do you convert Byte Array to Hexadecimal String, and vice versa, in C#?</a>
         /// </summary>
-        /// <param name="hex"></param>
-        /// <returns></returns>
         public static byte[] HexToByteArray(string hex)
         {
             int nbChars = hex.Length;

@@ -9,7 +9,7 @@
     /// </summary>
     /// <see cref="SQLInt"/>
     [TestFixture]
-    class SQLIntTests
+    internal class SQLIntTests
     {
         private static void WriteInt(int? value, string myFileName)
         {

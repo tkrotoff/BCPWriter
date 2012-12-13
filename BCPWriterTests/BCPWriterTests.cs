@@ -12,7 +12,7 @@
     /// </summary>
     /// <see cref="BCPWriter"/>
     [TestFixture]
-    class BCPWriterTests
+    internal class BCPWriterTests
     {
         [Test]
         public void TestAllSQLTypes()

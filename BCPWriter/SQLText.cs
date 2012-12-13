@@ -44,7 +44,7 @@
             }*/
 
             // uint is 4 bytes long
-            writer.Write((uint)(text.Length));
+            writer.Write((uint)text.Length);
 
             writer.Write(Util.EncodeToOEMCodePage(text));
         }

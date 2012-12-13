@@ -9,7 +9,7 @@
     /// </summary>
     /// <see cref="SQLNText"/>
     [TestFixture]
-    class SQLNTextTests
+    internal class SQLNTextTests
     {
         private static void WriteNText(string text, string myFileName)
         {

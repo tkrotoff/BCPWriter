@@ -9,7 +9,7 @@
     /// </summary>
     /// <see cref="SQLBigInt"/>
     [TestFixture]
-    class SQLBigIntTests
+    internal class SQLBigIntTests
     {
         private static void WriteBigInt(long? value, string myFileName)
         {

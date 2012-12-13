@@ -2,7 +2,7 @@
 {
     using System;
 
-    interface IBCPWriterSimple
+    internal interface IBCPWriterSimple
     {
         void Close();
         void WriteBigInt(long? value);

@@ -10,7 +10,7 @@
     /// </summary>
     /// <see cref="BCPBinary"/>
     [TestFixture]
-    class SQLBinaryTests
+    internal class SQLBinaryTests
     {
         private static void WriteBinary(byte[] data, ushort length, string myFileName)
         {

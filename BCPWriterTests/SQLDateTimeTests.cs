@@ -10,7 +10,7 @@
     /// </summary>
     /// <see cref="SQLDateTime"/>
     [TestFixture]
-    class SQLDateTimeTests
+    internal class SQLDateTimeTests
     {
         private static void WriteDateTime(DateTime? dateTime, string myFileName)
         {

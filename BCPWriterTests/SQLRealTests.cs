@@ -9,7 +9,7 @@
     /// </summary>
     /// <see cref="SQLReal"/>
     [TestFixture]
-    class SQLRealTests
+    internal class SQLRealTests
     {
         private static void WriteReal(float? value, string myFileName)
         {

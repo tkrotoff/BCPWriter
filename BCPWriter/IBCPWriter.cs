@@ -1,6 +1,6 @@
 ﻿namespace BCPWriter
 {
-    interface IBCPWriter
+    internal interface IBCPWriter
     {
         void AddColumn(IBCPSerialization column);
         void AddColumns(System.Collections.Generic.IEnumerable<IBCPSerialization> columns);

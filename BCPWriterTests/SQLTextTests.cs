@@ -9,7 +9,7 @@
     /// </summary>
     /// <see cref="SQLText"/>
     [TestFixture]
-    class SQLTextTests
+    internal class SQLTextTests
     {
         private static void WriteText(string text, string myFileName)
         {

@@ -10,7 +10,7 @@
     /// </summary>
     /// <see cref="SQLXml"/>
     [TestFixture]
-    class SQLXmlTests
+    internal class SQLXmlTests
     {
         private static void WriteXml(string xml, string myFileName)
         {

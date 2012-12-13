@@ -10,7 +10,7 @@
     /// </summary>
     /// <see cref="SQLVarChar"/>
     [TestFixture]
-    class SQLVarCharTests
+    internal class SQLVarCharTests
     {
         private static void WriteVarChar(string text, uint length, string myFileName)
         {
