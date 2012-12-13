@@ -44,16 +44,16 @@
     /// <![CDATA[
     /// BCPWriter writer = new BCPWriter();
     /// 
-    /// //FirstName
+    /// // FirstName
     /// writer.AddColumn(new SQLNVarChar(SQLNVarChar.MAX));
     /// 
-    /// //LastName
+    /// // LastName
     /// writer.AddColumn(new SQLNVarChar(SQLNVarChar.MAX));
     /// 
-    /// //Birth
+    /// // Birth
     /// writer.AddColumn(new SQLInt());
     /// 
-    /// //Death
+    /// // Death
     /// writer.AddColumn(new SQLInt());
     /// 
     /// List<object> rows = new List<object>();
